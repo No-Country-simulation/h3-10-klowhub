@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Inputlogin from "../FormLogin/Input-login";
-import FacebookIcon from "../FormLogin/iconos/FacebookIcon";
-import GithubIcon from "../FormLogin/iconos/GithubIcon";
-import GoogleIcon from "../FormLogin/iconos/GoogleIcon";
+import Inputlogin from "@/components/FormLogin/Input-login";
+import FacebookIcon from "@/components/FormLogin/iconos/FacebookIcon";
+import GithubIcon from "@/components/FormLogin/iconos/GithubIcon";
+import GoogleIcon from "@/components/FormLogin/iconos/GoogleIcon";
 import Image from "next/image";
 export default function RegisterPage() {
   return (
@@ -41,7 +41,7 @@ export default function RegisterPage() {
         </section>
         
         <div className="flex items-start justify-center gap-3 mt-3">
-          <Inputlogin type="checkbox" name="checkbox" placeholder="" className="w-[22px] h-[22px]  max-w-7"/>
+          <Inputlogin type="checkbox" name="checkbox" placeholder="" className="w-[22px] h-[22px] max-w-7"/>
           <p>Quiero recibir novedades y consejos de la plataforma</p>
         </div>
         
