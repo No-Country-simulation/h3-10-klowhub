@@ -1,6 +1,10 @@
-export function Icon_luggage() {
+interface props {
+    classname : string
+}
+
+export function Icon_luggage({classname} : props) {
     return (
-        <svg width="40" height="30" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="40" height="30" className={classname} viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_dd_68_21652)">
                 <path d="M2.5 14C2.5 6.8203 8.3203 1 15.5 1H24.5C31.6797 1 37.5 6.8203 37.5 14C37.5 21.1797 31.6797 27 24.5 27H15.5C8.3203 27 2.5 21.1797 2.5 14Z" shapeRendering="crispEdges" />
                 <path d="M13.3333 20.6667V12.3333C13.3333 11.4493 13.6844 10.6014 14.3096 9.97631C14.9347 9.35119 15.7825 9 16.6666 9H23.3333C24.2173 9 25.0652 9.35119 25.6903 9.97631C26.3154 10.6014 26.6666 11.4493 26.6666 12.3333V20.6667C26.6666 21.1087 26.491 21.5326 26.1784 21.8452C25.8659 22.1577 25.4419 22.3333 24.9999 22.3333H14.9999C14.5579 22.3333 14.134 22.1577 13.8214 21.8452C13.5088 21.5326 13.3333 21.1087 13.3333 20.6667Z" stroke="#702486" strokeLinecap="round" strokeLinejoin="round" />
