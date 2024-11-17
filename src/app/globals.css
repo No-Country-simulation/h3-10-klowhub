@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1717171;
+  --foreground: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {

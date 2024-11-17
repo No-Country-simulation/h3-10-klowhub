@@ -1,8 +1,10 @@
+import { Header } from "@/components/layout/Header";
 
 export default function Home() {
   return (
-    <h1>
-     
-    </h1>
+    <main >
+      <Header />
+    </main>
   );
 }
+
