@@ -1,12 +1,10 @@
-import { Footer } from "@/components/Footer/Footer";
+import { Header } from "@/components/layout/Header";
 
 export default function Home() {
   return (
-    <main className="flex  items-end   h-screen">
-      <div className="relative ">
-        <Footer />
-
-      </div>
+    <main >
+      <Header />
     </main>
   );
 }
+

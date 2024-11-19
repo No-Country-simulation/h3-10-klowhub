@@ -8,11 +8,11 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        inter: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
       },
     },
   },
   plugins: [],
 } satisfies Config;
+
