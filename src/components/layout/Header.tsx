@@ -82,7 +82,7 @@ export function Header() {
 
 
             {isMenuOpen && (
-                <nav className="xl:hidden w-[70%] md    :w-[50%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0  duration-300 h-screen">
+                <nav className="xl:hidden w-[70%] md:w-[50%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0  duration-300 h-screen">
                     <button onClick={toggleMenu} className="absolute top-4 right-4 text-2xl text-white">✕</button>
 
                     <div className='flex flex-row'>
