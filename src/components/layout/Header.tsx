@@ -7,6 +7,8 @@ import { Icon_Notification } from '../../../public/icons/Header_Icon/Notificatio
 import { Icon_Email } from '../../../public/icons/Header_Icon/Email';
 import { Icon_luggage } from '../../../public/icons/Header_Icon/luggage';
 import { Space } from '../../../public/icons/Header_Icon/Space';
+import { Sun_Icon } from '../../../public/icons/Header_Icon/Sun';
+import { Info_Icon } from '../../../public/icons/Header_Icon/Info';
 
 export function Header() {
     const [isActive, setIsActive] = useState(false);
@@ -21,15 +23,15 @@ export function Header() {
     };
 
     return (
-        <header className="mt-4 relative text-white font-inter">
+        <header className=" relative text-white font-inter">
 
             <div className="absolute top-0 left-0 h-20 -z-10 blur-md">
                 <Image src="/img/Header_Img/Header_img.png" alt="fondo" width={1366} height={100} />
             </div>
             <div className="absolute top-0 left-0 w-full h-[4.5rem] -z-[10] bg-[#1F2026] opacity-60"></div>
 
-            <div className="flex items-center justify-between px-4 md:px-6 py-2">
-                <div>
+            <div className="flex  items-center 2xl:justify-evenly justify-between px-4 md:px-6 py-2">
+                <div className=''>
                     <Image alt="Logo" src="/img/Header_Img/Logo.png" className='hidden xl:block' width={50} height={50} />
                     <Image alt="Logo" src="/img/Header_Img/Logo_2.png" className='xl:hidden' width={50} height={50} />
                 </div>
@@ -80,7 +82,7 @@ export function Header() {
 
 
             {isMenuOpen && (
-                <nav className="xl:hidden w-[70%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0  duration-300 h-screen">
+                <nav className="xl:hidden w-[70%] md    :w-[50%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0  duration-300 h-screen">
                     <button onClick={toggleMenu} className="absolute top-4 right-4 text-2xl text-white">✕</button>
 
                     <div className='flex flex-row'>
@@ -109,14 +111,14 @@ export function Header() {
                             <h3 className='text-white'>Perfil</h3>
                         </div>
                         <hr className='border-white mt-2 mb-2' />
-                        <div className="flex flex-row items-center gap-x-3 w-8 h-8 rounded-md ">
-                            <Image src="/img/Header_img/avatar.png" alt="Profile Picture" width={100} height={100} className="w-full h-full rounded-full object-cover" />
-                            <h3 className='text-white'>Perfil</h3>
+                        <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
+                            <Sun_Icon width={20} height={20} />
+                            <p>Cambia a modo oscuro/claro</p>
                         </div>
                         <hr className='border-white mt-2 mb-2' />
-                        <div className="flex flex-row items-center gap-x-3 w-8 h-8 rounded-md ">
-                            <Image src="/img/Header_img/avatar.png" alt="Profile Picture" width={100} height={100} className="w-full h-full rounded-full object-cover" />
-                            <h3 className='text-white'>Perfil</h3>
+                        <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
+                            <Info_Icon width={20} height={20} />
+                            <p>Soporte</p>
                         </div>
                         <hr className='border-white mt-2 mb-2' />
                         <div className="flex items-center space-x-6 justify-center">

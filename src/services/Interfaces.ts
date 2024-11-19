@@ -17,3 +17,8 @@ export interface inputdate {
   placeholder: string;
   className?: string;
 }
+
+export interface IconPromps{
+  width: number,
+  height: number,
+}
