@@ -1,8 +1,12 @@
+import { Footer } from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
-    <h1>
-     
-    </h1>
+    <main className="flex  items-end   h-screen">
+      <div className="relative ">
+        <Footer />
+
+      </div>
+    </main>
   );
 }
