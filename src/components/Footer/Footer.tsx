@@ -5,7 +5,7 @@ import { Icon_Twitter } from "../../../public/icons/Footer_Icon/Icon_Twitter";
 export function Footer() {
     return (
         <footer className="flex flex-col justify-center pt-10  h-auto bg-gradient-to-b from-[#201C2D] via-[#201D43] to-[#262136]">
-            <section className="flex flex-col ml-6 gap-y-5 md:flex-row md:justify-evenly md:pt-2 mb-32  ">
+            <section className="flex flex-col ml-6 gap-y-5 md:flex-row md:justify-evenly md:pt-2 lg:mb-32  ">
                 <article className="flex flex-col gap-y-2 text-[14px] lg:text-[17px]">
                     <h2 className="opacity-50">Categorías</h2>
                     <p className=" ">Cursos</p>
