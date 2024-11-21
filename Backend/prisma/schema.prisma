@@ -13,9 +13,159 @@ generator client {
   provider = "prisma-client-js" // Generador para el cliente de Prisma
 }
 
-model User {
+model Users {
+  user_id          String   @id @default(uuid())
+  name             String
+  lastname         String
+  birthday         String
+  role_id          Int
+  register_date    DateTime @default(now())
+  email            String   @unique
+  profile_image    String
+  seller_id        Int
+  deleteAt_user_id DateTime
+}
+
+model Sellers {
+  seller_id            String   @id @default(uuid())
+  user_id              String
+  seller_level_id      Int
+  description          String
+  register_date        DateTime @default(now())
+  deleteAt_seller_id   DateTime
+  sales_type_id        Int
+  url_website          String
+  collection_method_id Int
+  punctuation          Int
+  wallet_id            String
+  active               Boolean  @default(true)
+}
+
+model Seller_ratings {
   id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
+  seller_id String
+  user_id   String
+  rating    Int
+  comment   String
+  date      DateTime
+}
+
+model Seller_levels {
+  level_id Int    @id @default(autoincrement())
+  name     String
+}
+
+model Change_seller_level {
+  id        Int      @id @default(autoincrement())
+  seller_id String
+  level_id  Int
+  date      DateTime
+}
+
+model Sales_type {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Collection_method {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Roles {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Wallets {
+  id             String  @id @default(uuid())
+  user_id        String
+  balance        Decimal
+  transaction_id Int
+}
+
+model DeleteAt_user {
+  id      Int      @id @default(autoincrement())
+  user_id String
+  date    DateTime
+}
+
+model Transactions {
+  id               Int      @id @default(autoincrement())
+  seller_id        String
+  type_transaction Int
+  date             DateTime
+  amount           Decimal
+}
+
+model Type_transactions {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Courses {
+  id                Int      @id @default(autoincrement())
+  title             String
+  seller_id         String
+  type_course_id    Int
+  premium           Boolean
+  description       String
+  course_level_id   Int
+  platform_id       Int
+  language_id       Int
+  sector_id         Int
+  content_pillar_id Int
+  functionality_id  Int
+  tool_id           Int
+  tags              String[]
+  stars             Int
+  price             Decimal
+}
+
+model Types_of_courses {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Courses_level {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Platforms {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Languages {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Sectors {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Content_pillars {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Functionality {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Tools {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Courses_ratings {
+  id         Int      @id @default(autoincrement())
+  course_id  Int
+  user_id    String
+  rating     Int
+  created_at DateTime
 }
