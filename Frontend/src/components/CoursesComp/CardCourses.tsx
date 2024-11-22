@@ -5,23 +5,7 @@ import Image from "next/image";
 import DetailsIcon from "../../../public/icons/DetailIcon";
 import StarRating from "../StartsRating/StartsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
-interface PropsCourse {
-  mainImageCourse: string;
-  altMainImageCourse: string;
-  title: string;
-  description: string;
-  projectName: string;
-  projectImage: string;
-  sector: string;
-  sellerImage: string;
-  premium: boolean;
-  stars: number;
-  tags: string[];
-  price?: number;
-  califications: number;
-  width?: number;
-  heigth?: number;
-}
+import { PropsCourse } from "@/services/Interfaces";
 
 export default function CardCoursesComponent({
   mainImageCourse,

@@ -32,12 +32,30 @@ export interface Course {
   avatar: string;
   name: string;
   bio: string;
-  info_curso: string
+  info_curso: string;
 }
 
 export interface Details_Course {
   valoracion: number;
-  estrellas: number | any;
+  estrellas: number;
   videos: number;
   duracion: number;
+}
+
+export interface PropsCourse {
+  mainImageCourse: string;
+  altMainImageCourse: string;
+  title: string;
+  description: string;
+  projectName: string;
+  projectImage: string;
+  sector: string;
+  sellerImage: string;
+  premium: boolean;
+  stars: number;
+  tags: string[];
+  price?: number;
+  califications: number;
+  width?: number;
+  heigth?: number;
 }
