@@ -29,6 +29,8 @@ const course = {
   tags: ["Proyect Managment", "Agilidad", "Scrum"],
   price: 878,
   califications: 98,
+  width: 30,
+  heigth: 10,
 };
 
 export default function PruebaPage() {
@@ -62,8 +64,8 @@ export default function PruebaPage() {
           stars={course.stars}
           premium={course.premium}
           sellerImage={course.sellerImage}
-          price={course.price}
           califications={course.califications}
+          price={course.price}
         ></CardCoursesComponent>
       </div>
     </div>

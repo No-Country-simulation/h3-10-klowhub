@@ -2,11 +2,16 @@ interface StarRatingProps {
   rating: number;
   totalStars?: number;
   totalNumbers: number;
+  className?: string;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({ rating, totalStars = 5 }) => {
+const StarRating: React.FC<StarRatingProps> = ({
+  rating,
+  totalStars = 5,
+  className,
+}) => {
   return (
-    <div>
+    <div className={className}>
       <span className="flex space-x-1">
         {Array.from({ length: totalStars }, (_, index) => {
           const starIndex = index + 1;
