@@ -23,16 +23,30 @@ export function Header() {
     };
 
     return (
-        <header className=" relative text-white font-inter">
+        <header className="mt-3 relative text-white font-inter">
 
             <div className="absolute top-0 left-0 h-20 -z-10 blur-md">
-                <Image src="/img/Header_Img/Header_img.png" alt="fondo" width={1366} height={100} />
+                <Image
+                    src="/img/Header_Img/Header_img.png"
+                    rel="preload"
+                    priority={true}
+                    alt="fondo"
+                    height={20}
+                    width={4600}
+                />
             </div>
             <div className="absolute top-0 left-0 w-full h-[4.5rem] -z-[10] bg-[#1F2026] opacity-60"></div>
 
-            <div className="flex  items-center 2xl:justify-evenly justify-between px-4 md:px-6 py-2">
+            <div className="flex items-center 2xl:justify-evenly justify-between px-4 md:px-6 py-2">
                 <div className=''>
-                    <Image alt="Logo" src="/img/Header_Img/Logo.png" className='hidden xl:block' width={50} height={50} />
+                    <Image
+                        alt="Logo"
+                        src="/img/Header_Img/Logo.png"
+                        className='hidden xl:block'
+                        priority={false} width={50}
+                        height={50}
+                        style={{ height: 'auto', width: 'auto' }}
+                    />
                     <Image alt="Logo" src="/img/Header_Img/Logo_2.png" className='xl:hidden' width={50} height={50} />
                 </div>
 
@@ -60,10 +74,7 @@ export function Header() {
                     </div>
                     <div className="flex items-center space-x-3">
                         <button className="px-4 py-2 rounded-full text-sm font-semibold">Explorador</button>
-                        <div
-                            className="flex items-center  rounded-xl bg-purple-600 cursor-pointer gap-x-2 px-1 "
-                            onClick={toggleSwitch}
-                        >
+                        <div className="flex items-center  rounded-xl bg-purple-600 cursor-pointer gap-x-2 px-1" onClick={toggleSwitch}>
                             <Icon_luggage classname='bg-white rounded-xl' />
                             <Space width={20} height={20} stroke={isActive ? 'white' : 'white'} />
                         </div>
@@ -79,10 +90,8 @@ export function Header() {
                     </svg>
                 </button>
             </div>
-
-
             {isMenuOpen && (
-                <nav className="xl:hidden w-[70%] md:w-[50%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0  duration-300 h-screen">
+                <nav className="xl:hidden w-[70%] md:w-[50%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0 duration-300 h-screen overflow-auto">
                     <button onClick={toggleMenu} className="absolute top-4 right-4 text-2xl text-white">✕</button>
 
                     <div className='flex flex-row'>
@@ -95,7 +104,6 @@ export function Header() {
                             <Space width={20} height={20} stroke={isActive ? 'white' : 'white'} />
                         </div>
                     </div>
-
                     {['Home', 'Plataforma', 'Dashboard', 'Curso y lecciones', 'Appstore', 'Proyectos', 'Consultoría', 'Sobre Appsheet'].map((item, index) => (
                         <Link key={index} href="#" className="block text-purple-400">
                             {item}
@@ -127,7 +135,6 @@ export function Header() {
                             <a href="#" className="hover:text-purple-400 scale-150"><Icon_Email /></a>
                         </div>
                     </div>
-
                 </nav>
             )}
         </header>

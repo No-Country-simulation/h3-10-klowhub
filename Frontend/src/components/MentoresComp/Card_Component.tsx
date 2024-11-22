@@ -6,6 +6,8 @@ import HeartIcon from '@/components/MentoresComp/Icons/HeartIcon';
 import DetailsIcon from '../../../public/icons/DetailIcon'
 import { useState } from "react";
 import { PropsMentor } from "@/services/Interfaces";
+
+
 export default function CardMentoresComponent({ mentor }: { mentor: PropsMentor }) {
 
     const { mentorImage, fullName, projectName, projectImage, reviewCount, sessionCount, language, countryFlagIcon, hourlyRate, detailsLink } = mentor;
