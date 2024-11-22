@@ -8,7 +8,7 @@ export default function RegisterPage() {
   return (
     <div className="flex w-screen h-screen max-xl:flex-col max-md:h-auto relative">
       <Image 
-       src={'/fondosimg/fondo2.jpeg'}
+       src={'/Fondos_img/fondo2.jpeg'}
        alt="Fondo de login"
       fill
        priority
