@@ -7,8 +7,8 @@ import { Icon_Notification } from '../../../public/icons/Header_Icon/Notificatio
 import { Icon_Email } from '../../../public/icons/Header_Icon/Email';
 import { Icon_luggage } from '../../../public/icons/Header_Icon/luggage';
 import { Space } from '../../../public/icons/Header_Icon/Space';
-import { Sun_Icon } from '../../../public/icons/Header_Icon/Sun';
-import { Info_Icon } from '../../../public/icons/Header_Icon/Info';
+
+
 
 export function Header() {
     const [isActive, setIsActive] = useState(false);
@@ -59,7 +59,7 @@ export function Header() {
                 {/* Navegación en desktop */}
                 <nav className="hidden xl:flex md:space-x-6">
                     <div className="flex items-center gap-2 bg-gray-500/100 py-1 px-2 rounded-md">
-                        <Link href="/" className="hover:text-purple-400">Home</Link>
+                        <Link href="/home" className="hover:text-purple-400">Home</Link>
                         <Link href="/plataforma" className="bg-purple-500 text-white px-2 rounded-md">Plataforma</Link>
                     </div>
                     <div className="flex gap-4 text-sm items-center">

@@ -2,7 +2,7 @@
 import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs";
 import { Footer } from "@/components/Layout/Footer";
 import { Header } from "@/components/Layout/Header";
-import Link from "next/link";
+
 import { usePathname } from "next/navigation";
 
 export default function Home() {

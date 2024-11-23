@@ -1,30 +1,29 @@
 'use client'
-import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs"
-import Link from "next/link";
+import { useParams } from 'next/navigation';
+import { Header } from '@/components/Layout/Header';
+import { Page_Details_Course } from '@/Pages/Detalles_Cursos/Page_Details_Course';
 
-export default function Course_Detail() {
-    const breadcrumbs = useBreadcrumbs();
+const CourseDetail = ({ params }: any) => {
+  params = useParams();
+  const courseName = params.course_name;
 
+  if (!courseName) {
+    return <div>Loading...</div>;
+  }
 
+  const id = params.course_name;
 
-    return (
-        <main>
-            <div className="flex flex-row mt-4 mb-10">
-                {breadcrumbs?.map(({ name, path, isLast }) => (
-                    <li key={path} className="flex flex-row items-center">
-                        <span className="mx-2">/</span>
-                        {isLast ? (
-                            <div className="flex flex-row">
-                                <span className="font-bold">{name}</span>
-                            </div>
-                        ) : (
-                            <Link href={path} className="hover:underline">
-                                {name}
-                            </Link>
-                        )}
-                    </li>
-                ))}
-            </div>
-        </main>
-    )
-}
+  return (
+    <section>
+      <div>
+        <Header />
+        <h1>Curso: {courseName}</h1>
+      </div>
+      <div>
+        <Page_Details_Course id={id}/>
+      </div>
+    </section>
+  );
+};
+
+export default CourseDetail;
