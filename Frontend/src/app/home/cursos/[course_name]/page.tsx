@@ -15,7 +15,7 @@ export default function Course_Detail() {
                         <span className="mx-2">/</span>
                         {isLast ? (
                             <div className="flex flex-row">
-                                <span className="font-bold">{name} / </span>
+                                <span className="font-bold">{name}</span>
                             </div>
                         ) : (
                             <Link href={path} className="hover:underline">
