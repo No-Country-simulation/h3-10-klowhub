@@ -25,3 +25,9 @@ body {
 ::-webkit-scrollbar {
   width: 0;
 }
+
+.container {
+  min-height: 120vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}

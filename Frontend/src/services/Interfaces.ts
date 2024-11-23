@@ -41,3 +41,4 @@ export interface Details_Course {
   videos: number;
   duracion: number;
 }
+

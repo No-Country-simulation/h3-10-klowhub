@@ -24,9 +24,10 @@ const buttonStyle: React.CSSProperties = {
 };
 
 
-export function Details_Course({ datos }: { datos: Course }) {
+export function Details_Course_Modal({ datos }: { datos: Course }) {
 
     const { id, title, descripcion, details, video_resumen, avatar, name, bio, info_curso } = datos;
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
