@@ -49,9 +49,9 @@ export interface PropsCourse {
   description: string;
   projectName: string;
   projectImage: string;
-  sector: string;
-  sellerImage: string;
-  premium: boolean;
+  sector?: string;
+  sellerImage?: string;
+  premium?: boolean;
   stars: number;
   tags: string[];
   price?: number;

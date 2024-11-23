@@ -7,20 +7,21 @@ import StarRating from "../StartsRating/StartsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
 import { PropsCourse } from "@/services/Interfaces";
 
-export default function CardCoursesComponent({
-  mainImageCourse,
-  altMainImageCourse,
-  projectImage,
-  projectName,
-  title,
-  description,
-  tags,
-  stars,
-  califications,
-  price,
-  width = 200,
-  heigth = 453,
-}: PropsCourse) {
+export default function CardCourse({ course }: { course: PropsCourse }) {
+  const {
+    mainImageCourse,
+    altMainImageCourse,
+    projectImage,
+    projectName,
+    title,
+    description,
+    tags,
+    stars,
+    califications,
+    price,
+    width = 200,
+    heigth = 453,
+  } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
   function handleClick() {
     setStateHeadt(!StateHeadt);
