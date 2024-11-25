@@ -18,9 +18,6 @@ export function Page_Details_Course({ id }: Props) {
     return item.id === parsedId;
   });
 
-  const datos = detalles_pages;
-
-  console.log("informacion filtrada: " + filteredInfo?.title)
 
   const breadcrumbs = useBreadcrumbs();
   return (
