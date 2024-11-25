@@ -1,7 +1,6 @@
 'use client';
 
 import { Details_Course_Modal } from "@/components/Details_Course/Details_Course";
-import { Header } from "@/components/Layout/Header";
 import { detalles } from "@/mock/db";
 
 export default function CursosLecciones() {
@@ -14,7 +13,6 @@ export default function CursosLecciones() {
 
     return (
         <>
-        <Header />
             {
                 base.map((items, index) => {
                     return (

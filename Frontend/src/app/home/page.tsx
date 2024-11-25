@@ -1,15 +1,13 @@
 'use client'
-import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs";
 import { Footer } from "@/components/Layout/Footer";
 import { Header } from "@/components/Layout/Header";
 
-import { usePathname } from "next/navigation";
 
 export default function Home() {
 
 
     return (
-        <main className="container">
+        <main className="min-h-[100vh] grid grid-rows-[auto_1fr_auto]">
             <Header />
             <main>
 

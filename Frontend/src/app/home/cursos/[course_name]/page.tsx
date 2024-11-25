@@ -1,6 +1,5 @@
 'use client'
 import { useParams } from 'next/navigation';
-import { Header } from '@/components/Layout/Header';
 import { Page_Details_Course } from '@/Pages/Detalles_Cursos/Page_Details_Course';
 
 const CourseDetail = ({ params }: any) => {
@@ -15,13 +14,14 @@ const CourseDetail = ({ params }: any) => {
 
   return (
     <section>
+      
       <div>
-        <Header />
         <h1>Curso: {courseName}</h1>
       </div>
       <div>
-        <Page_Details_Course id={id}/>
+        <Page_Details_Course id={id} />
       </div>
+      
     </section>
   );
 };
