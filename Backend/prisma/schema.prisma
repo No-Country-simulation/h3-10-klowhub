@@ -19,31 +19,38 @@ model Users {
   lastname         String
   birthday         String?
   role_id          Int
-  register_date    DateTime       @default(now())
   email            String         @unique
   profile_image    String?
   password         String
   seller           Sellers?
-  deleteAt_user_id DeleteAt_user?
+  deleteAt_user_id DeleteAt_user? // al borrado logico actualizar isActive en false dentro de Sellers
 }
 
 model Sellers {
-  seller_id            String               @id @default(uuid())
-  user_id              String               @unique
-  seller_level_id      Int
+  seller_id            String                @id @default(uuid())
+  user_id              String                @unique
+  seller_level_id      Int                   @default(1)
   description          String?
-  register_date        DateTime             @default(now())
-  change_seller_id     Change_seller_level?
+  isUserActive         Boolean               @default(true) // verificar que el usuario este activo
+  change_seller_id     Change_seller_level[]
   sales_type_id        Int
   url_website          String?
   collection_method_id Int
-  punctuation          Float? // averiguar como hacer el promedio dentro de otra tabla
+  punctuation          Float?                @default(0) // averiguar como hacer el promedio dentro de otra tabla
   wallet_id            Wallets? // hacer desde el endpoint la creacion del wallet al seller!! no olvidar ese detalle!!!! al registrar el seller y luego proceder a crear el wallet
-  user                 Users                @relation(fields: [user_id], references: [user_id])
+  user                 Users                 @relation(fields: [user_id], references: [user_id])
   ratings              Seller_ratings[] // Relación uno a muchos con Seller_ratings
   courses              Courses[] // Relación uno a muchos con Courses
 }
 
+model Registers_date {
+  register_date_id Int      @id @default(autoincrement())
+  id               String   @unique
+  date             DateTime
+  isSeller         Boolean  @default(false)
+}
+
+// cada vez que se modifique la tabla de rating tiene que actualizar la puntuacion en la tabla
 model Seller_ratings {
   id        Int      @id @default(autoincrement())
   seller_id String
@@ -54,6 +61,7 @@ model Seller_ratings {
   seller    Sellers  @relation(fields: [seller_id], references: [seller_id]) // Relación con Sellers
 }
 
+// es la tabla diccionario con el nivel por ejemplo starter
 model Seller_levels {
   level_id Int    @id @default(autoincrement())
   name     String
@@ -61,17 +69,19 @@ model Seller_levels {
 
 model Change_seller_level {
   id        Int      @id @default(autoincrement())
-  seller_id String   @unique
+  seller_id String
   level_id  Int
   date      DateTime
   seller    Sellers  @relation(fields: [seller_id], references: [seller_id])
 }
 
+// es la tabla de categoria de vendodor por ejemplo desarrolador de apps
 model Sales_type {
   id   Int    @id @default(autoincrement())
   name String
 }
 
+// retiro del dinero
 model Collection_method {
   id   Int    @id @default(autoincrement())
   name String
@@ -88,6 +98,7 @@ model Wallets {
   balance      Decimal
   seller       Sellers        @relation(fields: [seller_id], references: [seller_id])
   transactions Transactions[] // Relación uno a muchos con Transactions
+  // si se concreto en true restar del balance el monto transaccion
 }
 
 model DeleteAt_user {
@@ -104,6 +115,8 @@ model Transactions {
   date             DateTime
   amount           Decimal
   wallet           Wallets  @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
+  purchases        Purchased_courses?
+  // validar si la operacion es factible, luego validar que la operacion se concreto y luego un trigger que cambie el balance del Wallets asociado
 }
 
 model Type_transactions {
@@ -111,6 +124,7 @@ model Type_transactions {
   name String
 }
 
+// aclaracion para visualizar los cursos en en front dentro de Sellers devolver solos los Sellers activos GET
 model Courses {
   id                Int               @id @default(autoincrement())
   title             String
@@ -129,9 +143,11 @@ model Courses {
   price             Decimal
   seller            Sellers           @relation(fields: [seller_id], references: [seller_id]) // Relación con Sellers
   stars             Courses_ratings[]
-  punctuation       Decimal
+  punctuation       Decimal           @default(0)
+  updateAt          DateTime          @default(now())
 }
 
+// cada vez que se modifique la tabla de rating tiene que actualizar la puntuacion en la tabla
 model Courses_ratings {
   id        Int      @id @default(autoincrement())
   course_id Int
@@ -180,4 +196,12 @@ model Functionality {
 model Tools {
   id   Int    @id @default(autoincrement())
   name String
+}
+
+model Purchased_courses {
+  id   Int    @id @default(autoincrement())
+  transaction_id Int @unique
+  user_id  String
+  course_id String
+  transaction Transactions @relation(fields: [transaction_id], references: [id])
 }
