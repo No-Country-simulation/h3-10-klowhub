@@ -4,21 +4,19 @@ import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs";
 import { detalles_pages } from "@/mock/db";
 import Image from "next/image";
 import Link from "next/link";
-import { Icon_Whasapp } from "../../../public/icons/Details_Course_Icon/Social_Media/Whasapp";
-import { Icon_Mensagge } from "../../../public/icons/Details_Course_Icon/Social_Media/Mensagge";
-import { Icon_Linkendi } from "../../../public/icons/Footer_Icon/Icon_Linkendi";
-import { Mail } from "../../../public/icons/Details_Course_Icon/Social_Media/Mail";
+
 import { Icon_Clock } from "../../../public/icons/Details_Course_Icon/Icon_Clock";
 import { Icon_Camera } from "../../../public/icons/Details_Course_Icon/Icon_Camera";
-import { Course } from "@/services/Interfaces";
+import { Course_page } from "@/services/Interfaces";
 import React, { useState } from "react";
 import { Icon_Star, Icon_Start_Med } from "../../../public/icons/Details_Course_Icon/Start_Icon";
+import { Icon_Check_page } from "../../../public/icons/Details_Course_Icon/Icon_Check";
 
 export function Page_Details_Course({ id }: any) {
 
   const parsedId = Number(id);
 
-  const filteredInfo: Course | any = detalles_pages.find(item => {
+  const filteredInfo: Course_page | any = detalles_pages.find(item => {
     console.log("Comparando item.id:", item.id, "con parsedId:", parsedId);
     return item.id === parsedId;
   });
@@ -69,12 +67,12 @@ export function Page_Details_Course({ id }: any) {
           <header>
             <h2 className='mb-4 font-bold text-[16px]'>{filteredInfo?.title}</h2>
           </header>
-          <p>{filteredInfo?.description}</p>
+          <p className="text-sm">{filteredInfo?.description}</p>
 
           <div className='md:flex md:flex-row mb-5 md:mb-2 md:items-center md:mt-10'>
             <div className='grid grid-cols-1 grid-rows-2 md:flex md:flex-row md:gap-x-1 items-center' key={id}>
               <div className='flex flex-row items-center'>
-                <span className='pt-0.5 pr-4'>{filteredInfo?.details.estrellas}</span>
+                <span className='pt-0.5 pr-4'>{filteredInfo.details?.estrellas}</span>
                 {Array.from({ length: 5 }, (_, index) => (
                   <React.Fragment key={index}>{renderStar(index)}</React.Fragment>
                 ))}
@@ -83,12 +81,12 @@ export function Page_Details_Course({ id }: any) {
 
               <div className='flex flex-row mt-2 items-center'>
                 <div className='flex flex-row items-center pb-1 md:pl-4 gap-x-3 text-[#A1C2FA]'>
-                  <Icon_Camera width={16} height={16} />
-                  <span>{filteredInfo?.details?.videos} videos</span>
+                  <Icon_Camera width={22} height={22} />
+                  <span className="text-sm">{filteredInfo?.details?.videos} videos</span>
                 </div>
                 <div className='flex flex-row items-center pb-1 gap-x-2 ml-4 text-[#A1C2FA]'>
-                  <Icon_Clock width={16} height={16} />
-                  <span>{filteredInfo?.details?.duracion} horas</span>
+                  <Icon_Clock width={20} height={20} />
+                  <span className="text-sm">{filteredInfo?.details?.duracion} horas</span>
                 </div>
               </div>
             </div>
@@ -125,26 +123,36 @@ export function Page_Details_Course({ id }: any) {
           <div>
           </div>
 
-          <section className='flex flex-col gap-y-2 mb-2'>
+
+
+
+          <section>
+            <h3 className="mb-2">Despues de completar este curso,  serás capaz de</h3>
+            <ul className="">
+              {filteredInfo.items.map((item: string, index: number) => {
+                return (
+                  <div className="flex flex-row items-center mb-2 gap-y-4" key={index}>
+                    <Icon_Check_page width={62} height={26} />
+                    <li key={index}>{item}</li>
+                  </div>
+                )
+              })}
+            </ul>
+          </section>
+
+          <section className='flex flex-col gap-y-2 mb-2 mt-10'>
             <h3 className='font-bold text-md'>Acerca de este curso</h3>
             <p className='font-inter text-sm'>{filteredInfo.info_curso}</p>
           </section>
 
-          <footer className='flex flex-row mt-6 gap-x-4 items-center'>
-            <p className='font-inter text-[12px]'>Compartir</p>
-            <div className='flex flex-row items-center gap-x-3'>
-              <Mail width={12} height={12} />
-              <Icon_Whasapp width={12} height={12} />
-              <Icon_Mensagge width={12} height={12} />
-              <Icon_Linkendi width={12} height={12} />
-            </div>
-          </footer>
         </article>
 
         <aside className="">
 
         </aside>
+        <p className="mt-10 text-center">Ver mas</p>
       </section>
+
     </main>
   );
 }

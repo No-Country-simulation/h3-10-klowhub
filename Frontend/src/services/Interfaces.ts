@@ -35,10 +35,25 @@ export interface Course {
   info_curso: string
 }
 
+export interface Course_page {
+  id: number | any;
+  title: string;
+  description: string;
+  details?: Details_Course;
+  video_resumen: string;
+  avatar: string;
+  name: string;
+  bio: string;
+  info_curso: string
+  items: string[] 
+}
+
+
 export interface Details_Course {
   valoracion: number;
   estrellas: number | any;
   videos: number;
   duracion: number;
 }
+
 
