@@ -14,40 +14,44 @@ generator client {
 }
 
 model Users {
-  user_id          String   @id @default(uuid())
+  user_id          String         @id @default(uuid())
   name             String
   lastname         String
-  birthday         String
+  birthday         String?
   role_id          Int
-  register_date    DateTime @default(now())
-  email            String   @unique
-  profile_image    String
-  seller_id        Int
-  deleteAt_user_id DateTime
+  register_date    DateTime       @default(now())
+  email            String         @unique
+  profile_image    String?
+  password         String
+  seller           Sellers?
+  deleteAt_user_id DeleteAt_user?
 }
 
 model Sellers {
-  seller_id            String   @id @default(uuid())
-  user_id              String
+  seller_id            String               @id @default(uuid())
+  user_id              String               @unique
   seller_level_id      Int
-  description          String
-  register_date        DateTime @default(now())
-  deleteAt_seller_id   DateTime
+  description          String?
+  register_date        DateTime             @default(now())
+  change_seller_id     Change_seller_level?
   sales_type_id        Int
-  url_website          String
+  url_website          String?
   collection_method_id Int
-  punctuation          Int
-  wallet_id            String
-  active               Boolean  @default(true)
+  punctuation          Float? // averiguar como hacer el promedio dentro de otra tabla
+  wallet_id            Wallets? // hacer desde el endpoint la creacion del wallet al seller!! no olvidar ese detalle!!!! al registrar el seller y luego proceder a crear el wallet
+  user                 Users                @relation(fields: [user_id], references: [user_id])
+  ratings              Seller_ratings[] // Relación uno a muchos con Seller_ratings
+  courses              Courses[] // Relación uno a muchos con Courses
 }
 
 model Seller_ratings {
   id        Int      @id @default(autoincrement())
   seller_id String
-  user_id   String
+  user_id   String // validar que un mismo usuario no pueda hacer mas de una calificacion
   rating    Int
   comment   String
   date      DateTime
+  seller    Sellers  @relation(fields: [seller_id], references: [seller_id]) // Relación con Sellers
 }
 
 model Seller_levels {
@@ -57,9 +61,10 @@ model Seller_levels {
 
 model Change_seller_level {
   id        Int      @id @default(autoincrement())
-  seller_id String
+  seller_id String   @unique
   level_id  Int
   date      DateTime
+  seller    Sellers  @relation(fields: [seller_id], references: [seller_id])
 }
 
 model Sales_type {
@@ -78,24 +83,27 @@ model Roles {
 }
 
 model Wallets {
-  id             String  @id @default(uuid())
-  user_id        String
-  balance        Decimal
-  transaction_id Int
+  id           String         @id @default(uuid())
+  seller_id    String         @unique
+  balance      Decimal
+  seller       Sellers        @relation(fields: [seller_id], references: [seller_id])
+  transactions Transactions[] // Relación uno a muchos con Transactions
 }
 
 model DeleteAt_user {
   id      Int      @id @default(autoincrement())
-  user_id String
+  user_id String   @unique
   date    DateTime
+  user    Users    @relation(fields: [user_id], references: [user_id])
 }
 
 model Transactions {
   id               Int      @id @default(autoincrement())
-  seller_id        String
+  wallet_id        String
   type_transaction Int
   date             DateTime
   amount           Decimal
+  wallet           Wallets  @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
 }
 
 model Type_transactions {
@@ -104,12 +112,12 @@ model Type_transactions {
 }
 
 model Courses {
-  id                Int      @id @default(autoincrement())
+  id                Int               @id @default(autoincrement())
   title             String
   seller_id         String
   type_course_id    Int
-  premium           Boolean
-  description       String
+  premium           Boolean           @default(false)
+  description       String?
   course_level_id   Int
   platform_id       Int
   language_id       Int
@@ -118,8 +126,20 @@ model Courses {
   functionality_id  Int
   tool_id           Int
   tags              String[]
-  stars             Int
   price             Decimal
+  seller            Sellers           @relation(fields: [seller_id], references: [seller_id]) // Relación con Sellers
+  stars             Courses_ratings[]
+  punctuation       Decimal
+}
+
+model Courses_ratings {
+  id        Int      @id @default(autoincrement())
+  course_id Int
+  user_id   String // validar que un mismo usuario no pueda hacer mas de una calificacion
+  rating    Int
+  comment   String
+  date      DateTime
+  course    Courses  @relation(fields: [course_id], references: [id]) // Relación con Sellers
 }
 
 model Types_of_courses {
@@ -160,12 +180,4 @@ model Functionality {
 model Tools {
   id   Int    @id @default(autoincrement())
   name String
-}
-
-model Courses_ratings {
-  id         Int      @id @default(autoincrement())
-  course_id  Int
-  user_id    String
-  rating     Int
-  created_at DateTime
 }
