@@ -110,12 +110,12 @@ export const detalles_pages = [
   },
   {
     id: 3,
-    title: "Gestión de con mi huevos",
+    title: "Gestión de con mis amigos",
     description: "Aprende a gestionar inventarios utilizando Power Apps.",
   },
   {
     id: 4,
-    title: "Gestión de con mi pelotas",
+    title: "Gestión de usuarios",
     description: "Aprende a gestionar inventarios utilizando Power Apps.",
   },
 ];

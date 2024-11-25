@@ -1,13 +1,11 @@
 'use client'
 import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs";
-import { Header } from "@/components/Layout/Header";
 import Link from "next/link";
 
 export default function Dashboard() {
     const breadcrumbs = useBreadcrumbs();
     return (
         <main>
-            <Header />
             <div className="flex flex-row mt-4 mb-10">
                 {breadcrumbs?.map(({ name, path, isLast }) => (
                     <li key={path} className="flex flex-row items-center">

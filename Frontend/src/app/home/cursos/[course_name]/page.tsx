@@ -1,6 +1,7 @@
 'use client'
 import { useParams } from 'next/navigation';
 import { Page_Details_Course } from '@/Pages/Detalles_Cursos/Page_Details_Course';
+import { Breadcrumbs } from '@/components/Breadcrubs.tsx/Breadcrubs';
 
 const CourseDetail = ({ params }: any) => {
   params = useParams();
@@ -14,14 +15,7 @@ const CourseDetail = ({ params }: any) => {
 
   return (
     <section>
-      
-      <div>
-        <h1>Curso: {courseName}</h1>
-      </div>
-      <div>
-        <Page_Details_Course id={id} />
-      </div>
-      
+      <Page_Details_Course id={id} />
     </section>
   );
 };

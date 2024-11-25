@@ -2,7 +2,7 @@ import { Footer } from "@/components/Layout/Footer"
 import { Header } from "@/components/Layout/Header"
 
 
-export default function Course_Detail({
+export default function Home({
     children,
 }: {
     children: React.ReactNode
