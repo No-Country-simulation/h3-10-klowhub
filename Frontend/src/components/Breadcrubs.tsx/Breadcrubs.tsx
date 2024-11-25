@@ -13,7 +13,7 @@ export function Breadcrumbs() {
                     <span className="mx-2">/</span>
                     {isLast ? (
                         <div className="flex flex-row">
-                            <span className="font-bold">{`${name.charAt(0).toUpperCase()}${name.slice(1)} y Lecciones`}</span>
+                            <span className="font-bold">{`${name.charAt(0).toUpperCase()}${name.slice(1)}`}</span>
                         </div>
                     ) : (
                         <Link href={path} className="hover:underline">

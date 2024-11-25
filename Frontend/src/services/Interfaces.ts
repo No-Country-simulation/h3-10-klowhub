@@ -24,7 +24,7 @@ export interface IconPromps {
 }
 
 export interface Course {
-  id: number;
+  id: number | any;
   title: string;
   descripcion: string;
   details?: Details_Course;

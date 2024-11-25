@@ -14,9 +14,9 @@ const CourseDetail = ({ params }: any) => {
   const id = params.course_name;
 
   return (
-    <section>
+    <main className='flex justify-center'>
       <Page_Details_Course id={id} />
-    </section>
+    </main>
   );
 };
 
