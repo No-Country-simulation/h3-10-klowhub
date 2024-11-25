@@ -1,0 +1,66 @@
+import Image from 'next/image'
+import React from 'react'
+import {AplicationCart} from '@/services/Interfaces'
+import StarCartIcon from './Icons/StarCartIcon'
+import MensageCartIcon from './Icons/MensageCartIcon'
+import MovieCartIcon from './Icons/MovieCartIcon'
+import LeafCartIcon from './Icons/LeafCartIcon'
+import CaficationCartComponent from './CaficationCartComponent'
+export default function AplicationCartComponent(
+  {
+    urlImg,nameProject, Top, Industry, Developer, numberOfScores, numberVotes,Category,fnDelete,id
+  }: AplicationCart
+) {
+  return (
+    <div className='p-6 bg-[#00000066] rounded-xl shadow-2xl'>
+      <hr/>
+      <div className='my-3 flex  flex-wrap  gap-6 '>
+      <Image src={urlImg} 
+        alt={`Es la imagen de la aplicación ${nameProject}`}
+        width={240}
+        height={240}
+        className='rounded-xl max-lg:w-full'/>
+        <div className='flex flex-col gap-3'>
+          <h6 className='font-bold text-base'>Aplicación para seguimiento de proyectos</h6>
+           
+          <div className='flex gap-3 text-sm'>
+            <StarCartIcon/>
+            <p>Top {Top} apps más vendidas</p>
+          </div>
+
+           <div className='flex gap-3 text-sm'>
+            <MensageCartIcon/>
+            <p>Plataforma: {nameProject}</p>
+           </div>
+
+           <div className='flex gap-3 text-sm'>
+            <LeafCartIcon/>
+            <p>Sector: {Industry}</p>
+           </div>
+
+           <div className='flex gap-3 text-sm'>
+            <MovieCartIcon/>
+            <p>Desarrollador %{Developer ? 'Verificado' : 'No verificado'}</p>
+           </div>
+
+           <div className='flex gap-3 text-sm'>
+            <p>{numberOfScores}</p>
+            <CaficationCartComponent valueStar={numberOfScores}/>
+            <p>{`(${numberVotes})`}</p>
+           </div>
+           
+           <div className='flex gap-3 text-sm'>
+             {Category.map((score,index) => (
+              <span key={score+index} 
+              className='rounded-lg bg-[#F3E3FBBF] text-[#812AAC] p-2 font-semibold'>{score}</span>
+             ))}
+           </div>
+        </div>
+
+        <button className='transition-colors mt-auto ml-auto mr-6 p-2 rounded-xl hover:bg-gray-100/40'
+         onClick={ () => fnDelete(id)}>Eliminar</button>
+      </div>
+      <hr/>
+    </div>
+  )
+}
