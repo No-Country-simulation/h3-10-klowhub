@@ -162,6 +162,14 @@ export function Page_Details_Course({ id }: any) {
         <aside className="flex flex-col">
           <Teacher_info />
           <Course_program />
+          <div className="flex flex-col gap-y-6 justify-center w-full items-center mt-10">
+            <button className="bg-primary_b_500 w-[60%] rounded-lg font-bold font-inter px-3 py-2 text-base">
+              Comprar Curso
+            </button>
+            <button className="border-primary_a border w-[60%] text-primary_c_200 rounded-lg font-bold font-inter px-3 py-2">
+              Añadir al carrito
+            </button>
+          </div>
         </aside>
 
 
