@@ -41,3 +41,15 @@ export interface Details_Course {
   videos: number;
   duracion: number;
 }
+export interface AplicationCart {
+  urlImg:string,
+  nameProject:string,
+  Top:number,
+  Industry:string,
+  Developer:boolean,
+  numberOfScores:number,
+  numberVotes:number,
+  Category:string[],
+  id:number
+  fnDelete:(id:number) => undefined 
+} 
