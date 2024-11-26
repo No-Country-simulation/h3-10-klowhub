@@ -127,11 +127,11 @@ export function Page_Details_Course({ id }: any) {
 
 
           <section>
-            <h3 className="mb-2">Despues de completar este curso,  serás capaz de</h3>
-            <ul className="">
+            <h3 className=" text-[16px]">Despues de completar este curso, serás capaz de</h3>
+            <ul className="ml-4 mt-4">
               {filteredInfo.items.map((item: string, index: number) => {
                 return (
-                  <div className="flex flex-row items-center mb-2 gap-y-4" key={index}>
+                  <div className="flex flex-row items-center mb-2  gap-y-4 text-sm" key={index}>
                     <Icon_Check_page width={62} height={26} />
                     <li key={index}>{item}</li>
                   </div>
