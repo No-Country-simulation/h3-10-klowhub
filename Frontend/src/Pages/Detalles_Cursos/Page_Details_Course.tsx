@@ -11,6 +11,7 @@ import { Course_page } from "@/services/Interfaces";
 import React, { useState } from "react";
 import { Icon_Star, Icon_Start_Med } from "../../../public/icons/Details_Course_Icon/Start_Icon";
 import { Icon_Check_page } from "../../../public/icons/Details_Course_Icon/Icon_Check";
+import { Teacher_info } from "@/components/Details_Course/Details_teacher/Teacher";
 
 export function Page_Details_Course({ id }: any) {
 
@@ -123,9 +124,6 @@ export function Page_Details_Course({ id }: any) {
           <div>
           </div>
 
-
-
-
           <section>
             <h3 className=" text-[16px]">Despues de completar este curso, serás capaz de</h3>
             <ul className="ml-4 mt-4">
@@ -148,7 +146,7 @@ export function Page_Details_Course({ id }: any) {
         </article>
 
         <aside className="">
-
+              <Teacher_info />
         </aside>
         <p className="mt-10 text-center">Ver mas</p>
       </section>

@@ -124,3 +124,19 @@ export const detalles_pages = [
     ],
   },
 ];
+
+export const teache_info = [
+  {
+    id: 1,
+    name: "Sebastian Rios",
+    bio: "Instructor y desarrollador",
+    img_avatar: "/img/Details_Course/avatar.png",
+    subcricion: "PRO",
+    details: {
+      qualification: 4.3,
+      reviews: 52,
+      students: 60,
+      course: 77
+    },
+  },
+];

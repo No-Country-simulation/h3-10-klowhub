@@ -11,8 +11,10 @@ export default {
       fontFamily: {
         inter: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
       },
+      colors: {
+        primary: "#D194E2",
+      },
     },
   },
   plugins: [],
 } satisfies Config;
-
