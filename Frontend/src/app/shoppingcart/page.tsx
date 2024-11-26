@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import CartJson from '@/services/CartJson.json'
 import AplicationCartComponent from '@/components/ShoppingCart/AplicationCartComponent'
 import PurchaseSummaryComponent from '@/components/ShoppingCart/PurchaseSummaryComponent'
+import ToasterCartComponent from '@/components/ShoppingCart/ToasterCartComponent'
 export default function PageCart() {
   const [Carts, setCarts] = useState(CartJson)
     console.log(CartJson)
@@ -37,7 +38,7 @@ export default function PageCart() {
         </div>
         <PurchaseSummaryComponent valueService={500} valueTotal={100}/>
      </div>
-        
+        <ToasterCartComponent/>
     </div>
   )
 }
