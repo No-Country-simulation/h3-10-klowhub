@@ -27,7 +27,7 @@ export interface Course {
   id: number | any;
   title: string;
   descripcion: string;
-  details?: Details_Course;
+  details: Details_Course;
   video_resumen: string;
   avatar: string;
   name: string;
