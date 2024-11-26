@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { Icon_Star, Icon_Start_Med } from "../../../public/icons/Details_Course_Icon/Start_Icon";
 import { Icon_Check_page } from "../../../public/icons/Details_Course_Icon/Icon_Check";
 import { Teacher_info } from "@/components/Details_Course/Details_teacher/Teacher";
+import { Course_program } from "@/components/Details_Course/Course program/Course_program";
 
 export function Page_Details_Course({ id }: any) {
 
@@ -43,6 +44,8 @@ export function Page_Details_Course({ id }: any) {
   };
 
   const breadcrumbs = useBreadcrumbs();
+
+  const [showMore, setShowMore] = useState(false);
 
   return (
     <main className="max-w-7xl flex flex-col justify-center mb-[48px]">
@@ -94,12 +97,12 @@ export function Page_Details_Course({ id }: any) {
           </div>
 
           <figure className='flex flex-col'>
-            <Image className='mb-1 h-[345px]' src={filteredInfo?.video_resumen} width={880} height={300} alt='video_resumen' />
+            <Image className='mb-1 h-[345px]' src={filteredInfo?.video_resumen} width={800} height={300} alt='video_resumen' />
             <Image
               src={"/img/Details_Course/Reproductor.png"}
               alt='Reproductor'
               className='relative bottom-[3.5rem] max-[1000px]:hidden rounded-md left-0'
-              width={880}
+              width={800}
               height={50}
             />
           </figure>
@@ -140,18 +143,32 @@ export function Page_Details_Course({ id }: any) {
 
           <section className='flex flex-col gap-y-2 mb-2 mt-10'>
             <h3 className='font-bold text-md'>Acerca de este curso</h3>
-            <p className='font-inter text-sm'>{filteredInfo.info_curso}</p>
+            <p className='font-inter text-sm' style={{ opacity: showMore ? 1 : 0.5, transition: "opacity 0.5s ease-in-out" }}>{filteredInfo.info_curso}</p>
           </section>
 
+          <button className={`w-full text-center mt-10 ${showMore ? "hidden" : "block  "}`} onClick={() => setShowMore(!showMore)}>
+            {showMore ? " Ver menos" : "Ver mas"}
+          </button>
+
+          {showMore && (
+            <div className="mt-10 ">
+              <p className="text-sm font-inter">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Donec sed odio dui.
+              </p>
+            </div>
+          )}
         </article>
 
-        <aside className="">
-              <Teacher_info />
+        <aside className="flex flex-col">
+          <Teacher_info />
+          <Course_program />
         </aside>
-        <p className="mt-10 text-center">Ver mas</p>
+
+
       </section>
 
     </main>
   );
 }
+
 

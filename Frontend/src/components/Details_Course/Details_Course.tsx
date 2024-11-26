@@ -13,8 +13,6 @@ import { Icon_Mensagge } from '../../../public/icons/Details_Course_Icon/Social_
 import { Icon_Linkendi } from '../../../public/icons/Details_Course_Icon/Social_Media/Linkedin';
 import Link from 'next/link';
 
-
-
 const buttonStyle: React.CSSProperties = {
     padding: '10px 20px',
     backgroundColor: '#007bff',

@@ -1,3 +1,11 @@
+export const login = [
+  {
+    id: 1,
+    email: "Yhordi Choque Espinoza",
+    password: "123456",
+  },
+];
+
 export const db = [
   {
     id: 1,
@@ -114,7 +122,7 @@ export const detalles_pages = [
     name: "Sebastian Rios",
     bio: "Experto en desarrollo de aplicaciones no-code con más de 5 años de experiencia en AppSheet y Power Apps, ayudando a empresas y emprendedores.",
     info_curso:
-      "Este curso está diseñado para quienes desean aprender a crear aplicaciones personalizadas de manera rápida y sencilla, sin necesidad de conocimientos previos en programación. A lo largo de las lecciones, explorarás las funcionalidades clave de AppSheet, desde los conceptos básicos hasta técnicas avanzadas, que te permitirán desarrollar soluciones adaptadas a tus necesidades.",
+      "Este curso está diseñado para quienes desean aprender a crear aplicaciones personalizadas de manera rápida y sencilla, sin necesidad de conocimientos previos en programación. A lo largo de las lecciones, explorarás las funcionalidades clave de Power Apps, desde los conceptos básicos hasta técnicas avanzadas, que te permitirán desarrollar soluciones adaptadas a tus necesidades. Con ejemplos prácticos y explicaciones claras, te guiaré en el proceso de convertir tus ideas en aplicaciones funcionales que mejoren la productividad y eficiencia de tus proyectos.",
     items: [
       "Crear aplicaciones personalizadas desde cero utilizando Power Apps.",
       "Automatizar tareas y optimizar procesos en tu entorno laboral o personal.",
@@ -136,7 +144,86 @@ export const teache_info = [
       qualification: 4.3,
       reviews: 52,
       students: 60,
-      course: 77
+      course: 77,
     },
+  },
+];
+
+export const Program_info = [
+  {
+    id: 1,
+    title: "Introducción a Power Apps y Fundamentos Básicos",
+    description:
+      "En esta lección, vamos a explorar los conceptos básicos de Power Apps y cómo configurar tu entorno de trabajo.",
+    contentPreview: "Vista previa del contenido",
+    content: [
+      {
+        title: "¿Que es Power Apps?",
+        description: "Una visión general de la plataforma",
+        preview: "",
+      },
+      {
+        title: "Configuración de tu cuenta y entorno de trabajo",
+        description: "",
+      },
+      { title: "Creacion de tu primera aplicación básica", description: "" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Introducción a Power Apps y Fundamentos Básicos",
+    description:
+      "En esta lección, vamos a explorar los conceptos básicos de Power Apps y cómo configurar tu entorno de trabajo.",
+    contentPreview: "Vista previa del contenido",
+    content: [
+      {
+        title: "¿Que es Power Apps?",
+        description: "Una visión general de la plataforma",
+        preview: "",
+      },
+      {
+        title: "Configuración de tu cuenta y entorno de trabajo",
+        description: "",
+      },
+      { title: "Creacion de tu primera aplicación básica", description: "" },
+    ],
+  },
+  {
+    id: 3,
+    title: "Introducción a Power Apps y Fundamentos Básicos",
+    description:
+      "En esta lección, vamos a explorar los conceptos básicos de Power Apps y cómo configurar tu entorno de trabajo.",
+    contentPreview: "Vista previa del contenido",
+    content: [
+      {
+        title: "¿Que es Power Apps?",
+        description: "Una visión general de la plataforma",
+        preview: "",
+      },
+      {
+        title: "Configuración de tu cuenta y entorno de trabajo",
+        description: "",
+      },
+      { title: "Creacion de tu primera aplicación básica", description: "" },
+    ],
+  },
+  {
+    id: 4,
+    title: "Introducción a Power Apps y Fundamentos Básicos",
+    description:
+      "En esta lección, vamos a explorar los conceptos básicos de Power Apps y cómo configurar tu entorno de trabajo.",
+    contentPreview: "Vista previa del contenido",
+    content: [
+      {
+        title: "¿Que es Power Apps?",
+        description: "Una visión general de la plataforma",
+        preview: "",
+      },
+      {
+        title: "Configuración de tu cuenta y entorno de trabajo",
+        description: "",
+      },
+      { title: "Creacion de tu primera aplicación básica", description: "" },
+    ],
   },
 ];

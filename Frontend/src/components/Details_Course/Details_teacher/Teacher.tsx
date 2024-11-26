@@ -13,7 +13,7 @@ export function Teacher_info() {
         <section className="flex justify-center">
             {info.map((item, index) => {
                 return (
-                    <article key={index} className=" bg-white/10 rounded-md px-5 py-2 gap-x-2 w-[80%]">
+                    <article key={index} className=" bg-white/10 rounded-md px-5 py-2 gap-x-2 w-[90%]">
                         <div className='flex flex-row items-center gap-x-3 h-auto'>
                             <Image src={item.img_avatar} className="mt-1" width={50} height={50} alt='avatar' />
                             <div className='flex flex-col justify-center h-auto'>
