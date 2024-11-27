@@ -8,6 +8,7 @@ import { PasswordService } from 'src/shared-module/password.service';
 @Module({
   controllers: [UsersController],
   providers: [UsersService],
-  imports : [PrismaModule, SharedModule]
+  imports: [PrismaModule, SharedModule],
+  exports: [UsersService],
 })
 export class UsersModule {}
