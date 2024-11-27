@@ -60,3 +60,35 @@ export const detalles = [
       "Este curso está diseñado para quienes desean aprender a crear aplicaciones personalizadas de manera rápida y sencilla, sin necesidad de conocimientos previos en programación. A lo largo de las lecciones, explorarás las funcionalidades clave de AppSheet, desde los conceptos básicos hasta técnicas avanzadas, que te permitirán desarrollar soluciones adaptadas a tus necesidades.",
   },
 ];
+
+export const courseCard = [
+  {
+    mainImageCourse: "/img/Cards_Img/imagen.jpg",
+    altMainImageCourse: "Curso",
+    projectImage: "/img/Cards_Img/logo.png",
+    projectName: "GreenTech Innovations",
+    title: "Gestion de inventarios con Power Apps",
+    description:
+      "Aprende a gestionar inventarios de la mejor manera con las mejores tecnologías",
+    tags: ["Gestion", "Inventarios", "Power Apps"],
+    stars: 5.5,
+    califications: 34,
+    price: 60,
+    width: 453,
+    heigth: 200,
+  },
+  {
+    mainImageCourse: "/img/Cards_Img/imagen.jpg",
+    altMainImageCourse: "Curso",
+    projectImage: "/img/Cards_Img/logo.png",
+    projectName: "GreenTech Innovations",
+    title: "Gestion de Servicios con Power Apps",
+    description:
+      "Aprende a gestionar inventarios de la mejor manera con las mejores tecnologías",
+    tags: ["Gestion", "Inventarios", "Power Apps"],
+    stars: 5.5,
+    califications: 34,
+    width: 100,
+    heigth: 100,
+  },
+];
