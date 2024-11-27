@@ -31,10 +31,9 @@ export function Header() {
         { id: 6, name: "Proyectos", path: "/home/Sobre Appsheet" },
     ]
 
-    // ['Home', 'Plataforma', 'Dashboard', 'Curso y lecciones', 'Appstore', 'Proyectos', 'Consultoría', 'Sobre Appsheet']
 
     return (
-        <header className="mt-3 relative text-white font-inter">
+        <header className="mt-3 relative text-white font-inter ">
 
             <div className="absolute top-0 left-0 h-20 -z-10 blur-md">
                 <Image
@@ -48,13 +47,14 @@ export function Header() {
             </div>
             <div className="absolute top-0 left-0 w-full h-[4.5rem] -z-[10] bg-[#1F2026] opacity-60"></div>
 
-            <div className="flex items-center 2xl:justify-evenly justify-between px-4 md:px-6 py-2">
-                <div className=''>
+            <div className="flex items-center 2xl:justify-evenly justify-between px-4 md:px-10">
+                <div className='flex items-center'>
                     <Image
                         alt="Logo"
                         src="/img/Header_Img/Logo.png"
-                        className='hidden xl:block'
-                        priority={false} width={50}
+                        className='hidden xl:block '
+                        priority={false}
+                        width={50}
                         height={50}
                         style={{ height: 'auto', width: 'auto' }}
                     />

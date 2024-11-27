@@ -2,9 +2,11 @@ import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs"
 import Link from "next/link";
 
 
-export function Breadcrumbs() {
+export function Breadcrumbs({ name }: any) {
 
     const breadcrumbs = useBreadcrumbs();
+
+    const info = name;
 
     return (
         <div className="flex flex-row mt-4 mb-4">
@@ -13,7 +15,7 @@ export function Breadcrumbs() {
                     <span className="mx-2">/</span>
                     {isLast ? (
                         <div className="flex flex-row">
-                            <span className="font-bold">{`${name.charAt(0).toUpperCase()}${name.slice(1)}`}</span>
+                            <span className="font-bold">{`${name.charAt(0).toUpperCase()}${name.slice(1)} ${info}`}</span>
                         </div>
                     ) : (
                         <Link href={path} className="hover:underline">

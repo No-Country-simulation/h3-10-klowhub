@@ -6,10 +6,14 @@ import { detalles } from "@/mock/db";
 export default function CursosLecciones() {
 
     const base = detalles;
-    
+
+
+
     return (
         <main>
-            <Breadcrumbs />
+            <div className="ml-10">
+                <Breadcrumbs name={"y Lecciones"} />
+            </div>
             <div>
                 {
                     base.map((items, index) => {

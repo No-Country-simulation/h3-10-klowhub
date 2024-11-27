@@ -45,9 +45,14 @@ export interface Course_page {
   name: string;
   bio: string;
   info_curso: string
-  items: string[] 
+  items: string[]
+  question: question_info;
 }
 
+export interface question_info {
+  question_1: string;
+  question_2: string;
+}
 
 export interface Details_Course {
   valoracion: number;

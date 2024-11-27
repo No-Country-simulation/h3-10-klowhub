@@ -4,10 +4,12 @@ import { Breadcrumbs } from "@/components/Breadcrubs.tsx/Breadcrubs";
 
 export default function Home() {
 
-   
+
     return (
         <main className="">
-            <Breadcrumbs />
+            <div className="ml-10">
+                <Breadcrumbs name={" "} />
+            </div>
         </main>
     )
 }

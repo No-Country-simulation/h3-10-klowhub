@@ -8,11 +8,14 @@ export const useBreadcrumbs = () => {
   const segments = pathname?.split('/').filter(Boolean);
   const [resolvedSegments, setResolvedSegments] = useState<string[]>([]);
 
-  console.log("Segments: " + segments)
+
+  console.log("resolvedSegments: " + resolvedSegments)
+
   const breadcrumbs = segments?.map((segment, index) => {
     const path = `/${segments.slice(0, index + 1).join('/')}`;
     const isLast = index === segments.length - 1;
 
+    console.log(path)
 
     function capitalizeFirstLetter(string: string) {
       if (!string) return '';
@@ -23,10 +26,11 @@ export const useBreadcrumbs = () => {
 
 
     return {
-      name: resolvedSegments[index] || decodeURIComponent(segmentCapitalized),
+      name: resolvedSegments[index] || decodeURIComponent(segmentCapitalized).replace(/\//g, '/'),
       path,
       isLast,
     };
+
   });
 
   return breadcrumbs;

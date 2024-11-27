@@ -48,7 +48,7 @@ export function Details_Course_Modal({ datos }: { datos: Course }) {
     };
 
     return (
-        <div>
+        <div className=''>
             <button onClick={openModal} style={buttonStyle} className='mt-10 ml-10'>
                 Ver detalles
             </button>

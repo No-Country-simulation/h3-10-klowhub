@@ -13,6 +13,10 @@ import { Icon_Star, Icon_Start_Med } from "../../../public/icons/Details_Course_
 import { Icon_Check_page } from "../../../public/icons/Details_Course_Icon/Icon_Check";
 import { Teacher_info } from "@/components/Details_Course/Details_teacher/Teacher";
 import { Course_program } from "@/components/Details_Course/Course program/Course_program";
+import { Mail } from "../../../public/icons/Details_Course_Icon/Social_Media/Mail";
+import { Icon_Whasapp } from "../../../public/icons/Details_Course_Icon/Social_Media/Whasapp";
+import { Icon_Mensagge } from "../../../public/icons/Details_Course_Icon/Social_Media/Mensagge";
+import { Icon_Linkendi } from "../../../public/icons/Details_Course_Icon/Social_Media/Linkedin";
 
 export function Page_Details_Course({ id }: any) {
 
@@ -97,7 +101,7 @@ export function Page_Details_Course({ id }: any) {
           </div>
 
           <figure className='flex flex-col'>
-            <Image className='mb-1 h-[345px]' src={filteredInfo?.video_resumen} width={800} height={300} alt='video_resumen' />
+            <Image className='mb-1 h-[385px]' src={filteredInfo?.video_resumen} width={800} height={400} alt='video_resumen' />
             <Image
               src={"/img/Details_Course/Reproductor.png"}
               alt='Reproductor'
@@ -152,15 +156,123 @@ export function Page_Details_Course({ id }: any) {
 
           {showMore && (
             <div className="mt-10 ">
-              <p className="text-sm font-inter">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sed odio dui. Donec sed odio dui.
-              </p>
+              <div>
+                <button className=" bg-primary_b_500 border w-auto border-none rounded-lg font-semibold font-inter px-10 py-2">
+                  Añadir al carrito
+                </button>
+              </div>
+              <div className='flex flex-row mt-6 gap-x-4 items-center'>
+                <h5 className='font-inter text-[14px]'>Compartir</h5>
+                <div className='flex flex-row items-center gap-x-3'>
+                  <Mail width={12} height={12} />
+                  <Icon_Whasapp width={12} height={12} />
+                  <Icon_Mensagge width={12} height={12} />
+                  <Icon_Linkendi width={12} height={12} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-y-5 mt-4">
+                <h2 className="font-bold font-inter text-[18px]">¿Por  qué aprender con {filteredInfo.name}?</h2>
+                <p className="font-inter text-sm">{filteredInfo.question.question_1}</p>
+              </div>
+              <div className="flex flex-col gap-y-5 mt-4">
+                <h2 className="font-bold font-inter text-[18px]">¿Para quién es este curso?</h2>
+                <p className="font-inter text-sm">{filteredInfo.question.question_2}</p>
+              </div>
+              <div className="flex flex-col gap-y-5 mt-4">
+                <h2>Requsitos</h2>
+
+                <div>
+                  {filteredInfo.requirements.map((item: string, index: number) => {
+                    return (
+                      <div className="flex flex-row" key={index}>
+                        <Icon_Check_page width={62} height={26} />
+                        <p>{item}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+              <div className="flex flex-col gap-y-5 mt-4">
+                <h2>¿Que incluye?</h2>
+
+                <div className="">
+                  {filteredInfo.includes.map((item: string, index: number) => {
+                    return (
+                      <div className="flex flex-row gap-y-4 pb-4" key={index}>
+                        <Icon_Check_page width={62} height={26} />
+                        <p>{item}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <h2 className="font-bold">Información y funcionalidades de la app</h2>
+                <div className=" py-1 rounded-md grid grid-cols-4 border border-primary_c_200 mt-4">
+                  <div className="flex flex-col items-center ">
+                    <h3 className="font-inter pb-4 font-semibold">Funcionalidades</h3>
+                    <div className="flex flex-col gap-y-3 items-center">
+                      {filteredInfo.information_app.funcionalidad.map((item: string, index: number) => {
+                        return (
+                          <h5 key={index} className="bg-gray-400 p-1 rounded-lg text-primary_b_500/70 font-semibold font-inter text-sm">
+                            {item}
+                          </h5>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center">
+                    <h3 className="font-inter pb-4 font-semibold">Herramientas y plataformas</h3>
+                    <div className="flex flex-col gap-y-3">
+                      {filteredInfo.information_app.tools.map((item: string, index: number) => {
+                        return (
+                          <h5 key={index} className="bg-gray-400  px-2 p-1 rounded-lg text-primary_b_500/70 font-semibold font-inter text-sm">
+                            {item}
+                          </h5>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center">
+                    <h3 className="font-inter pb-4 font-semibold">Sector</h3>
+                    <div className="flex flex-col gap-y-3 items-center">
+                      {filteredInfo.information_app.section.map((item: string, index: number) => {
+                        return (
+                          <h5 key={index} className="bg-gray-400 px-2 p-1 rounded-lg text-primary_b_500/70 font-semibold font-inter text-sm">
+                            {item}
+                          </h5>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center">
+                    <h3 className="font-inter pb-4 font-semibold">Plan de contenido</h3>
+                    <div className="flex flex-col gap-y-3 pb-2 items-center">
+                      {filteredInfo.information_app.content.map((item: string, index: number) => {
+                        return (
+                          <h5 key={index} className="bg-gray-400 px-2 p-1 rounded-lg text-primary_b_500/70 font-semibold font-inter text-sm">
+                            {item}
+                          </h5>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             </div>
           )}
         </article>
 
         <aside className="flex flex-col">
           <Teacher_info />
+          <div className="">
+
+          </div>
           <Course_program />
           <div className="flex flex-col gap-y-6 justify-center w-full items-center mt-10">
             <button className="bg-primary_b_500 w-[60%] rounded-lg font-bold font-inter px-3 py-2 text-base">
@@ -170,6 +282,8 @@ export function Page_Details_Course({ id }: any) {
               Añadir al carrito
             </button>
           </div>
+
+
         </aside>
 
 

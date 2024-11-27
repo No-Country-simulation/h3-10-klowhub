@@ -14,7 +14,7 @@ export function Course_program() {
 
     return (
         <article className='flex flex-col w-full mt-10'>
-            <h2 className='font-semibold font-inter pl-10'>Programa del curso</h2>
+            <h2 className='font-bold text-[16.5px] font-inter pl-7'>Programa del curso</h2>
             <section className='flex flex-col mt-3 items-center w-full justify-center   rounded-md ' >
                 <div className="rounded-md px-4 py-2 gap-x-2 w-[90%] bg-white/10">
                     {modules.map((module, index) => (
