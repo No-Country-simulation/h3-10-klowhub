@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,14 +19,11 @@ export class UsersController {
 
   @Post()
   create(@Body() user: CreateUserDto) {
-
-    
-    return this.usersService.createUser(user);
-  }
-
-  @Get()
-  findAll() {
-    return this.usersService.findAll();
+    try {
+      return this.usersService.createUser(user);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get(':id')

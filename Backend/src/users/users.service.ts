@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -12,17 +17,36 @@ export class UsersService {
   ) {}
 
   async createUser(user: CreateUserDto): Promise<any> {
-    const hashedPassword = await this.passwordService.hashPassword(user.password)
-    return this.prisma.users.create({
-      data:{
-        ...user, password: hashedPassword
+    try {
+      const hashedPassword = await this.passwordService.hashPassword(
+        user.password,
+      );
+      return await this.prisma.users.create({
+        data: {
+          ...user,
+          password: hashedPassword,
+        },
+      });
+    } catch (error) {
+      if (error.code === 'P2002') {
+        throw new ConflictException('Email already exists');
       }
-    })
+      throw new BadRequestException('Unknown Error');
+    }
   }
 
-  findAll() {
-
-    return `This action returns all users`;
+  async findByMail(email: string) {
+    try {
+      const usernameFound = await this.prisma.users.findUnique({
+        where: { email },
+      });
+      if (!usernameFound) {
+        throw new NotFoundException('User not found');
+      }
+      return usernameFound;
+    } catch (error) {
+      throw new NotFoundException({ message: 'User not found', error });
+    }
   }
 
   findOne(id: number) {
