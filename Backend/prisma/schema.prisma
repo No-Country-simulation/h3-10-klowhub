@@ -198,6 +198,7 @@ model Tools {
   name String
 }
 
+// revisar como un usuario que no es vendedor compra un curso
 model Purchased_courses {
   id             Int          @id @default(autoincrement())
   transaction_id Int          @unique
