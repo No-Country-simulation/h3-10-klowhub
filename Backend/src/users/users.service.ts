@@ -8,6 +8,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PasswordService } from 'src/shared-module/password.service';
+import { Users } from '@prisma/client';
+import { ResponseObject } from 'src/interfaces/types';
 
 @Injectable()
 export class UsersService {
@@ -16,17 +18,18 @@ export class UsersService {
     private passwordService: PasswordService,
   ) {}
 
-  async createUser(user: CreateUserDto): Promise<any> {
+  async createUser(user: CreateUserDto): Promise<ResponseObject | null> {
     try {
       const hashedPassword = await this.passwordService.hashPassword(
         user.password,
       );
-      return await this.prisma.users.create({
+      await this.prisma.users.create({
         data: {
           ...user,
           password: hashedPassword,
         },
       });
+      return { message: 'User Created Successfully', ok: true };
     } catch (error) {
       if (error.code === 'P2002') {
         throw new ConflictException('Email already exists');
@@ -35,7 +38,7 @@ export class UsersService {
     }
   }
 
-  async findByMail(email: string) {
+  async findByMail(email: string): Promise<Users | null> {
     try {
       const usernameFound = await this.prisma.users.findUnique({
         where: { email },
@@ -45,19 +48,51 @@ export class UsersService {
       }
       return usernameFound;
     } catch (error) {
-      throw new NotFoundException({ message: 'User not found', error });
+      throw new BadRequestException({ message: 'Server Error', error });
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string): Promise<Omit<Users, 'password'> | null> {
+    const usernameFound = await this.prisma.users.findUnique({
+      where: { user_id: id },
+    });
+    if (!usernameFound) {
+      throw new NotFoundException('User not found');
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...returnUser } = usernameFound;
+    return returnUser;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<ResponseObject | null> {
+    try {
+      const userFound = await this.findOne(id);
+      if (!userFound) {
+        throw new NotFoundException('User not found');
+      }
+      await this.prisma.users.update({
+        where: { user_id: id },
+        data: updateUserDto,
+      });
+      return { message: 'User Updated Successfully', ok: true };
+    } catch (error) {
+      throw new BadRequestException({ message: 'Server Error', error });
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const userFound = await this.findOne(id);
+    if (!userFound) {
+      throw new NotFoundException('User not found');
+    }
+    // hacer el servicio de crear el deleteAtUser en el resource correspondiente
+    // hacer el servicio en sellers del borrado usuario no olvidarse que hay tabla del viejo
+    /* this.prisma.sellers.update({
+      where: { user_id: id },
+      data: { isUserActive: false },
+    }); */
   }
 }
