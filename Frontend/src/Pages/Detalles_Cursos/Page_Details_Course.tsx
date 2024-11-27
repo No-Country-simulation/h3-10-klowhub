@@ -17,6 +17,7 @@ import { Mail } from "../../../public/icons/Details_Course_Icon/Social_Media/Mai
 import { Icon_Whasapp } from "../../../public/icons/Details_Course_Icon/Social_Media/Whasapp";
 import { Icon_Mensagge } from "../../../public/icons/Details_Course_Icon/Social_Media/Mensagge";
 import { Icon_Linkendi } from "../../../public/icons/Details_Course_Icon/Social_Media/Linkedin";
+import { Reviews } from "@/components/Details_Course/Reviews/Reviews";
 
 export function Page_Details_Course({ id }: any) {
 
@@ -53,16 +54,17 @@ export function Page_Details_Course({ id }: any) {
 
   return (
     <main className="max-w-7xl flex flex-col justify-center mb-[48px]">
-      <nav className="mb-10">
+      <nav className="mb-5 mt-5">
         <ol className="flex flex-row mt-4 mb-4">
           {breadcrumbs?.map(({ name, path, isLast }) => (
             <li key={path} className="flex flex-row items-center">
-              <span className="mx-2">/</span>
+              <span className="mx-4"></span>
               {isLast ? (
                 <span className="font-bold">{filteredInfo?.title}</span>
               ) : (
-                <Link href={path} className="hover:underline">
+                <Link href={path} className="hover:underline flex flex-row gap-x-5">
                   {name}
+                  <p>/</p>
                 </Link>
               )}
             </li>
@@ -100,21 +102,41 @@ export function Page_Details_Course({ id }: any) {
             </div>
           </div>
 
-          <figure className='flex flex-col'>
-            <Image className='mb-1 h-[385px]' src={filteredInfo?.video_resumen} width={800} height={400} alt='video_resumen' />
-            <Image
-              src={"/img/Details_Course/Reproductor.png"}
-              alt='Reproductor'
-              className='relative bottom-[3.5rem] max-[1000px]:hidden rounded-md left-0'
-              width={800}
-              height={50}
-            />
+          <figure className='flex flex-col p-0 m-0 w-[800px]'>
+            <div>
+              <Image className='mb-1 h-[385px]' src={filteredInfo?.video_resumen} width={800} height={400} alt='video_resumen' />
+
+              <div>
+                <Image className="absolute bottom-7 rounded-md" src={"/img/Details_Course/Reproductor.png"} width={800} height={300} alt="" />
+              </div>
+
+            </div>
+            <h3 className="pl-4 mt-2 mb-2 font-semibold font-inter">Contenido gratuito</h3>
+            <div className="grid grid-cols-4  gap-x-3 items-center justify-center">
+              <div className="flex flex-col gap-y-3">
+                <Image alt="Leccion 1" src={"/img/Details_Course/Lesson/Leccion_1.png"} width={500} height={300} />
+                <p>Lección 1</p>
+              </div>
+              <div className="flex flex-col gap-y-3">
+                <Image alt="Leccion 2" src={"/img/Details_Course/Lesson/Leccion_2.png"} width={500} height={300} />
+                <p>Lección 2</p>
+
+              </div>
+              <div className="flex flex-col gap-y-3">
+                <Image alt="Leccion 3" className="pt-1 h-[93px]" src={"/img/Details_Course/Lesson/Leccion_3.png"} width={500} height={300} />
+                <p>Lección 3</p>
+
+              </div>
+              <div className="flex flex-col gap-y-3">
+                <Image alt="Leccion 4" src={"/img/Details_Course/Lesson/Leccion_4.png"} width={500} height={300} />
+                <p>Lección 4</p>
+
+              </div>
+
+            </div>
           </figure>
 
-          {/* Lecciones */}
-          <div>
 
-          </div>
 
           <div className='flex flex-row items-center gap-x-2 mb-5 sm:mt-5  h-auto'>
             <div className="flex flex-col justify-center  items-center h-auto">
@@ -261,8 +283,14 @@ export function Page_Details_Course({ id }: any) {
                       })}
                     </div>
                   </div>
-
                 </div>
+
+
+
+              </div>
+
+              <div className="mt-20">
+                <Reviews />
               </div>
             </div>
           )}

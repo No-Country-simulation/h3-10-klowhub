@@ -155,6 +155,37 @@ export const detalles_pages = [
   },
 ];
 
+export const reviews = [
+  {
+    id: 1,
+    stars: 5,
+    name: "Mariana López",
+    description:
+      "Este curso superó mis expectativas. Sebastián explica todo de manera clara y sencilla, lo que me permitió crear mi primera aplicación en tiempo récord.",
+  },
+  {
+    id: 2,
+    stars: 5,
+    name: "Marta Torres",
+    description:
+      "Nunca pensé que podría desarrollar una aplicación sin programar. Gracias a Sebastián, ahora puedo automatizar varias tareas en mi trabajo. ¡Muy recomendado!",
+  },
+  {
+    id: 3,
+    stars: 4,
+    name: "Rodigo Baez",
+    description:
+      "El enfoque práctico de Sebastián es perfecto para aprender. Su experiencia se nota en cada lección y las herramientas que proporciona son súper útiles.",
+  },
+  {
+    id: 4,
+    stars: 4,
+    name: "Mario Perez",
+    description:
+      "Excelente curso para quienes quieren iniciarse en el mundo no-code. Sebastián sabe cómo transmitir sus conocimientos de manera efectiva y accesible.",
+  },
+];
+
 export const teache_info = [
   {
     id: 1,

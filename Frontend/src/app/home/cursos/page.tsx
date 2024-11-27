@@ -11,7 +11,7 @@ export default function CursosLecciones() {
 
     return (
         <main>
-            <div className="ml-10">
+            <div className="ml-14 mt-7 mb-0">
                 <Breadcrumbs name={"y Lecciones"} />
             </div>
             <div>
