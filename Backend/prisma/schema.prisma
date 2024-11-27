@@ -23,7 +23,7 @@ model Users {
   profile_image    String?
   password         String
   seller           Sellers?
-  deleteAt_user_id DeleteAt_user? // al borrado logico actualizar isActive en false dentro de Sellers
+  deleteAt_user_id DeleteAt_user[] // al borrado logico actualizar isActive en false dentro de Sellers
 }
 
 model Sellers {
@@ -103,8 +103,8 @@ model Wallets {
 
 model DeleteAt_user {
   id      Int      @id @default(autoincrement())
-  user_id String   @unique
-  date    DateTime
+  user_id String   
+  date    DateTime @default(now())
   user    Users    @relation(fields: [user_id], references: [user_id])
 }
 
