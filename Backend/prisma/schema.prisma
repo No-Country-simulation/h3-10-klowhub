@@ -18,7 +18,7 @@ model Users {
   name             String
   lastname         String
   birthday         String?
-  role_id          Int
+  role_id          Int?
   email            String         @unique
   profile_image    String?
   password         String
@@ -109,12 +109,12 @@ model DeleteAt_user {
 }
 
 model Transactions {
-  id               Int      @id @default(autoincrement())
+  id               Int                @id @default(autoincrement())
   wallet_id        String
   type_transaction Int
   date             DateTime
   amount           Decimal
-  wallet           Wallets  @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
+  wallet           Wallets            @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
   purchases        Purchased_courses?
   // validar si la operacion es factible, luego validar que la operacion se concreto y luego un trigger que cambie el balance del Wallets asociado
 }
@@ -199,9 +199,9 @@ model Tools {
 }
 
 model Purchased_courses {
-  id   Int    @id @default(autoincrement())
-  transaction_id Int @unique
-  user_id  String
-  course_id String
-  transaction Transactions @relation(fields: [transaction_id], references: [id])
+  id             Int          @id @default(autoincrement())
+  transaction_id Int          @unique
+  user_id        String
+  course_id      String
+  transaction    Transactions @relation(fields: [transaction_id], references: [id])
 }
