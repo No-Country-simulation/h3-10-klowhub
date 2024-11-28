@@ -63,7 +63,7 @@ export const detalles = [
 
 export const courseCard = [
   {
-    mainImageCourse: "/img/Cards_Img/imagen.jpg",
+    mainImageCourse: "/img/Details_Course/Course_1.png",
     altMainImageCourse: "Curso",
     projectImage: "/img/Cards_Img/logo.png",
     projectName: "GreenTech Innovations",
@@ -74,21 +74,57 @@ export const courseCard = [
     stars: 5.5,
     califications: 34,
     price: 60,
-    width: 453,
-    heigth: 200,
   },
   {
-    mainImageCourse: "/img/Cards_Img/imagen.jpg",
+    mainImageCourse: "/img/Details_Course/Course_1.png",
     altMainImageCourse: "Curso",
     projectImage: "/img/Cards_Img/logo.png",
     projectName: "GreenTech Innovations",
     title: "Gestion de Servicios con Power Apps",
     description:
       "Aprende a gestionar inventarios de la mejor manera con las mejores tecnologías",
+    tags: ["Tecnología", "Inventarios", "Power Apps"],
+    stars: 5.5,
+    califications: 34,
+    price: 100,
+  },
+  {
+    mainImageCourse: "/img/Details_Course/Course_1.png",
+    altMainImageCourse: "Curso",
+    projectImage: "/img/Cards_Img/logo.png",
+    projectName: "GreenTech Innovations",
+    title: "Gestion de Servicios Esenciales",
+    description:
+      "Aprende a gestionar inventarios de la mejor manera con las mejores tecnologías",
     tags: ["Gestion", "Inventarios", "Power Apps"],
     stars: 5.5,
     califications: 34,
-    width: 100,
-    heigth: 100,
+    price: 100,
+  },
+  {
+    mainImageCourse: "/img/Details_Course/Course_1.png",
+    altMainImageCourse: "Curso",
+    projectImage: "/img/Cards_Img/logo.png",
+    projectName: "GreenTech Innovations",
+    title: "Gestion de Servicios",
+    description:
+      "Aprende a gestionar inventarios de la mejor manera con las mejores tecnologías",
+    tags: ["Gestion", "Inventarios", "Power Apps"],
+    stars: 5.5,
+    califications: 34,
+    price: 100,
+  },
+  {
+    mainImageCourse: "/img/Details_Course/Course_1.png",
+    altMainImageCourse: "Curso",
+    projectImage: "/img/Cards_Img/logo.png",
+    projectName: "GreenTech Innovations",
+    title: "Gestion de Servicios Web",
+    description:
+      "Aprende a gestionar inventarios de la mejor manera con las mejores tecnologías",
+    tags: ["Gestion", "Inventarios", "Power Apps"],
+    stars: 5.5,
+    califications: 34,
+    price: 100,
   },
 ];

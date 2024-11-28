@@ -27,7 +27,7 @@ export default function CardCourse({ course }: { course: PropsCourse }) {
     setStateHeadt(!StateHeadt);
   }
   return (
-    <div className="w-full max-w-[700px]  bg-[#1F2937] relative rounded-xl">
+    <div className=" w-full bg-[#1F2937] relative rounded-xl">
       <button onClick={handleClick} className={"absolute right-2 top-2"}>
         <HeartIcon StateHeart={StateHeadt} />
       </button>
