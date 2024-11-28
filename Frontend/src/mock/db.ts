@@ -89,7 +89,7 @@ export const courseCard = [
     price: 100,
   },
   {
-    mainImageCourse: "/img/Details_Course/Course_1.png",
+    mainImageCourse: "/img/Landing/CourseMock.png",
     altMainImageCourse: "Curso",
     projectImage: "/img/Cards_Img/logo.png",
     projectName: "GreenTech Innovations",

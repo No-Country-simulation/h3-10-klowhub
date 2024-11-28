@@ -3,6 +3,7 @@ import { courseCard } from "@/mock/db";
 import React, { useState } from "react";
 import CardCourse from "@/components/Card_Course/Card_Course";
 import BackgroundBanner2 from "../../../public/Fondos_img/BackgroundBanner2.png";
+import CourseMock from "../../../public/img/Landing/CourseMock.png";
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
 import Banner from "@/components/Banner/Banner";
@@ -42,7 +43,7 @@ export default function LandingPage() {
           ></Banner>
           <Banner classes="" title="Aprende en KlowHub" redirectTo="/"></Banner>
         </div>
-        <section>
+        <section className="mt-8">
           <h2 className="font-bold text-xl lg:text-5xl">Cursos Recomendados</h2>
           <p className="mt-4 mb-8 text-sm lg:text-lg">
             Descubre los cursos más destacados y lleva tus habilidades al
@@ -98,7 +99,9 @@ export default function LandingPage() {
             )}
           </div>
         </section>
-        <section>Ultimas Consultas</section>
+        <section>
+          <h2 className="text-5xl">Ultimas Consultas</h2>
+        </section>
       </div>
       <Footer />
     </div>
