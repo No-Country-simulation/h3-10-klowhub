@@ -1,3 +1,5 @@
+import React, { Dispatch, SetStateAction } from "react";
+
 export interface PropsMentor {
   mentorImage: string;
   fullName: string;
@@ -50,6 +52,62 @@ export interface AplicationCart {
   numberOfScores:number,
   numberVotes:number,
   Category:string[],
-  id:number
-  fnDelete:(id:number) => undefined 
+  children?: React.ReactNode,
+  className?: string
 } 
+
+export interface PropsDetailsAppCart {
+  nameAplication:string,
+  language:string,
+  Dateofshopping:string,
+  dateCupon:string | null,
+   valueShopping:number,
+   valueTotal:number,
+   PaymentMethod:string
+}
+
+
+export interface Steps{
+  
+    step1:
+     {status:boolean,
+      step:boolean}
+    ,
+    step2:
+    {status:boolean,
+     step:boolean},
+     step3:
+     {status:boolean,
+      step:boolean}
+   }
+
+export interface step1{
+  steps:Steps
+  ,setStep: Dispatch<SetStateAction<{
+    step1:
+     {status:boolean,
+      step:boolean}
+    ,
+    step2:
+    {status:boolean,
+     step:boolean},
+     step3:
+     {status:boolean,
+      step:boolean}}>>
+}
+
+export interface step2{
+  nameProject:string,
+  steps:Steps
+  ,setStep: Dispatch<SetStateAction<{
+    step1:
+     {status:boolean,
+      step:boolean}
+    ,
+    step2:
+    {status:boolean,
+     step:boolean},
+     step3:
+     {status:boolean,
+      step:boolean}}>>
+}

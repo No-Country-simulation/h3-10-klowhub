@@ -6,6 +6,7 @@ import AplicationCartComponent from '@/components/ShoppingCart/AplicationCartCom
 import PurchaseSummaryComponent from '@/components/ShoppingCart/PurchaseSummaryComponent'
 import ToasterCartComponent from '@/components/ShoppingCart/ToasterCartComponent'
 export default function PageCart() {
+  const [Open, setOpen] = useState(false)
   const [Carts, setCarts] = useState(CartJson)
     console.log(CartJson)
 
@@ -14,7 +15,7 @@ export default function PageCart() {
       return undefined
     }
   return (
-    <div className='w-full p-5 pt-12'>
+    <div className='w-full p-5 pt-12 flex flex-col items-center justify-center'>
         <RepoCartComponent/>
         <h6 className='mb-8 mt-4 font-bold '>Tu carrito de compra</h6>
         
@@ -31,14 +32,20 @@ export default function PageCart() {
             numberOfScores={item.numberOfScores}
             numberVotes={item.numberVotes}
             urlImg={item.urlImg}
-            fnDelete={fnDelete}
-            id={item.id}/>
+            >
+              <button className='transition-colors mt-auto ml-auto mr-6 p-2 rounded-xl hover:bg-gray-100/40'
+               onClick={ () => fnDelete(item.id)}>Eliminar</button>
+            </AplicationCartComponent>
             
         ))}
         </div>
         <PurchaseSummaryComponent valueService={500} valueTotal={100}/>
      </div>
-        <ToasterCartComponent/>
+    
+  
+    <ToasterCartComponent Open={Open} setOpen={setOpen}/>
     </div>
+        
+   
   )
 }
