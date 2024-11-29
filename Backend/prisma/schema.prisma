@@ -95,7 +95,7 @@ model Roles {
 model Wallets {
   id           String         @id @default(uuid())
   seller_id    String         @unique
-  balance      Decimal
+  balance      Float          @default(0)
   seller       Sellers        @relation(fields: [seller_id], references: [seller_id])
   transactions Transactions[] // Relación uno a muchos con Transactions
   // si se concreto en true restar del balance el monto transaccion

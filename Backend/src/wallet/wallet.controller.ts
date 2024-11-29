@@ -1,34 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, Put, Delete, HttpException } from '@nestjs/common';
 import { WalletService } from './wallet.service';
 import { CreateWalletDto } from './dto/create-wallet.dto';
-import { UpdateWalletDto } from './dto/update-wallet.dto';
 
 @Controller('wallet')
 export class WalletController {
-  constructor(private readonly walletService: WalletService) {}
-
-  @Post()
-  create(@Body() createWalletDto: CreateWalletDto) {
-    return this.walletService.create(createWalletDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.walletService.findAll();
-  }
+  constructor(private readonly walletService: WalletService) { }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.walletService.findOne(+id);
+    return this.walletService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWalletDto: UpdateWalletDto) {
-    return this.walletService.update(+id, updateWalletDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.walletService.remove(+id);
+  @Post()
+  create(@Body() createWallet: CreateWalletDto) {
+    try {
+      return this.walletService.create(createWallet);
+      
+    } catch (error) {
+      throw new HttpException(error.message, error.status);
+    }
   }
 }
