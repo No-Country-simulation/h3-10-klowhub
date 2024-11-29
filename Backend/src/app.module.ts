@@ -5,6 +5,7 @@ import { SharedModule } from './shared-module/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { DeleteUserModule } from './delete-user/delete-user.module';
 import { SellersModule } from './sellers/sellers.module';
+import { CoursesModule } from './courses/courses.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { SellersModule } from './sellers/sellers.module';
     AuthModule,
     DeleteUserModule,
     SellersModule,
+    CoursesModule,
   ],
   controllers: [],
   providers: [],

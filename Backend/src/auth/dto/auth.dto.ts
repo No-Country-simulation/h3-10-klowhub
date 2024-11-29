@@ -9,13 +9,3 @@ export class LoginDto {
   @Length(4, 8)
   password: string;
 }
-
-export interface LoginResponse {
-  id: string;
-  name: string;
-  email: string;
-}
-
-export interface LoginResponseWithToken extends LoginResponse {
-  token: string;
-}
