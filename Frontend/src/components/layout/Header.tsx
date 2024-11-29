@@ -79,9 +79,9 @@ export function Header() {
 
                 <div className="hidden xl:flex items-center space-x-4">
                     <div className="flex items-center space-x-3">
-                        <a href="#" className="hover:text-purple-400"><Icon_Shopping_Cart /></a>
-                        <a href="#" className="hover:text-purple-400"><Icon_Notification /></a>
-                        <a href="#" className="hover:text-purple-400"><Icon_Email /></a>
+                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Shopping_Cart /></Link>
+                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Notification /></Link>
+                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Email /></Link>
                     </div>
                     <div className="flex items-center space-x-3">
                         <button className="px-4 py-2 rounded-full text-sm font-semibold">Explorador</button>
@@ -141,9 +141,9 @@ export function Header() {
                         </div>
                         <hr className='border-white mt-2 mb-2' />
                         <div className="flex items-center space-x-6 justify-center">
-                            <a href="#" className="hover:text-purple-400 scale-150"><Icon_Shopping_Cart /></a>
-                            <a href="#" className="hover:text-purple-400 scale-150"><Icon_Notification /></a>
-                            <a href="#" className="hover:text-purple-400 scale-150"><Icon_Email /></a>
+                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Shopping_Cart /></Link>
+                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Notification /></Link>
+                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Email /></Link>
                         </div>
                     </div>
                 </nav>

@@ -4,7 +4,6 @@ import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs";
 import { detalles_pages } from "@/mock/db";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Icon_Clock } from "../../../public/icons/Details_Course_Icon/Icon_Clock";
 import { Icon_Camera } from "../../../public/icons/Details_Course_Icon/Icon_Camera";
 import { Course_page } from "@/services/Interfaces";
@@ -58,12 +57,12 @@ export function Page_Details_Course({ id }: any) {
         <ol className="flex flex-row mt-4 mb-4">
           {breadcrumbs?.map(({ name, path, isLast }) => (
             <li key={path} className="flex flex-row items-center">
-              <span className="mx-4"></span>
+              <span className="mx-2"></span>
               {isLast ? (
                 <span className="font-bold">{filteredInfo?.title}</span>
               ) : (
-                <Link href={path} className="hover:underline flex flex-row gap-x-5">
-                  {name}
+                <Link href={path} className=" flex flex-row gap-x-5">
+                  <p className="hover:underline">{name}</p>
                   <p>/</p>
                 </Link>
               )}
@@ -106,9 +105,7 @@ export function Page_Details_Course({ id }: any) {
             <div>
               <Image className='mb-1 h-[385px]' src={filteredInfo?.video_resumen} width={800} height={400} alt='video_resumen' />
 
-              <div>
-                <Image className="absolute bottom-7 rounded-md" src={"/img/Details_Course/Reproductor.png"} width={800} height={300} alt="" />
-              </div>
+
 
             </div>
             <h3 className="pl-4 mt-2 mb-2 font-semibold font-inter">Contenido gratuito</h3>

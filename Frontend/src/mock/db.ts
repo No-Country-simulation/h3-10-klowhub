@@ -297,18 +297,5 @@ export const courseCard = [
     width: 453,
     heigth: 200,
   },
-  {
-    mainImageCourse: "/img/Cards_Img/imagen.jpg",
-    altMainImageCourse: "Curso",
-    projectImage: "/img/Cards_Img/logo.png",
-    projectName: "GreenTech Innovations",
-    title: "Gestion de Servicios con Power Apps",
-    description:
-      "Aprende a gestionar inventarios de la mejor manera con las mejores tecnologías",
-    tags: ["Gestion", "Inventarios", "Power Apps"],
-    stars: 5.5,
-    califications: 34,
-    width: 100,
-    heigth: 100,
-  },
+  
 ];

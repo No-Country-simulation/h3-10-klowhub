@@ -1,7 +1,8 @@
 'use client';
 import { Breadcrumbs } from "@/components/Breadcrubs.tsx/Breadcrubs";
+import CardCourse from "@/components/Card_Course/Card_Course";
 import { Details_Course_Modal } from "@/components/Details_Course/Details_Course";
-import { detalles } from "@/mock/db";
+import { courseCard, detalles } from "@/mock/db";
 
 export default function CursosLecciones() {
 
@@ -11,7 +12,7 @@ export default function CursosLecciones() {
 
     return (
         <main>
-            <div className="ml-14 mt-7 mb-0">
+            <div className=" mb-0">
                 <Breadcrumbs name={"y Lecciones"} />
             </div>
             <div>
