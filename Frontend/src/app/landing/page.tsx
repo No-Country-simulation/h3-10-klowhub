@@ -7,6 +7,7 @@ import CourseMock from "../../../public/img/Landing/CourseMock.png";
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
 import Banner from "@/components/Banner/Banner";
+import CardCourseHorizontal from "@/components/Card_Course/Card_Course_Horizontal/CardCourseHorizontal";
 export default function LandingPage() {
   const [visibleCountAPP, setVisibleCountAPP] = useState(4); // Estado para controlar cuántos elementos se muestran
   const [visibleCountCourse, setVisibleCountCourse] = useState(3); // Estado para controlar cuántos elementos se muestran
@@ -19,9 +20,19 @@ export default function LandingPage() {
     setVisibleCountCourse((prevCount: number) => prevCount + 4);
   };
   const base = courseCard;
+  const curso = courseCard.slice(0, 1);
   return (
     <div>
       <Header />
+
+      {curso &&
+        curso.map((items) => {
+          return (
+            <div className="" key={items.title}>
+              <CardCourseHorizontal course={items} />;
+            </div>
+          );
+        })}
       <div className="m-8">
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap sm:gap-4 justify-around">
           <Banner

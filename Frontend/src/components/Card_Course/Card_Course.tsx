@@ -57,7 +57,7 @@ export default function CardCourse({ course }: { course: PropsCourse }) {
         </div>
         {tags.map((tags) => (
           <span
-            className=" inline-block relative text-purple-900 bg-[#F7E5FFBF] hover:bg-purple-200 text-white font-bold my-2 py-2 px-4 mr-4 rounded"
+            className=" inline-block relative text-purple-900 bg-[#F7E5FFBF] hover:bg-purple-200 text-{#632daf} font-bold my-2 py-2 px-4 mr-4 rounded"
             key={tags}
           >
             {tags}

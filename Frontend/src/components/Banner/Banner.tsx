@@ -10,15 +10,13 @@ const Banner: React.FC<Banner_Props> = ({
 }) => {
   return (
     <div className={classes}>
-      <div className="relative rounded-lg">
+      <div className="hover:opacity-80 relative rounded-lg">
         <Link href={redirectTo}>
           <Image
             src={backgroundImage || BackgroundBanner}
             alt="Background image with abstract purple shapes"
             objectFit="cover"
             className="overflow-hidden"
-            // layout="fill"
-            //style={{ paddingBottom: "14.4%" }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <h1 className="text-white text-md md:text-lg lg:text-2xl font-bold">
