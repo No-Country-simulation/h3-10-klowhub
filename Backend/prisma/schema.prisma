@@ -7,6 +7,7 @@
 datasource db {
   provider = "postgresql" // Usamos PostgreSQL
   url      = env("DATABASE_URL") // La URL de conexión desde el archivo .env
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -145,6 +146,15 @@ model Courses {
   stars             Courses_ratings[]
   punctuation       Decimal           @default(0)
   updateAt          DateTime          @default(now())
+
+  type_course       Types_of_courses    @relation(fields: [type_course_id], references: [id])
+  course_level      Courses_level       @relation(fields: [course_level_id], references: [id])
+  platform          Platforms           @relation(fields: [platform_id], references: [id])
+  language          Languages           @relation(fields: [language_id], references: [id])
+  sector            Sectors             @relation(fields: [sector_id], references: [id])
+  contentPillar     Content_pillars     @relation(fields: [content_pillar_id], references: [id])
+  functionality     Functionality       @relation(fields: [functionality_id], references: [id])
+  tool              Tools               @relation(fields: [tool_id], references: [id])
 }
 
 // cada vez que se modifique la tabla de rating tiene que actualizar la puntuacion en la tabla
@@ -159,43 +169,51 @@ model Courses_ratings {
 }
 
 model Types_of_courses {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 model Courses_level {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 model Platforms {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 model Languages {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 model Sectors {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 model Content_pillars {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 model Functionality {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 model Tools {
-  id   Int    @id @default(autoincrement())
-  name String
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Courses[]
 }
 
 // revisar como un usuario que no es vendedor compra un curso
