@@ -1,7 +1,7 @@
 import { BadRequestException, ConflictException, HttpException, Injectable } from '@nestjs/common';
 import { CreateWalletDto } from './dto/create-wallet.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ResponseObject } from 'src/interfaces/types'
+import { Wallet } from 'src/interfaces/types';
 
 @Injectable()
 export class WalletService {
@@ -10,13 +10,12 @@ export class WalletService {
     private prisma: PrismaService
   ) { }
 
-  async create(wallet: CreateWalletDto): Promise<ResponseObject> {
+  async create(wallet: CreateWalletDto): Promise< Wallet | null> {
 
     try {
-      await this.prisma.wallets.create({
+      return await this.prisma.wallets.create({
         data: wallet
       });
-      return { message: "Wallet has been created", ok: true }
     } catch (error) {
       if (error.code === 'P2002') {
         throw new HttpException('seller_id already exists', 409);
@@ -25,11 +24,11 @@ export class WalletService {
     }
   }
 
-  async findAll(): Promise<any> {
+  async findAll(): Promise<Wallet[] | null> {
     return await this.prisma.wallets.findMany();
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<Wallet | null> {
     return await this.prisma.wallets.findUnique({
       where: { id },
     })
