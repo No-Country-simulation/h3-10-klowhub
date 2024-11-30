@@ -43,6 +43,7 @@ export default function LandingPage() {
             redirectTo="/"
           ></Banner>
           <Banner
+            backgroundImage={""}
             classes=""
             title="Encuentra Aplicaciones"
             redirectTo="/"
@@ -53,7 +54,7 @@ export default function LandingPage() {
             title="Publica Proyectos"
             redirectTo="/"
           ></Banner>
-          <Banner classes="" title="Aprende en KlowHub" redirectTo="/"></Banner>
+          <Banner classes="" title="Aprende en KlowHub" redirectTo="/" backgroundImage={""}></Banner>
         </div>
         <section className="mt-8">
           <h2 className="font-bold text-xl lg:text-5xl">Cursos Recomendados</h2>

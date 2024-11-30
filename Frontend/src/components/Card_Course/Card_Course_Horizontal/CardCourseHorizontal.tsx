@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import DetailsIcon from "../../../../public/icons/DetailIcon";
-import StarRating from "../../StarsRating/StarsRating";
 import HeartIcon from "../../MentoresComp/Icons/HeartIcon";
 import { PropsCourse } from "@/services/Interfaces";
 
@@ -15,16 +13,9 @@ export default function CardCourseHorizontal({
   const {
     mainImageCourse,
     altMainImageCourse,
-    projectImage,
-    projectName,
     title,
     description,
     tags,
-    stars,
-    califications,
-    price,
-    width = 200,
-    heigth = 453,
   } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
   function handleClick() {

@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
 export interface PropsMentor {
   mentorImage: string;
@@ -52,8 +53,48 @@ export interface AplicationCart {
   numberOfScores: number;
   numberVotes: number;
   Category: string[];
+  children?: React.ReactNode;
+  className?: string;
   id: number;
-  fnDelete: (id: number) => undefined;
+}
+
+export interface PropsDetailsAppCart {
+  nameAplication: string;
+  language: string;
+  Dateofshopping: string;
+  dateCupon: string | null;
+  valueShopping: number;
+  valueTotal: number;
+  PaymentMethod: string;
+}
+
+export interface Steps {
+  step1: { status: boolean; step: boolean };
+  step2: { status: boolean; step: boolean };
+  step3: { status: boolean; step: boolean };
+}
+
+export interface step1 {
+  steps: Steps;
+  setStepAction: Dispatch<
+    SetStateAction<{
+      step1: { status: boolean; step: boolean };
+      step2: { status: boolean; step: boolean };
+      step3: { status: boolean; step: boolean };
+    }>
+  >;
+}
+
+export interface step2 {
+  nameProject: string;
+  steps: Steps;
+  setStep: Dispatch<
+    SetStateAction<{
+      step1: { status: boolean; step: boolean };
+      step2: { status: boolean; step: boolean };
+      step3: { status: boolean; step: boolean };
+    }>
+  >;
 }
 
 export interface PropsCourse {
@@ -75,8 +116,8 @@ export interface PropsCourse {
 }
 
 export interface Banner_Props {
+  backgroundImage: StaticImageData | string;
   title: string;
   redirectTo: string;
-  classes?: string;
-  backgroundImage?: StaticImageData;
+  classes: string;
 }

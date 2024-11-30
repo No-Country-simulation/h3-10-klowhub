@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BackgroundBanner from "../../../public/Fondos_img/BackgroundBanner.png";
 import { Banner_Props } from "@/services/Interfaces";
+
 const Banner: React.FC<Banner_Props> = ({
   backgroundImage,
   title,

@@ -8,11 +8,19 @@ import LeafCartIcon from './Icons/LeafCartIcon'
 import CaficationCartComponent from './CaficationCartComponent'
 export default function AplicationCartComponent(
   {
-    urlImg,nameProject, Top, Industry, Developer, numberOfScores, numberVotes,Category,fnDelete,id
+    urlImg,nameProject, 
+    Top, 
+    Industry, 
+    Developer, 
+    numberOfScores, 
+    numberVotes, 
+    Category, 
+    children, 
+    className
   }: AplicationCart
 ) {
   return (
-    <div className='p-6 bg-[#00000066] rounded-xl shadow-2xl'>
+    <div className={`p-6 bg-[#FFFFFF1A] rounded-xl shadow-2xl w-full  ${className}`}>
       <hr/>
       <div className='my-3 flex  flex-wrap  gap-6 '>
       <Image src={urlImg} 
@@ -57,8 +65,7 @@ export default function AplicationCartComponent(
            </div>
         </div>
 
-        <button className='transition-colors mt-auto ml-auto mr-6 p-2 rounded-xl hover:bg-gray-100/40'
-         onClick={ () => fnDelete(id)}>Eliminar</button>
+        {children}
       </div>
       <hr/>
     </div>
