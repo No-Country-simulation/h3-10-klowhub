@@ -9,7 +9,7 @@ export default function CaficationCartComponent({valueStar}: {valueStar: number}
  const [puntuation] = useState(value)
 
 
- console.log(SetPuntuation)
+
 
  console.log(value)
 return (

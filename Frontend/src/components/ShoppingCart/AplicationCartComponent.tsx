@@ -8,7 +8,15 @@ import LeafCartIcon from './Icons/LeafCartIcon'
 import CaficationCartComponent from './CaficationCartComponent'
 export default function AplicationCartComponent(
   {
-    urlImg,nameProject, Top, Industry, Developer, numberOfScores, numberVotes,Category,children,className
+    urlImg,nameProject, 
+    Top, 
+    Industry, 
+    Developer, 
+    numberOfScores, 
+    numberVotes, 
+    Category, 
+    children, 
+    className
   }: AplicationCart
 ) {
   return (

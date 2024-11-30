@@ -3,7 +3,6 @@ import { courseCard } from "@/mock/db";
 import React, { useState } from "react";
 import CardCourse from "@/components/Card_Course/Card_Course";
 import BackgroundBanner2 from "../../../public/Fondos_img/BackgroundBanner2.png";
-import CourseMock from "../../../public/img/Landing/CourseMock.png";
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
 import Banner from "@/components/Banner/Banner";
@@ -42,6 +41,7 @@ export default function LandingPage() {
             redirectTo="/"
           ></Banner>
           <Banner
+            backgroundImage={""}
             classes=""
             title="Encuentra Aplicaciones"
             redirectTo="/"
@@ -52,7 +52,7 @@ export default function LandingPage() {
             title="Publica Proyectos"
             redirectTo="/"
           ></Banner>
-          <Banner classes="" title="Aprende en KlowHub" redirectTo="/"></Banner>
+          <Banner classes="" title="Aprende en KlowHub" redirectTo="/" backgroundImage={""}></Banner>
         </div>
         <section className="mt-8">
           <h2 className="font-bold text-xl lg:text-5xl">Cursos Recomendados</h2>

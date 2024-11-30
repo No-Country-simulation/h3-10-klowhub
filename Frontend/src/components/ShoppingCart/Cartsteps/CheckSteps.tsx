@@ -1,10 +1,9 @@
 'use client'
 import { Dispatch, SetStateAction } from "react"
 import GoodIcon from "../Icons/GoodIcon"
-import { step1 } from "@/services/Interfaces"
-export default function CheckSteps({steps}
-  :step1) {
+import {  Steps } from "@/services/Interfaces";
 
+export default function CheckSteps({ steps}: { steps: Steps; setSteps: Dispatch<SetStateAction<Steps>> }) {
   return (
     <div className="flex gap-5  w-full justify-center max-md:scale-50">
       <section className={` flex gap-3 flex-col items-center ${steps.step1.step ? 'opacity-100' : 'opacity-70'}`}>

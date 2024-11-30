@@ -24,6 +24,7 @@ export default function PageCart() {
         {Carts.map(item => (
             <AplicationCartComponent
             key={item.id}
+            id={item.id}
             Category={item.Category}
             Developer={item.Developer}
             Industry={item.Industry}
