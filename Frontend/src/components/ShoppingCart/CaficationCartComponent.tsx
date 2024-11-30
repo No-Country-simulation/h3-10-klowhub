@@ -8,6 +8,8 @@ export default function CaficationCartComponent({valueStar}: {valueStar: number}
  const value = rellenarStar(valueStar)
  const [puntuation,SetPuntuation] = useState(value)
 
+ console.log(SetPuntuation)
+
  console.log(value)
 return (
     <div className='flex gap-1'>

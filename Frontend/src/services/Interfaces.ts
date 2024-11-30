@@ -37,7 +37,7 @@ export interface Course {
 
 export interface Details_Course {
   valoracion: number;
-  estrellas: number | any;
+  estrellas: number;
   videos: number;
   duracion: number;
 }
