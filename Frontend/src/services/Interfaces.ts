@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface PropsMentor {
   mentorImage: string;
   fullName: string;
@@ -70,4 +72,11 @@ export interface PropsCourse {
   califications: number;
   width?: number;
   heigth?: number;
+}
+
+export interface Banner_Props {
+  title: string;
+  redirectTo: string;
+  classes?: string;
+  backgroundImage?: StaticImageData;
 }
