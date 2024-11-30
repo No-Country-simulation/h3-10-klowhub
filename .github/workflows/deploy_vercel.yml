@@ -7,7 +7,7 @@ on:
     branches:
       - develop-front
     paths:
-      - 'client/**'
+      - 'Frontend/**'
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
@@ -23,10 +23,13 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
-      - name: Build Project
-        run: cd client && npm install
+      - name: Install and Build Project
+        run: |
+          cd Frontend
+          npm install
+          npm run build
 
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: cd client && npm run deploy
+        run: cd Frontend && npm run deploy
