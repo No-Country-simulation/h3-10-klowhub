@@ -6,7 +6,8 @@ import { useState } from "react"
 export default function CaficationCartComponent({valueStar}: {valueStar: number}) {
     
  const value = rellenarStar(valueStar)
- const [puntuation,SetPuntuation] = useState(value)
+ const [puntuation] = useState(value)
+
 
  console.log(value)
 return (
