@@ -3,11 +3,12 @@ import { courseCard } from "@/mock/db";
 import React, { useState } from "react";
 import CardCourse from "@/components/Card_Course/Card_Course";
 import BackgroundBanner2 from "../../../public/Fondos_img/BackgroundBanner2.png";
-import CourseMock from "../../../public/img/Landing/CourseMock.png";
 import { Header } from "@/components/Layout/Header";
 import { Footer } from "@/components/Layout/Footer";
 import Banner from "@/components/Banner/Banner";
 import CardCourseHorizontal from "@/components/Card_Course/Card_Course_Horizontal/CardCourseHorizontal";
+
+
 export default function LandingPage() {
   const [visibleCountAPP, setVisibleCountAPP] = useState(4); // Estado para controlar cuántos elementos se muestran
   const [visibleCountCourse, setVisibleCountCourse] = useState(3); // Estado para controlar cuántos elementos se muestran
