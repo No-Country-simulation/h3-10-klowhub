@@ -18,7 +18,56 @@ export interface inputdate {
   className?: string;
 }
 
-export interface IconPromps{
-  width: number,
-  height: number,
+export interface IconPromps {
+  width: number;
+  height: number;
+}
+
+export interface Course {
+  id: number;
+  title: string;
+  descripcion: string;
+  details?: Details_Course;
+  video_resumen: string;
+  avatar: string;
+  name: string;
+  bio: string;
+  info_curso: string;
+}
+
+export interface Details_Course {
+  valoracion: number;
+  estrellas: number | any;
+  videos: number;
+  duracion: number;
+}
+export interface AplicationCart {
+  urlImg: string;
+  nameProject: string;
+  Top: number;
+  Industry: string;
+  Developer: boolean;
+  numberOfScores: number;
+  numberVotes: number;
+  Category: string[];
+  id: number;
+  fnDelete: (id: number) => undefined;
+}
+
+export interface PropsCourse {
+  mainImageCourse: string;
+  altMainImageCourse: string;
+  title: string;
+  description: string;
+  projectName: string;
+  projectImage: string;
+  sector?: string;
+  sellerImage?: string;
+  premium?: boolean;
+  stars: number;
+  tags: string[];
+  price?: number;
+  califications: number;
+  width?: number;
+  heigth?: number;
 }
