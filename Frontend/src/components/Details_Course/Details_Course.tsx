@@ -31,7 +31,7 @@ export function Details_Course({ datos }: { datos: Course }) {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    const [rating, setRating] = useState(details?.estrellas);
+    const [rating] = useState(details?.estrellas || 0);
 
     const renderStar = (index: number) => {
         const fullStar = index < Math.floor(rating);

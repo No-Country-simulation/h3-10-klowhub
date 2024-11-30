@@ -27,36 +27,37 @@ export default function CardCourse({ course }: { course: PropsCourse }) {
     setStateHeadt(!StateHeadt);
   }
   return (
-    <div className="w-full max-w-[700px]  bg-[#1F2937] relative rounded-xl">
-      <button onClick={handleClick} className={"absolute right-2 top-2"}>
-        <HeartIcon StateHeart={StateHeadt} />
-      </button>
+    <div className="h-[800px] w-full bg-[#1F2937] relative rounded-xl">
       <Image
         src={mainImageCourse}
         alt={altMainImageCourse}
         width={width}
         height={heigth}
-        className="rounded-t-xl object-cover object-center w-full"
+        objectFit="cover"
+        className=" h-2/5 w-full rounded-t-xl object-cover object-center"
       />
+      <button onClick={handleClick} className={"absolute right-2 top-2"}>
+        <HeartIcon StateHeart={StateHeadt} />
+      </button>
       <div className="px-4 flex justify-between py-4">
         <h2 className=" text-3xl">{title}</h2>
         <DetailsIcon />
       </div>
       <p className="px-4 w-4/5 text-md">{description}</p>
       <section className="m-4">
-        <div className="flex gap-3 bg-[#FFFFFF1A] rounded-lg w-max px-6 py-3 items-center">
+        <div className=" flex gap-3 bg-[#FFFFFF1A] rounded-lg w-max px-6 py-3 items-center">
           <Image
             src={projectImage}
             alt={`Imagen del proyecto ${projectName}`}
             width={30}
             height={20}
-            className="m-4"
+            className="m-4 "
           />
           <p className="font-semibold text-xs">{projectName}</p>
         </div>
         {tags.map((tags) => (
           <span
-            className=" inline-block relative text-purple-900 bg-[#F7E5FFBF] hover:bg-purple-200 text-white font-bold my-2 py-2 px-4 mr-4 rounded"
+            className=" inline-block relative text-purple-900 bg-[#F7E5FFBF] hover:bg-purple-200 text-{#632daf} font-bold my-2 py-2 px-4 mr-4 rounded"
             key={tags}
           >
             {tags}

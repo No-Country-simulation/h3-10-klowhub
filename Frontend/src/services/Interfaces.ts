@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+
 
 export interface PropsMentor {
   mentorImage: string;
@@ -39,7 +39,7 @@ export interface Course {
 
 export interface Details_Course {
   valoracion: number;
-  estrellas: number | any;
+  estrellas: number;
   videos: number;
   duracion: number;
 }
@@ -132,4 +132,5 @@ export interface PropsCourse {
   width?: number;
   heigth?: number;
 }
+
 
