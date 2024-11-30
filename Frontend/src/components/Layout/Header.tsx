@@ -79,7 +79,7 @@ export function Header() {
                             <Space width={20} height={20} stroke={isActive ? 'white' : 'white'} />
                         </div>
                         <div className="w-8 h-8 rounded-full bg-purple-500 overflow-hidden">
-                            <Image src="/img/Header_img/avatar.png" alt="Profile Picture" width={100} height={100} className="w-full h-full object-cover" />
+                            <Image src="/img/Header_Img/avatar.png" alt="Profile Picture" width={100} height={100} className="w-full h-full object-cover" />
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ export function Header() {
                     </div>
                     <div className='bg-gray-300/15 rounded-md p-2 px-3'>
                         <div className="flex flex-row items-center gap-x-3 w-8 h-8 rounded-md ">
-                            <Image src="/img/Header_img/avatar.png" alt="Profile Picture" width={100} height={100} className="w-full h-full rounded-full object-cover" />
+                            <Image src="/img/Header_Img/avatar.png" alt="Profile Picture" width={100} height={100} className="w-full h-full rounded-full object-cover" />
                             <h3 className='text-white'>Perfil</h3>
                         </div>
                         <hr className='border-white mt-2 mb-2' />
