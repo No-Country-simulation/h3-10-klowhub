@@ -18,3 +18,15 @@ export interface DeleteResponseObject {
   user_id: string;
   date: Date;
 }
+
+export interface Wallet {
+  id: string;
+  seller_id: string;
+  balance: number;
+}
+
+export interface CreateTransaction {
+  wallet_id: string;
+  type_transaction: number;
+  amount: number
+}
