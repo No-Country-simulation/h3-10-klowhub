@@ -2,11 +2,11 @@ import { useBreadcrumbs } from "@/Hooks/useBreadcrumbs"
 import Link from "next/link";
 
 
-export function Breadcrumbs({ name }: any) {
+export function Breadcrumbs() {
 
     const breadcrumbs = useBreadcrumbs();
 
-    const info = name;
+    
 
     return (
         <div className=" max-w-7xl ml-10 flex flex-row mb-[48px]">

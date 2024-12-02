@@ -18,20 +18,20 @@ import { Icon_Mensagge } from "../../../public/icons/Details_Course_Icon/Social_
 import { Icon_Linkendi } from "../../../public/icons/Details_Course_Icon/Social_Media/Linkedin";
 import { Reviews } from "@/components/Details_Course/Reviews/Reviews";
 
-export function Page_Details_Course({ id }: any) {
-
+export default function Page_Details_Course({ id }: { id: string }) {
+  const breadcrumbs = useBreadcrumbs();
   const parsedId = Number(id);
+  const [showMore, setShowMore] = useState(false);
 
-  const filteredInfo: Course_page | any = detalles_pages.find(item => {
-    console.log("Comparando item.id:", item.id, "con parsedId:", parsedId);
-    return item.id === parsedId;
-  });
+
+  const filteredInfo = detalles_pages.find(item => item.id === parsedId) as Course_page | undefined;
 
   if (!filteredInfo) {
     return <div className="text-center my-10">No se encontró información para el curso con id {id}</div>;
   }
 
-  const [rating, setRating] = useState(filteredInfo.details?.estrellas);
+  const { details } = filteredInfo;
+  const rating = details?.estrellas ?? 0;
 
   const renderStar = (index: number) => {
     const fullStar = index < Math.floor(rating);
@@ -46,10 +46,6 @@ export function Page_Details_Course({ id }: any) {
     }
     return <Icon_Star fill='#fff' width={20} height={20} key={index} />
   };
-
-  const breadcrumbs = useBreadcrumbs();
-
-  const [showMore, setShowMore] = useState(false);
 
   return (
     <main className="max-w-7xl flex flex-col justify-center mb-[48px]">
@@ -133,8 +129,6 @@ export function Page_Details_Course({ id }: any) {
             </div>
           </figure>
 
-
-
           <div className='flex flex-row items-center gap-x-2 mb-5 sm:mt-5  h-auto'>
             <div className="flex flex-col justify-center  items-center h-auto">
               <Image src={filteredInfo?.avatar} className="mt-1" width={80} height={80} alt='avatar' />
@@ -147,9 +141,7 @@ export function Page_Details_Course({ id }: any) {
             </div>
           </div>
 
-          <div>
-          </div>
-
+        
           <section>
             <h3 className=" text-[16px]">Despues de completar este curso, serás capaz de</h3>
             <ul className="ml-4 mt-4">
@@ -281,11 +273,7 @@ export function Page_Details_Course({ id }: any) {
                     </div>
                   </div>
                 </div>
-
-
-
               </div>
-
               <div className="mt-20">
                 <Reviews />
               </div>

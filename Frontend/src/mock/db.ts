@@ -153,6 +153,53 @@ export const detalles_pages = [
       content: ["Automatizacion", "Flujos de trabajo"],
     },
   },
+  {
+    id: 2,
+    title: "Gestion de inventarios con Google Sheets",
+    description:
+      "Descubre cómo transformar ideas en aplicaciones funcionales sin necesidad de programar, utilizando Power Apps. Este curso te guiará paso a paso para que aprendas a crear aplicaciones personalizadas que se adapten a tus necesidades, optimizando procesos y mejorando la eficiencia en tu trabajo o negocio.",
+    details: {
+      valoracion: 4.1,
+      estrellas: 4.5,
+      videos: 18,
+      duracion: 1.6,
+    },
+    video_resumen: "/img/Details_Course/Course_1.png",
+    avatar: "/img/Details_Course/avatar.png",
+    name: "Sebastian Rios",
+    bio: "Experto en desarrollo de aplicaciones no-code con más de 5 años de experiencia en AppSheet y Power Apps, ayudando a empresas y emprendedores.",
+    info_curso:
+      "Este curso está diseñado para quienes desean aprender a crear aplicaciones personalizadas de manera rápida y sencilla, sin necesidad de conocimientos previos en programación. A lo largo de las lecciones, explorarás las funcionalidades clave de Power Apps, desde los conceptos básicos hasta técnicas avanzadas, que te permitirán desarrollar soluciones adaptadas a tus necesidades. Con ejemplos prácticos y explicaciones claras, te guiaré en el proceso de convertir tus ideas en aplicaciones funcionales que mejoren la productividad y eficiencia de tus proyectos.",
+    items: [
+      "Crear aplicaciones personalizadas desde cero utilizando Power Apps.",
+      "Automatizar tareas y optimizar procesos en tu entorno laboral o personal.",
+      "Diseñar interfaces de usuario intuitivas y funcionales sin necesidad de conocimientos en programación.",
+      "Integrar tus aplicaciones con otras herramientas y plataformas para maximizar su potencial.",
+      "Resolver problemas comunes y mejorar la eficiencia de tus proyectos mediante soluciones no-code.",
+    ],
+    question: {
+      question_1:
+        "Sebastián Ríos es un apasionado del desarrollo no-code, con más de 5 años de experiencia en AppSheet y un enfoque práctico y accesible para la enseñanza. Ha ayudado a cientos de profesionales y emprendedores a transformar sus ideas en aplicaciones exitosas, simplificando procesos y mejorando la productividad. Su metodología se centra en ejemplos reales y soluciones prácticas, lo que te permitirá aplicar lo aprendido de inmediato en tus propios proyectos. Aprender con Sebastián significa adquirir habilidades valiosas de la mano de un experto comprometido con tu éxito.",
+      question_2:
+        "Este curso está dirigido a emprendedores, profesionales y cualquier persona interesada en crear aplicaciones personalizadas sin necesidad de programar. Si buscas optimizar procesos, mejorar la eficiencia en tu trabajo o simplemente explorar nuevas herramientas tecnológicas, este curso es ideal para ti. No se requiere experiencia previa en desarrollo, ya que te guiaré desde lo más básico hasta técnicas avanzadas, asegurando que puedas aplicar lo aprendido en proyectos reales, independientemente de tu nivel de conocimientos.",
+    },
+    requirements: [
+      "Fundamentos de Power Apps: Entiende cómo funciona la plataforma y cómo empezar a construir tus primeras aplicaciones.",
+    ],
+    includes: [
+      "Todas las lecciones, videos y materiales de apoyo necesarios para dominar AppSheet.",
+      "Casos de estudio y ejemplos reales para aplicar lo aprendido en situaciones concretas.",
+      "Guías, plantillas y archivos que te ayudarán a seguir las lecciones y desarrollar tus propias aplicaciones.",
+      "Asistencia y respuestas a tus preguntas durante el curso para asegurarte de que entiendas cada concepto.",
+      "Acceso a futuras actualizaciones y nuevas lecciones que se añadan al curso.",
+    ],
+    information_app: {
+      funcionalidad: ["APIS - Integraciones", "APIS - Integraciones"],
+      tools: ["Otras", "Otras"],
+      section: ["Ventas y CRM", "Finanzas y contabilidad"],
+      content: ["Automatizacion", "Flujos de trabajo"],
+    },
+  },
 ];
 
 export const reviews = [
@@ -297,5 +344,4 @@ export const courseCard = [
     width: 453,
     heigth: 200,
   },
-  
 ];

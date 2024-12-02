@@ -6,10 +6,9 @@ import { useState } from 'react';
 export const useBreadcrumbs = () => {
   const pathname = usePathname();
   const segments = pathname?.split('/').filter(Boolean);
-  const [resolvedSegments, setResolvedSegments] = useState<string[]>([]);
+  const [resolvedSegments] = useState<string[]>([]);
 
 
-  console.log("resolvedSegments: " + resolvedSegments)
 
   const breadcrumbs = segments?.map((segment, index) => {
     const path = `/${segments.slice(0, index + 1).join('/')}`;

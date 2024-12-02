@@ -10,7 +10,7 @@ interface propms {
 
 export function Reviews() {
 
-    const info: propms[] | any = reviews;
+    const info: propms[]= reviews;
 
     const renderStars = (stars: number) => {
         const fullStar = (index: number) => index < Math.floor(stars);
@@ -25,10 +25,8 @@ export function Reviews() {
     };
     return (
         <section>
-
-
             <div>
-                {info.map((item: string | any, index: number) => {
+                {info.map((item, index: number) => {
                     return (
                         <div key={index} className="border-b-2 mb-5 mt-5 pb-5">
                             <div className="flex flex-row mb-3 items-center gap-x-4">

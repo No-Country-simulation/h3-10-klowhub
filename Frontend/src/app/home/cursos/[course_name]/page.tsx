@@ -1,20 +1,28 @@
-'use client'
-import { useParams } from 'next/navigation';
-import { Page_Details_Course } from '@/Pages/Detalles_Cursos/Page_Details_Course';
+'use client';
 
-const CourseDetail = ({ params }: any) => {
-  params = useParams();
-  const courseName = params.course_name;
+import  Page_Details_Course from '@/Pages/Detalles_Cursos/Page_Details_Course';
+import React from 'react';
 
-  if (!courseName) {
-    return <div>Loading...</div>;
+interface PageProps {
+  params: Promise<{
+    course_name: string;
+  }>;
+}
+
+const CourseDetail = ({ params }: PageProps) => {
+  const { course_name } = React.use(params);
+
+  console.log('Información del parámetro:', course_name);
+
+  if (!course_name) {
+    return <div>No se encontró el curso.</div>;
   }
 
-  const id = params.course_name;
+  console.log("Tipo de dato del course_name: " + typeof course_name)
 
   return (
-    <main className='flex justify-center'>
-      <Page_Details_Course id={id} />
+    <main className="flex justify-center">
+      <Page_Details_Course id={course_name} />
     </main>
   );
 };

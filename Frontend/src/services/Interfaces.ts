@@ -24,7 +24,7 @@ export interface IconPromps {
 }
 
 export interface Course {
-  id: number | any;
+  id: number;
   title: string;
   descripcion: string;
   details: Details_Course;
@@ -36,18 +36,36 @@ export interface Course {
 }
 
 export interface Course_page {
-  id: number | any;
+  id: number;
   title: string;
   description: string;
-  details?: Details_Course;
+  details?: {
+    valoracion: number;
+    estrellas: number;
+    videos: number;
+    duracion: number;
+  };
   video_resumen: string;
   avatar: string;
   name: string;
   bio: string;
-  info_curso: string
-  items: string[]
-  question: question_info;
+  info_curso: string;
+  items: string[];
+  question: {
+    question_1: string;
+    question_2: string;
+  };
+  requirements: string[];
+  includes: string[];
+  information_app: {
+    funcionalidad: string[];
+    tools: string[];
+    section: string[];
+    content: string[];
+  };
 }
+
+
 
 export interface question_info {
   question_1: string;
@@ -55,7 +73,7 @@ export interface question_info {
 }
 
 export interface Course_page {
-  id: number | any;
+  id: number;
   title: string;
   description: string;
   details?: Details_Course;
@@ -75,7 +93,7 @@ export interface question_info {
 
 export interface Details_Course {
   valoracion: number;
-  estrellas: number | any;
+  estrellas: number;
   videos: number;
   duracion: number;
 }
