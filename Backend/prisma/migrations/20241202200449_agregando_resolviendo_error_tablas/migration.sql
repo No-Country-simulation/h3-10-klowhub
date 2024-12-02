@@ -1,9 +1,3 @@
--- DropIndex
-DROP INDEX "DeleteAt_user_user_id_key";
-
--- AlterTable
-ALTER TABLE "DeleteAt_user" ALTER COLUMN "date" SET DEFAULT CURRENT_TIMESTAMP;
-
 -- AddForeignKey
 ALTER TABLE "Courses" ADD CONSTRAINT "Courses_type_course_id_fkey" FOREIGN KEY ("type_course_id") REFERENCES "Types_of_courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
