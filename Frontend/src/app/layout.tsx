@@ -3,8 +3,8 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "KlowHub",
-  description: "Plataforma educativa No Code y Low Code",
+  title: "Klowhub",
+  description: "Plataforma Educativa No Code && Low Code",
 };
 
 export default function RootLayout({

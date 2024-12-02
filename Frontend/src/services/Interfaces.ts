@@ -30,12 +30,68 @@ export interface Course {
   id: number;
   title: string;
   descripcion: string;
-  details?: Details_Course;
+  details: Details_Course;
   video_resumen: string;
   avatar: string;
   name: string;
   bio: string;
   info_curso: string;
+}
+
+export interface Course_page {
+  id: number;
+  title: string;
+  description: string;
+  details?: {
+    valoracion: number;
+    estrellas: number;
+    videos: number;
+    duracion: number;
+  };
+  video_resumen: string;
+  avatar: string;
+  name: string;
+  bio: string;
+  info_curso: string;
+  items: string[];
+  question: {
+    question_1: string;
+    question_2: string;
+  };
+  requirements: string[];
+  includes: string[];
+  information_app: {
+    funcionalidad: string[];
+    tools: string[];
+    section: string[];
+    content: string[];
+  };
+}
+
+
+
+export interface question_info {
+  question_1: string;
+  question_2: string;
+}
+
+export interface Course_page {
+  id: number;
+  title: string;
+  description: string;
+  details?: Details_Course;
+  video_resumen: string;
+  avatar: string;
+  name: string;
+  bio: string;
+  info_curso: string
+  items: string[]
+  question: question_info;
+}
+
+export interface question_info {
+  question_1: string;
+  question_2: string;
 }
 
 export interface Details_Course {

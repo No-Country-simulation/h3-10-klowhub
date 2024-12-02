@@ -22,8 +22,18 @@ export function Header() {
         setIsMenuOpen((prev) => !prev);
     };
 
+    const rutas = [
+        { id: 1, name: "Dashboard", path: "/home/dashboard" },
+        { id: 2, name: "Cursos y Lecciones", path: "/home/cursos" },
+        { id: 3, name: "Appstore", path: "/home/Appstores" },
+        { id: 4, name: "Proyectos", path: "/home/Proyectos" },
+        { id: 5, name: "Proyectos", path: "/home/Consultoria" },
+        { id: 6, name: "Proyectos", path: "/home/Sobre Appsheet" },
+    ]
+
+
     return (
-        <header className="mt-3 relative text-white font-inter">
+        <header className="mt-3 relative text-white font-inter ">
 
             <div className="absolute top-0 left-0 h-20 -z-10 blur-md">
                 <Image
@@ -37,13 +47,14 @@ export function Header() {
             </div>
             <div className="absolute top-0 left-0 w-full h-[4.5rem] -z-[10] bg-[#1F2026] opacity-60"></div>
 
-            <div className="flex items-center 2xl:justify-evenly justify-between px-4 md:px-6 py-2">
-                <div className=''>
+            <div className="flex items-center 2xl:justify-evenly justify-between px-4 md:px-10">
+                <div className='flex items-center'>
                     <Image
                         alt="Logo"
                         src="/img/Header_Img/Logo.png"
-                        className='hidden xl:block'
-                        priority={false} width={50}
+                        className='hidden xl:block '
+                        priority={false}
+                        width={50}
                         height={50}
                         style={{ height: 'auto', width: 'auto' }}
                     />
@@ -53,13 +64,13 @@ export function Header() {
 
                 <nav className="hidden xl:flex md:space-x-6">
                     <div className="flex items-center gap-2 bg-gray-500/100 py-1 px-2 rounded-md">
-                        <Link href="#" className="hover:text-purple-400">Home</Link>
+                        <Link href="/home   " className="hover:text-purple-400">Home</Link>
                         <Link href="#" className="bg-purple-500 text-white px-2 rounded-md">Plataforma</Link>
                     </div>
                     <div className="flex gap-4 text-sm items-center">
-                        {['Dashboard', 'Curso y lecciones', 'Appstore', 'Proyectos', 'Consultoría', 'Sobre Appsheet'].map((item, index) => (
-                            <Link key={index} href="#" className="hover:text-purple-400">
-                                {item}
+                        {rutas.map((item, index) => (
+                            <Link key={index} href={item.path} className="hover:text-purple-400">
+                                {item.name}
                             </Link>
                         ))}
                     </div>
@@ -68,9 +79,9 @@ export function Header() {
 
                 <div className="hidden xl:flex items-center space-x-4">
                     <div className="flex items-center space-x-3">
-                        <a href="#" className="hover:text-purple-400"><Icon_Shopping_Cart /></a>
-                        <a href="#" className="hover:text-purple-400"><Icon_Notification /></a>
-                        <a href="#" className="hover:text-purple-400"><Icon_Email /></a>
+                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Shopping_Cart /></Link>
+                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Notification /></Link>
+                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Email /></Link>
                     </div>
                     <div className="flex items-center space-x-3">
                         <button className="px-4 py-2 rounded-full text-sm font-semibold">Explorador</button>
@@ -104,13 +115,13 @@ export function Header() {
                             <Space width={20} height={20} stroke={isActive ? 'white' : 'white'} />
                         </div>
                     </div>
-                    {['Home', 'Plataforma', 'Dashboard', 'Curso y lecciones', 'Appstore', 'Proyectos', 'Consultoría', 'Sobre Appsheet'].map((item, index) => (
-                        <Link key={index} href="#" className="block text-purple-400">
-                            {item}
+                    {rutas.map((item, index) => (
+                        <Link key={index} href={item.path} className="block text-purple-400">
+                            {item.name}
                         </Link>
                     ))}
                     <div className="flex items-center w-2/3 gap-2 bg-gray-600/100 py-2 px-2 rounded-md">
-                        <Link href="#" className="hover:text-purple-400">Home</Link>
+                        <Link href="/home" className="hover:text-purple-400">Home</Link>
                         <Link href="#" className="bg-purple-500 text-white px-2 rounded-md">Plataforma</Link>
                     </div>
                     <div className='bg-gray-300/15 rounded-md p-2 px-3'>
@@ -130,9 +141,9 @@ export function Header() {
                         </div>
                         <hr className='border-white mt-2 mb-2' />
                         <div className="flex items-center space-x-6 justify-center">
-                            <a href="#" className="hover:text-purple-400 scale-150"><Icon_Shopping_Cart /></a>
-                            <a href="#" className="hover:text-purple-400 scale-150"><Icon_Notification /></a>
-                            <a href="#" className="hover:text-purple-400 scale-150"><Icon_Email /></a>
+                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Shopping_Cart /></Link>
+                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Notification /></Link>
+                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Email /></Link>
                         </div>
                     </div>
                 </nav>

@@ -11,8 +11,7 @@ import { Mail } from '../../../public/icons/Details_Course_Icon/Social_Media/Mai
 import { Icon_Whasapp } from '../../../public/icons/Details_Course_Icon/Social_Media/Whasapp';
 import { Icon_Mensagge } from '../../../public/icons/Details_Course_Icon/Social_Media/Mensagge';
 import { Icon_Linkendi } from '../../../public/icons/Details_Course_Icon/Social_Media/Linkedin';
-
-
+import Link from 'next/link';
 
 const buttonStyle: React.CSSProperties = {
     padding: '10px 20px',
@@ -24,14 +23,15 @@ const buttonStyle: React.CSSProperties = {
 };
 
 
-export function Details_Course({ datos }: { datos: Course }) {
+export function Details_Course_Modal({ datos }: { datos: Course }) {
 
     const { id, title, descripcion, details, video_resumen, avatar, name, bio, info_curso } = datos;
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    const [rating] = useState(details?.estrellas || 0);
+    const [rating] = useState(details?.estrellas);
 
     const renderStar = (index: number) => {
         const fullStar = index < Math.floor(rating);
@@ -48,7 +48,7 @@ export function Details_Course({ datos }: { datos: Course }) {
     };
 
     return (
-        <div>
+        <div className=''>
             <button onClick={openModal} style={buttonStyle} className='mt-10 ml-10'>
                 Ver detalles
             </button>
@@ -109,9 +109,9 @@ export function Details_Course({ datos }: { datos: Course }) {
                         <h3 className='font-bold text-md'>Acerca de este curso</h3>
                         <p className='font-inter text-sm '>{info_curso}</p>
                     </div>
-                    <button className='mt-5 border border-[#d194e2] text-[#d194e2] px-14 text-[14px] py-1.5 rounded-md hover:bg-[#834196] hover:text-white duration-200' onClick={closeModal} >
+                    <Link href={`cursos/${id}`} className='mt-5 border border-[#d194e2] text-[#d194e2] px-14 text-[14px] py-1.5 rounded-md hover:bg-[#834196] hover:text-white duration-200' onClick={closeModal} >
                         Ver detalles
-                    </button>
+                    </Link>
                     <div className='flex flex-row mt-6 gap-x-4 items-center'>
                         <h5 className='font-inter text-[12px]'>Compartir</h5>
                         <div className='flex flex-row items-center gap-x-3'>
