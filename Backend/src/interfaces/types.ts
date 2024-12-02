@@ -18,3 +18,9 @@ export interface Wallet {
   seller_id: string;
   balance: number;
 }
+
+export interface CreateTransaction {
+  wallet_id: string;
+  type_transaction: number;
+  amount: number
+}

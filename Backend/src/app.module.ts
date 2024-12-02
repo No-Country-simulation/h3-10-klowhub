@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { DeleteUserModule } from './delete-user/delete-user.module';
 import { SellersModule } from './sellers/sellers.module';
 import { CoursesModule } from './courses/courses.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { CoursesModule } from './courses/courses.module';
     DeleteUserModule,
     SellersModule,
     CoursesModule,
+    TransactionsModule,
   ],
   controllers: [],
   providers: [],
