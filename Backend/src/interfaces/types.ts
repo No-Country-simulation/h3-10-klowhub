@@ -12,3 +12,9 @@ export interface LoginResponse {
 export interface LoginResponseWithToken extends LoginResponse {
   token: string;
 }
+
+export interface DeleteResponseObject {
+  id: number;
+  user_id: string;
+  date: Date;
+}
