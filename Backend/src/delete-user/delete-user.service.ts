@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateDeleteUserDto } from './dto/create-delete-user.dto';
-import { UpdateDeleteUserDto } from './dto/update-delete-user.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { DeleteResponseObject } from 'src/interfaces/types';
 
 @Injectable()
 export class DeleteUserService {
-  create(createDeleteUserDto: CreateDeleteUserDto) {
-    return 'This action adds a new deleteUser';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createDeleteUserDto: CreateDeleteUserDto) {
+    try {
+      return await this.prisma.deleteAt_user.create({
+        data: createDeleteUserDto,
+      });
+    } catch (error) {
+      throw new BadRequestException('Error creating delete date', error);
+    }
   }
 
-  findAll() {
-    return `This action returns all deleteUser`;
+  async findAll(): Promise<DeleteResponseObject[] | null> {
+    try {
+      return await this.prisma.deleteAt_user.findMany();
+    } catch (error) {
+      throw new BadRequestException('Error finding all delete dates', error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} deleteUser`;
-  }
-
-  update(id: number, updateDeleteUserDto: UpdateDeleteUserDto) {
-    return `This action updates a #${id} deleteUser`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} deleteUser`;
+  async findOne(user_id: string): Promise<DeleteResponseObject[] | null> {
+    try {
+      const usersRegisterDates = await this.prisma.deleteAt_user.findMany({
+        where: { user_id },
+      });
+      if (usersRegisterDates.length === 0) {
+        throw new BadRequestException('Error finding delete date');
+      }
+      return usersRegisterDates;
+    } catch (error) {
+      throw new BadRequestException('Error finding delete date', error);
+    }
   }
 }

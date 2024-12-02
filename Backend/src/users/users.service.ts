@@ -10,12 +10,16 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { PasswordService } from 'src/shared-module/password.service';
 import { Users } from '@prisma/client';
 import { ResponseObject } from 'src/interfaces/types';
+import { DeleteUserService } from 'src/delete-user/delete-user.service';
+import { SellersService } from 'src/sellers/sellers.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     private prisma: PrismaService,
     private passwordService: PasswordService,
+    private deleteService: DeleteUserService,
+    private sellersService: SellersService,
   ) {}
 
   async createUser(user: CreateUserDto): Promise<ResponseObject | null> {
@@ -83,16 +87,26 @@ export class UsersService {
     }
   }
 
-  async remove(id: string) {
-    const userFound = await this.findOne(id);
-    if (!userFound) {
-      throw new NotFoundException('User not found');
+  async remove(id: string): Promise<ResponseObject | null> {
+    try {
+      const userFound = await this.findOne(id);
+      if (!userFound) {
+        throw new NotFoundException('User not found');
+      }
+      const { user_id } = userFound;
+      await this.deleteService.create({ user_id: user_id });
+      await this.prisma.users.update({
+        where: { user_id },
+        data: { isUserActive: false },
+      });
+      // primero hacer el servicio de encontrar el seller para luego proceder a borrarlo
+      const isSeller = await this.sellersService.findSellerWithUser(user_id);
+      if (isSeller) {
+        await this.sellersService.removeSeller(userFound);
+      }
+      return { message: 'User Deleted Successfully', ok: true };
+    } catch (error) {
+      throw new BadRequestException({ message: 'Server Error', error });
     }
-    // hacer el servicio de crear el deleteAtUser en el resource correspondiente
-    // hacer el servicio en sellers del borrado usuario no olvidarse que hay tabla del viejo
-    /* this.prisma.sellers.update({
-      where: { user_id: id },
-      data: { isUserActive: false },
-    }); */
   }
 }

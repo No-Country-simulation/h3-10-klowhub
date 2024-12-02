@@ -14,14 +14,16 @@ generator client {
 }
 
 model Users {
-  user_id          String         @id @default(uuid())
+  user_id          String          @id @default(uuid())
   name             String
   lastname         String
   birthday         String?
   role_id          Int?
-  email            String         @unique
+  email            String          @unique
   profile_image    String?
   password         String
+  isUserActive     Boolean         @default(true)
+  notification     Boolean         @default(false)
   seller           Sellers?
   deleteAt_user_id DeleteAt_user[] // al borrado logico actualizar isActive en false dentro de Sellers
 }
@@ -103,7 +105,7 @@ model Wallets {
 
 model DeleteAt_user {
   id      Int      @id @default(autoincrement())
-  user_id String   
+  user_id String
   date    DateTime @default(now())
   user    Users    @relation(fields: [user_id], references: [user_id])
 }
