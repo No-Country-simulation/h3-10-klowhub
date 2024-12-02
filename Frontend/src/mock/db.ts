@@ -330,7 +330,7 @@ export const Program_info = [
 
 export const courseCard = [
   {
-    mainImageCourse: "/img/Cards_Img/imagen.jpg",
+    mainImageCourse: "/img/Details_Course/Course_1.png",
     altMainImageCourse: "Curso",
     projectImage: "/img/Cards_Img/logo.png",
     projectName: "GreenTech Innovations",
@@ -341,7 +341,5 @@ export const courseCard = [
     stars: 5.5,
     califications: 34,
     price: 60,
-    width: 453,
-    heigth: 200,
   },
 ];

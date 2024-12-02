@@ -1,9 +1,16 @@
-import LoginPage from "./login/page";
+import { Footer } from "@/components/Layout/Footer";
+import { Header } from "@/components/Layout/Header";
 
 export default function Home() {
 
 
   return (
-    <LoginPage />
+    <>
+      <Header />
+      <main className="h-screen ">
+        <h1>Bienvenido</h1>
+      </main>
+      <Footer />
+    </>
   );
 }
