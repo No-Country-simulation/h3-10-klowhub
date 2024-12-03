@@ -1,4 +1,4 @@
 export class FilterDto {
   key: string;
-  value: string;
+  value: string | number;
 }

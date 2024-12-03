@@ -15,12 +15,12 @@ generator client {
 }
 
 model Users {
-  user_id          String           @id @default(uuid())
+  user_id          String          @id @default(uuid())
   name             String
   lastname         String
   birthday         String?
   role_id          Int?
-  email            String           @unique
+  email            String          @unique
   profile_image    String?
   password         String
   isUserActive     Boolean         @default(true)
@@ -112,14 +112,12 @@ model DeleteAt_user {
 }
 
 model Transactions {
-  id               Int                @id @default(autoincrement())
-  wallet_id        String
-  type_transaction Int
-  date             DateTime           @default(now())
-  amount           Float
-  wallet           Wallets            @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
-  purchases        Purchased_courses?
-  // validar si la operacion es factible, luego validar que la operacion se concreto y luego un trigger que cambie el balance del Wallets asociado
+  id                  Int                @id @default(autoincrement())
+  wallet_id           String
+  type_transaction    Int
+  date                DateTime           @default(now())
+  amount              Float
+  wallet              Wallets            @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
 }
 
 model Type_transactions {
@@ -220,9 +218,10 @@ model Tools {
 
 // revisar como un usuario que no es vendedor compra un curso
 model Purchased_courses {
-  id             Int          @id @default(autoincrement())
-  transaction_id Int          @unique
-  user_id        String
-  course_id      String
-  transaction    Transactions @relation(fields: [transaction_id], references: [id])
+  id           Int            @id @default(autoincrement())
+  order_id     String         @unique
+  seller_id    String
+  user_id      String
+  course_id    String
+  date         DateTime       @default(now())
 }

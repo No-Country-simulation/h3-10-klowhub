@@ -106,21 +106,34 @@ export class CoursesService {
 
   async filtersCourses(filters: FilterDto[]): Promise<Courses[] | null> {
     try {
-      const where: Record<string, any> = {};
+      const whereClause = {};
 
-      filters.forEach(({ key, value }) => {
-        if (key && value) {
-          where[key] = { contains: value, mode: 'insensitive' };
-        }
+      filters.forEach((filter) => {
+        const { key, value } = filter;
+        whereClause[key] = value;
       });
 
       const courses = await this.prisma.courses.findMany({
-        where,
+        where: whereClause,
+        include: {
+          type_course: true,
+          course_level: true,
+          platform: true,
+          language: true,
+          sector: true,
+          contentPillar: true,
+          functionality: true,
+          tool: true,
+        },
       });
 
-      return courses; // Devolvemos los resultados
+      if (courses.length === 0) {
+        throw new BadRequestException(
+          'There are no courses with the filter parameters provided',
+        );
+      }
 
-      //await this.prisma.courses.findMany();
+      return courses;
     } catch (error) {
       throw error;
     }
