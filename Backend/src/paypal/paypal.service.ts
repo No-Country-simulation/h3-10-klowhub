@@ -1,12 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
+import { CreatePaypalOrder } from 'src/interfaces/types';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class PaypalService {
+  constructor(private prisma: PrismaService) {}
+
   private readonly baseUrl = 'https://api-m.sandbox.paypal.com';
   private readonly clientId = process.env.PAYPAL_CLIENT_ID;
   private readonly clientSecret = process.env.PAYPAL_CLIENT_SECRET;
 
-  async createOrder(amount: string, currency: string, title: string) {
+  async createOrder(createPaypalOrder: CreatePaypalOrder) {
+    const { amount, currency, title, description, seller_email } =
+      createPaypalOrder;
     const token = await this.getAccessToken();
     const response = await fetch(`${this.baseUrl}/v2/checkout/orders`, {
       method: 'POST',
@@ -19,7 +25,11 @@ export class PaypalService {
         purchase_units: [
           {
             amount: { currency_code: currency, value: amount },
-            description: title,
+            description: description,
+            title: title,
+            paye: {
+              email_address: seller_email,
+            },
           },
         ],
       }),
@@ -53,6 +63,74 @@ export class PaypalService {
         },
       },
     );
+    const data = await response.json();
+    return data;
+  }
+
+  async checkout(id: string) {
+    const token = await this.getAccessToken();
+
+    const response = await fetch(`${this.baseUrl}/v2/checkout/orders/${id}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  async sendPayout(
+    sellerEmail: string,
+    amount: string,
+    currency: string,
+  ): Promise<any> {
+    const token = await this.getAccessToken();
+
+    const payoutPayload = {
+      sender_batch_header: {
+        email_subject: 'You have a payment!',
+        email_message: 'You have received a payment for your course sale.',
+      },
+      items: [
+        {
+          recipient_type: 'EMAIL',
+          receiver: sellerEmail,
+          amount: {
+            value: amount,
+            currency: currency,
+          },
+          note: 'Payment for course sold',
+          sender_item_id: `course-payment-${Date.now()}`,
+        },
+      ],
+    };
+
+    const response = await fetch(`${this.baseUrl}/v1/payments/payouts`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payoutPayload),
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new HttpException(`Error sending payout: ${data.message}`, 500);
+    }
+
+    return data;
+  }
+
+  async getUser() {
+    const token = await this.getAccessToken();
+    const response = await fetch(`${this.baseUrl}/v1/oauth2/token/userinfo`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     return data;
   }

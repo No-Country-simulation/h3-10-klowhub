@@ -10,7 +10,6 @@ import {
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { CreatePaypalOrder } from 'src/interfaces/types';
 
 @Controller('courses')
 export class CoursesController {
@@ -63,38 +62,6 @@ export class CoursesController {
       throw new HttpException(
         `Error updating course with id ${id}: ${error.message}`,
         error.status,
-      );
-    }
-  }
-
-  @Post('/paypal-order')
-  async createPaypalOrder(@Body() createPaypalOrder: CreatePaypalOrder) {
-    try {
-      const order =
-        await this.coursesService.createPaypalOrder(createPaypalOrder);
-
-      const approvalLink = order.links.find((link) => link.rel === 'approve');
-      if (!approvalLink) {
-        throw new Error('Approval link not found in PayPal order response.');
-      }
-
-      return { approvalUrl: approvalLink.href, orderId: order.id };
-    } catch (error) {
-      throw new HttpException(
-        `Error creating PayPal order: ${error.message}`,
-        500,
-      );
-    }
-  }
-
-  @Post('/paypal-capture')
-  async capturePaypalPayment(@Body() { orderId }: { orderId: string }) {
-    try {
-      return await this.coursesService.capturePaypalPayment(orderId);
-    } catch (error) {
-      throw new HttpException(
-        `Error capturing PayPal payment: ${error.message}`,
-        error.status || 500,
       );
     }
   }

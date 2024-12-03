@@ -37,4 +37,5 @@ export interface CreatePaypalOrder {
   currency: string;
   title: string;
   description: string;
+  seller_email: string;
 }
