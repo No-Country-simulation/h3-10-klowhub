@@ -7,6 +7,7 @@ import { DeleteUserModule } from './delete-user/delete-user.module';
 import { SellersModule } from './sellers/sellers.module';
 import { CoursesModule } from './courses/courses.module';
 import { TransactionsModule } from './transactions/transactions.module';
+import { PaypalService } from './paypal/paypal.service';
 
 @Module({
   imports: [
@@ -20,6 +21,6 @@ import { TransactionsModule } from './transactions/transactions.module';
     TransactionsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [PaypalService],
 })
 export class AppModule {}

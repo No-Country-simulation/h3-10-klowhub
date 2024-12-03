@@ -6,11 +6,15 @@ import {
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { ResponseObject } from 'src/interfaces/types';
+import { CreatePaypalOrder, ResponseObject } from 'src/interfaces/types';
+import { PaypalService } from 'src/paypal/paypal.service';
 
 @Injectable()
 export class CoursesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private paypal: PaypalService,
+  ) {}
 
   async findAll() {
     try {
@@ -93,6 +97,27 @@ export class CoursesService {
         data: updateCourseDto,
       });
       return { message: 'Course Updated Successfully', ok: true };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createPaypalOrder(createPaypalOrder: CreatePaypalOrder) {
+    const { amount, currency, title } = createPaypalOrder;
+    try {
+      const order = await this.paypal.createOrder(amount, currency, title);
+      console.log('paypal order', order);
+      return order;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async capturePaypalPayment(orderId: string) {
+    try {
+      const capture = await this.paypal.capturePayment(orderId);
+      console.log('paypal capture', capture);
+      return capture;
     } catch (error) {
       throw error;
     }
