@@ -10,7 +10,10 @@ import {
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { FilterDto } from './dto/filter-course.dto';
 
+@ApiTags('Courses')
 @Controller('courses')
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
@@ -34,6 +37,18 @@ export class CoursesController {
     } catch (error) {
       throw new HttpException(
         `Error finding courses: ${error.message}`,
+        error.status,
+      );
+    }
+  }
+
+  @Post('/filters')
+  async findWithFilters(@Body() filtersConditions: FilterDto[]) {
+    try {
+      return await this.coursesService.filtersCourses(filtersConditions);
+    } catch (error) {
+      throw new HttpException(
+        `Error filtering courses: ${error.message}`,
         error.status,
       );
     }

@@ -7,6 +7,8 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ResponseObject } from 'src/interfaces/types';
+import { FilterDto } from './dto/filter-course.dto';
+import { Courses } from '@prisma/client';
 
 @Injectable()
 export class CoursesService {
@@ -93,6 +95,28 @@ export class CoursesService {
         data: updateCourseDto,
       });
       return { message: 'Course Updated Successfully', ok: true };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async filtersCourses(filters: FilterDto[]): Promise<Courses[] | null> {
+    try {
+      const where: Record<string, any> = {};
+
+      filters.forEach(({ key, value }) => {
+        if (key && value) {
+          where[key] = { contains: value, mode: 'insensitive' };
+        }
+      });
+
+      const courses = await this.prisma.courses.findMany({
+        where,
+      });
+
+      return courses; // Devolvemos los resultados
+
+      //await this.prisma.courses.findMany();
     } catch (error) {
       throw error;
     }
