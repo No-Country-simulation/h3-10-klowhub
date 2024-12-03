@@ -7,12 +7,16 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ResponseObject } from 'src/interfaces/types';
+import { PaypalService } from 'src/paypal/paypal.service';
 import { FilterDto } from './dto/filter-course.dto';
 import { Courses } from '@prisma/client';
 
 @Injectable()
 export class CoursesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private paypal: PaypalService,
+  ) {}
 
   async findAll() {
     try {
