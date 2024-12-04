@@ -27,13 +27,13 @@ export function Header() {
         { id: 2, name: "Cursos y Lecciones", path: "/home/cursos" },
         { id: 3, name: "Appstore", path: "/home/Appstores" },
         { id: 4, name: "Proyectos", path: "/home/Proyectos" },
-        { id: 5, name: "Proyectos", path: "/home/Consultoria" },
-        { id: 6, name: "Proyectos", path: "/home/Sobre Appsheet" },
+        { id: 5, name: "Consultoria", path: "/home/Consultoria" },
+        { id: 6, name: "Sobre Appsheet", path: "/home/Sobre Appsheet" },
     ]
 
 
     return (
-        <header className="mt-3 relative text-white font-inter ">
+        <header className="mt-3 relative text-white font-inter mb-14 ">
 
             <div className="absolute top-0 left-0 h-20 -z-10 blur-md">
                 <Image
@@ -62,7 +62,7 @@ export function Header() {
                 </div>
 
 
-                <nav className="hidden xl:flex md:space-x-6">
+                <nav className="hidden xl:flex md:space-x-6 ">
                     <div className="flex items-center gap-2 bg-gray-500/100 py-1 px-2 rounded-md">
                         <Link href="/home   " className="hover:text-purple-400">Home</Link>
                         <Link href="#" className="bg-purple-500 text-white px-2 rounded-md">Plataforma</Link>
@@ -95,14 +95,14 @@ export function Header() {
                     </div>
                 </div>
 
-                <button className="xl:hidden" onClick={toggleMenu}>
+                <button className="xl:hidden " onClick={toggleMenu}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
             </div>
             {isMenuOpen && (
-                <nav className="xl:hidden w-[70%] md:w-[50%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0 duration-300 h-screen overflow-auto">
+                <nav className="xl:hidden w-[70%] md:w-[50%] bg-[#1F2026] text-sm space-y-4 py-4 px-6 fixed top-0 right-0 duration-300 h-screen overflow-auto md:z-10 max-md:z-10">
                     <button onClick={toggleMenu} className="absolute top-4 right-4 text-2xl text-white">✕</button>
 
                     <div className='flex flex-row'>
