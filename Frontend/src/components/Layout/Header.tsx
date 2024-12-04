@@ -27,8 +27,8 @@ export function Header() {
         { id: 2, name: "Cursos y Lecciones", path: "/home/cursos" },
         { id: 3, name: "Appstore", path: "/home/Appstores" },
         { id: 4, name: "Proyectos", path: "/home/Proyectos" },
-        { id: 5, name: "Proyectos", path: "/home/Consultoria" },
-        { id: 6, name: "Proyectos", path: "/home/Sobre Appsheet" },
+        { id: 5, name: "Consultoria", path: "/home/Consultoria" },
+        { id: 6, name: "Appsheet", path: "/home/Sobre Appsheet" },
     ]
 
 
