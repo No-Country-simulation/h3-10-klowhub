@@ -8,7 +8,9 @@
       "Developer": true,
       "numberOfScores":4.1,
       "numberVotes": 120,
-      "Category": ["Web Development", "Education", "AI"]
+      "Category": ["Web Development", "Education", "AI"],
+      "value": 2000,
+      "description": "Plataforma para gestionar turnos médicos y perfiles de pacientes de forma eficiente."
     },
     { "id":2,
       "urlImg": "/imgApp.png",
@@ -18,7 +20,9 @@
       "Developer": false,
       "numberOfScores": 4.5,
       "numberVotes": 110,
-      "Category": ["Health Tech", "Innovation"]
+      "Category": ["Health Tech", "Innovation"],
+      "value": 1500,
+      "description": "Simplifica la gestión de tus consultas médicas con nuestra app intuitiva y segura."
     },
     { "id":3,
       "urlImg": "/imgApp.png",
@@ -28,7 +32,10 @@
       "Developer": true,
       "numberOfScores": 3.5,
       "numberVotes": 95,
-      "Category": ["FinTech", "Blockchain", "Security"]
+      "Category": ["FinTech", "Blockchain", "Security"],
+      "value": 900,
+      "description": "Marketplace para la compra y venta de productos frescos con soporte para perfiles y historial de pedidos."
+
     }
   ]
   
