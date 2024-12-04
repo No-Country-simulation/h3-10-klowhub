@@ -55,6 +55,11 @@ export class CoursesService {
           contentPillar: true,
           functionality: true,
           tool: true,
+          modules: {
+            include: {
+              lessons: true,
+            },
+          },
         },
       });
       if (!course) {
