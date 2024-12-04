@@ -124,6 +124,20 @@ export interface PropsDetailsAppCart {
   PaymentMethod: string;
 }
 
+export interface Product {
+id:number
+urlImg: string
+nameProject: string
+Top: number
+Industry: string
+Developer: boolean
+numberOfScores: number
+numberVotes: number
+Category: string[]
+price: number
+description: string,
+quantity? : number
+}
 export interface Steps {
   step1: { status: boolean; step: boolean };
   step2: { status: boolean; step: boolean };
