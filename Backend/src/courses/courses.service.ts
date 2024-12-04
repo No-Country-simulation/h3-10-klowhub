@@ -10,6 +10,7 @@ import { ResponseObject } from 'src/interfaces/types';
 import { PaypalService } from 'src/paypal/paypal.service';
 import { FilterDto } from './dto/filter-course.dto';
 import { Courses } from '@prisma/client';
+import { QueryDto } from './dto/query-course.dto';
 
 @Injectable()
 export class CoursesService {
@@ -136,6 +137,30 @@ export class CoursesService {
       return courses;
     } catch (error) {
       throw error;
+    }
+  }
+
+  async filterWithQuery(query: QueryDto) {
+    if (query.title) {
+      const title = query.title.replace(/_/g, ' ');
+      const courseFound = await this.prisma.courses.findFirst({
+        where: { title: { equals: title, mode: 'insensitive' } },
+      });
+      if (!courseFound) {
+        throw new NotFoundException('Course not found');
+      }
+      return courseFound;
+    }
+
+    if (query.tags) {
+      const tagsArray = query.tags.split(',').map((tag) => tag.trim());
+      const courseFound = await this.prisma.courses.findMany({
+        where: { tags: { hasSome: tagsArray } },
+      });
+      if (courseFound.length === 0) {
+        throw new NotFoundException('Course not found');
+      }
+      return courseFound;
     }
   }
 }
