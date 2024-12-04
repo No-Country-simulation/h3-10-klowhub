@@ -14,11 +14,11 @@ export function Footer() {
                     <p className=" ">Vende una App</p>
                 </article>
                 <article className="flex flex-col gap-y-2 text-[14px] lg:text-[17px]">
-                    <h2 className="opacity-50">Acerca de</h2>
+                    <h2 className="opacity-50">Acerca De</h2>
                     <p className="">Instructores</p>
                     <p className="">Cursos</p>
-                    <p className="">Términos y condiciones</p>
-                    <p className="">Politicas de Privacidad</p>
+                    <p className="">Términos del Servicio</p>
+                    <p className="">Políticas de Privacidad</p>
                 </article>
                 <article className="flex flex-col gap-y-2 text-[14px] lg:text-[17px]">
                     <h2 className="opacity-50">Soporte</h2>
@@ -27,7 +27,7 @@ export function Footer() {
                     <p className="">Foro</p>
                 </article>
                 <article className="flex flex-col">
-                    <h2 className="opacity-50 pb-2">Encuéntranos en.</h2>
+                    <h2 className="opacity-50 pb-2">Encuéntranos En</h2>
                     <div className="flex flex-row gap-x-5 items-center ">
                         <Icon_Facebook width={24} height={24} />
                         <Icon_Twitter width={25} height={26} />
