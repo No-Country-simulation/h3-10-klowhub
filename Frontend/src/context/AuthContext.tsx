@@ -1,7 +1,7 @@
 "use client";
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { AuthUser } from "@/utils/types/auth";
-import useCookie from "@/hooks/useCookie";
+import { AuthUser } from "@/services/types";
+//import useCookie from "@/hooks/useCookie";
 
 interface TAuthContext {
   user: AuthUser | null;
@@ -19,13 +19,13 @@ interface Props {
 
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<AuthUser | null>(null);
-  const { getCookie } = useCookie();
+  // const { getCookie } = useCookie();
 
   useEffect(() => {
     if (!user) {
       let existingUser = null;
-      const getFromCookie = async () => (existingUser = getCookie("user"));
-      getFromCookie();
+      //  const getFromCookie = async () => (existingUser = getCookie("user"));
+      //
 
       if (existingUser) {
         try {
