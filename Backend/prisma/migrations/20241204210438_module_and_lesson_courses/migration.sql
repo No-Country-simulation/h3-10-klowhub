@@ -97,7 +97,7 @@ CREATE TABLE "Roles" (
 CREATE TABLE "Wallets" (
     "id" TEXT NOT NULL,
     "seller_id" TEXT NOT NULL,
-    "balance" DECIMAL(10,2),
+    "balance" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Wallets_pkey" PRIMARY KEY ("id")
 );
@@ -149,6 +149,7 @@ CREATE TABLE "Courses" (
     "price" DECIMAL(65,30) NOT NULL,
     "punctuation" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "video_url" TEXT NOT NULL,
 
     CONSTRAINT "Courses_pkey" PRIMARY KEY ("id")
 );
@@ -232,11 +233,34 @@ CREATE TABLE "Tools" (
 -- CreateTable
 CREATE TABLE "Purchased_courses" (
     "id" SERIAL NOT NULL,
-    "transaction_id" INTEGER NOT NULL,
+    "order_id" TEXT NOT NULL,
+    "seller_id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
     "course_id" TEXT NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Purchased_courses_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Lesson" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "video_url" TEXT NOT NULL,
+    "module_id" INTEGER NOT NULL,
+
+    CONSTRAINT "Lesson_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Module" (
+    "id" SERIAL NOT NULL,
+    "course_id" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "Module_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -252,7 +276,7 @@ CREATE UNIQUE INDEX "Registers_date_id_key" ON "Registers_date"("id");
 CREATE UNIQUE INDEX "Wallets_seller_id_key" ON "Wallets"("seller_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Purchased_courses_transaction_id_key" ON "Purchased_courses"("transaction_id");
+CREATE UNIQUE INDEX "Purchased_courses_order_id_key" ON "Purchased_courses"("order_id");
 
 -- AddForeignKey
 ALTER TABLE "Sellers" ADD CONSTRAINT "Sellers_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -303,4 +327,7 @@ ALTER TABLE "Courses" ADD CONSTRAINT "Courses_tool_id_fkey" FOREIGN KEY ("tool_i
 ALTER TABLE "Courses_ratings" ADD CONSTRAINT "Courses_ratings_course_id_fkey" FOREIGN KEY ("course_id") REFERENCES "Courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Purchased_courses" ADD CONSTRAINT "Purchased_courses_transaction_id_fkey" FOREIGN KEY ("transaction_id") REFERENCES "Transactions"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Lesson" ADD CONSTRAINT "Lesson_module_id_fkey" FOREIGN KEY ("module_id") REFERENCES "Module"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Module" ADD CONSTRAINT "Module_course_id_fkey" FOREIGN KEY ("course_id") REFERENCES "Courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

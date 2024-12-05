@@ -146,6 +146,8 @@ model Courses {
   stars             Courses_ratings[]
   punctuation       Decimal           @default(0)
   updateAt          DateTime          @default(now())
+  //agregar logica para los videos
+  video_url         String
 
   type_course   Types_of_courses @relation(fields: [type_course_id], references: [id])
   course_level  Courses_level    @relation(fields: [course_level_id], references: [id])
@@ -155,6 +157,8 @@ model Courses {
   contentPillar Content_pillars  @relation(fields: [content_pillar_id], references: [id])
   functionality Functionality    @relation(fields: [functionality_id], references: [id])
   tool          Tools            @relation(fields: [tool_id], references: [id])
+
+  modules       Module[]
 }
 
 // cada vez que se modifique la tabla de rating tiene que actualizar la puntuacion en la tabla
@@ -224,4 +228,23 @@ model Purchased_courses {
   user_id      String
   course_id    String
   date         DateTime       @default(now())
+}
+
+model Lesson {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  video_url   String
+
+  module_id  Int
+  module     Module   @relation(fields: [module_id], references: [id])
+}
+
+model Module {
+  id          Int      @id @default(autoincrement())
+  course_id   Int
+  title       String
+  description String
+  course      Courses  @relation(fields: [course_id], references: [id])
+  lessons     Lesson[]
 }

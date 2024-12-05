@@ -33,25 +33,28 @@ export class CoursesController {
   }
 
   @Get()
-  async findAll(@Query() query: QueryDto) {
-    if (query.title || query.tags) {
-      try {
-        return await this.coursesService.filterWithQuery(query);
-      } catch (error) {
-        throw new HttpException(
-          `Error filtering courses: ${error.message}`,
-          error.status,
-        );
-      }
-    } else {
-      try {
-        return await this.coursesService.findAll();
-      } catch (error) {
-        throw new HttpException(
-          `Error finding courses: ${error.message}`,
-          error.status,
-        );
-      }
+  async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
+    const newPage = page ? +page : 1;
+    const newLimit = limit ? +limit : 4;
+    try {
+      return await this.coursesService.findAll(newPage, newLimit);
+    } catch (error) {
+      throw new HttpException(
+        `Error finding courses: ${error.message}`,
+        error.status,
+      );
+    }
+  }
+
+  @Get('/search')
+  async searchCourses(@Query() query: QueryDto) {
+    try {
+      return await this.coursesService.filterWithQuery(query);
+    } catch (error) {
+      throw new HttpException(
+        `Error searching courses: ${error.message}`,
+        error.status,
+      );
     }
   }
 

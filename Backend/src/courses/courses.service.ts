@@ -19,9 +19,12 @@ export class CoursesService {
     private paypal: PaypalService,
   ) {}
 
-  async findAll() {
+  async findAll(page: number, limit: number) {
     try {
+      const skip = (page - 1) * limit;
       return await this.prisma.courses.findMany({
+        skip,
+        take: limit,
         include: {
           seller: true,
           stars: true,
@@ -55,6 +58,11 @@ export class CoursesService {
           contentPillar: true,
           functionality: true,
           tool: true,
+          modules: {
+            include: {
+              lessons: true,
+            },
+          },
         },
       });
       if (!course) {

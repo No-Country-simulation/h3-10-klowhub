@@ -63,4 +63,8 @@ export class CreateCourseDto {
   @IsDecimal()
   @IsOptional()
   punctuation?: number;
+
+  @IsString()
+  @IsOptional()
+  video_url: string;
 }
