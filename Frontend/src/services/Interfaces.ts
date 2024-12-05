@@ -112,6 +112,7 @@ export interface AplicationCart {
   children?: React.ReactNode;
   className?: string;
   id: number;
+  
 }
 
 export interface PropsDetailsAppCart {
@@ -168,8 +169,9 @@ export interface step2 {
 }
 
 export interface PropsCourse {
+  id:number;
   mainImageCourse: string;
-  altMainImageCourse: string;
+  altMainImageCourse?: string;
   title: string;
   description: string;
   projectName: string;

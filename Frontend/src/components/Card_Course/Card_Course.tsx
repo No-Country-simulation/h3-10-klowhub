@@ -5,12 +5,14 @@ import Image from "next/image";
 import DetailsIcon from "../../../public/icons/DetailIcon";
 import StarRating from "../StarsRating/StarsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
-import { PropsCourse } from "@/services/Interfaces";
+import { AplicationCart, PropsCourse } from "@/services/Interfaces";
+import AddItenCart from "../AddItemCart/AddItenCart";
+import RemoveCart from "../AddItemCart/RemoveCart";
 
-export default function CardCourse({ course }: { course: PropsCourse }) {
+export default function CardCourse({ course }: { course: PropsCourse  }) {
   const {
+    id,
     mainImageCourse,
-    altMainImageCourse,
     projectImage,
     projectName,
     title,
@@ -23,6 +25,7 @@ export default function CardCourse({ course }: { course: PropsCourse }) {
     heigth = 453,
   } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
+  const [StateCart,setStateCart] = useState(true) // estado de carito si el boton muestra eliminar o añadir carito
   function handleClick() {
     setStateHeadt(!StateHeadt);
   }
@@ -30,7 +33,7 @@ export default function CardCourse({ course }: { course: PropsCourse }) {
     <div className="h-[800px] w-full bg-[#1F2937] relative rounded-xl">
       <Image
         src={mainImageCourse}
-        alt={altMainImageCourse}
+        alt={`POrtada de ${projectName}`}
         width={width}
         height={heigth}
         objectFit="cover"
@@ -75,9 +78,13 @@ export default function CardCourse({ course }: { course: PropsCourse }) {
         </div>
       )}
       <div className="flex space-between p-4">
-        <button className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded">
-          Añadir al Carrito
-        </button>
+        
+         <AddItenCart items={course}/>
+        <RemoveCart id={id}/>
+        
+        
+       
+       
         <Link
           href={""}
           className="block text-[#D194E2] hover:text-white py-4 ml-6"

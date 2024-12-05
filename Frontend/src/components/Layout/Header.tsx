@@ -9,11 +9,13 @@ import { Icon_luggage } from '../../../public/icons/Header_Icon/luggage';
 import { Space } from '../../../public/icons/Header_Icon/Space';
 import { Sun_Icon } from '../../../public/icons/Header_Icon/Sun';
 import { Info_Icon } from '../../../public/icons/Header_Icon/Info';
+import { CartContext } from '../context/CartContext';
+import { useContext } from 'react';
 
 export function Header() {
     const [isActive, setIsActive] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    const {items} = useContext(CartContext)
     const toggleSwitch = () => {
         setIsActive((prev) => !prev);
     };
@@ -79,7 +81,8 @@ export function Header() {
 
                 <div className="hidden xl:flex items-center space-x-4">
                     <div className="flex items-center space-x-3">
-                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Shopping_Cart /></Link>
+                        <Link href="/home/shopping_card" className="relative hover:text-purple-400"><Icon_Shopping_Cart />
+                        <p className='text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]'>{items.length}</p></Link>
                         <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Notification /></Link>
                         <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Email /></Link>
                     </div>
