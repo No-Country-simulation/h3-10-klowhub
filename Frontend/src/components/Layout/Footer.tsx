@@ -3,13 +3,13 @@ import useAuth from "@/Hooks/useAuth";
 import { Icon_Facebook } from "../../../public/icons/Footer_Icon/Icon_Facebook";
 import { Icon_Linkendi } from "../../../public/icons/Footer_Icon/Icon_Linkendi";
 import { Icon_Twitter } from "../../../public/icons/Footer_Icon/Icon_Twitter";
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 export function Footer() {
   const { logout, isLoggedIn } = useAuth();
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    setLoggedIn(isLoggedIn); // Sincroniza el estado solo en el cliente
+    setLoggedIn(isLoggedIn); 
   }, [isLoggedIn]);
 
   const handleLogout = () => {

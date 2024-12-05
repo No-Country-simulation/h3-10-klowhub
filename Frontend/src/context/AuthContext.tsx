@@ -3,27 +3,24 @@
 import {
   createContext,
   useCallback,
-  useContext,
-  useEffect,
   useMemo,
   useState,
 } from "react";
 
 import {
   tokenData,
-  userLogin,
   AuthTokens,
   AuthContextProps,
 } from "../services/Interfaces";
 
+import {jwtDecode} from 'jwt-decode';
 import { toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode";
 import { API_URL } from "../../api";
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
 const AUTH_INFO_USER = "USER_INFO";
 export const AuthContext = createContext<AuthContextProps>({
-  login: () => {},
-  logout: () => {},
+  login: () => { },
+  logout: () => { },
   authTokens: null,
   isLoggedIn: false,
   userName: "",
@@ -47,7 +44,7 @@ export const AuthContextProvider = ({
     authTokensInLocalStorage ? JSON.parse(authTokensInLocalStorage).email : ""
   );
 
-  const login = async (email: string, password: string) => {
+  const login = useCallback(async (email: string, password: string) => {
     try {
       const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
@@ -57,7 +54,7 @@ export const AuthContextProvider = ({
         body: JSON.stringify({ email, password }),
       });
 
-      if (res.status == 401 || res.status == 400) {
+      if (res.status === 401 || res.status === 400) {
         toast.warning("El email o contraseña son incorrectos");
       }
 
@@ -86,7 +83,7 @@ export const AuthContextProvider = ({
     } catch (err) {
       console.log(err);
     }
-  };
+  }, []); // Empty dependency array ensures this function is memoized
 
   const logout = useCallback(() => {
     window.localStorage.removeItem(AUTH_TOKEN_KEY);
@@ -103,7 +100,7 @@ export const AuthContextProvider = ({
       userName,
       isLoggedIn: !!authTokens,
     }),
-    [authTokens, login, logout]
+    [authTokens, login, logout, userName] // Add 'login' here
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
