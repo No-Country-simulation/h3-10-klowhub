@@ -9,7 +9,7 @@ export default function Home() {
       <Header />
       <div className='w-screen h-screen flex justify-center items-center '>
         <PayPalScriptProvider options={{
-          clientId: "ATnTXFUhKYkfzCmfo1dDcUDW5n0mEAZKoZ630VnTBuV7HfImHmrgdq25Ef3BJiH2qmOARzLs_CHAy3ic",
+          clientId: "",
         }}>
           <PayPalButtons
             className="w-1/4"
