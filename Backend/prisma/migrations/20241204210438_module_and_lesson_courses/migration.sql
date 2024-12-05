@@ -1,22 +1,15 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "Users" (
     "user_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "birthday" TEXT,
-    "role_id" INTEGER NOT NULL,
+    "role_id" INTEGER,
     "email" TEXT NOT NULL,
     "profile_image" TEXT,
     "password" TEXT NOT NULL,
+    "isUserActive" BOOLEAN NOT NULL DEFAULT true,
+    "notification" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("user_id")
 );
@@ -104,7 +97,7 @@ CREATE TABLE "Roles" (
 CREATE TABLE "Wallets" (
     "id" TEXT NOT NULL,
     "seller_id" TEXT NOT NULL,
-    "balance" DECIMAL(65,30) NOT NULL,
+    "balance" DOUBLE PRECISION NOT NULL DEFAULT 0,
 
     CONSTRAINT "Wallets_pkey" PRIMARY KEY ("id")
 );
@@ -113,7 +106,7 @@ CREATE TABLE "Wallets" (
 CREATE TABLE "DeleteAt_user" (
     "id" SERIAL NOT NULL,
     "user_id" TEXT NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "DeleteAt_user_pkey" PRIMARY KEY ("id")
 );
@@ -123,8 +116,8 @@ CREATE TABLE "Transactions" (
     "id" SERIAL NOT NULL,
     "wallet_id" TEXT NOT NULL,
     "type_transaction" INTEGER NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
-    "amount" DECIMAL(65,30) NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "amount" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "Transactions_pkey" PRIMARY KEY ("id")
 );
@@ -156,6 +149,7 @@ CREATE TABLE "Courses" (
     "price" DECIMAL(65,30) NOT NULL,
     "punctuation" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "video_url" TEXT NOT NULL,
 
     CONSTRAINT "Courses_pkey" PRIMARY KEY ("id")
 );
@@ -239,11 +233,34 @@ CREATE TABLE "Tools" (
 -- CreateTable
 CREATE TABLE "Purchased_courses" (
     "id" SERIAL NOT NULL,
-    "transaction_id" INTEGER NOT NULL,
+    "order_id" TEXT NOT NULL,
+    "seller_id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
     "course_id" TEXT NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Purchased_courses_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Lesson" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "video_url" TEXT NOT NULL,
+    "module_id" INTEGER NOT NULL,
+
+    CONSTRAINT "Lesson_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Module" (
+    "id" SERIAL NOT NULL,
+    "course_id" INTEGER NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "Module_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -259,10 +276,7 @@ CREATE UNIQUE INDEX "Registers_date_id_key" ON "Registers_date"("id");
 CREATE UNIQUE INDEX "Wallets_seller_id_key" ON "Wallets"("seller_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "DeleteAt_user_user_id_key" ON "DeleteAt_user"("user_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Purchased_courses_transaction_id_key" ON "Purchased_courses"("transaction_id");
+CREATE UNIQUE INDEX "Purchased_courses_order_id_key" ON "Purchased_courses"("order_id");
 
 -- AddForeignKey
 ALTER TABLE "Sellers" ADD CONSTRAINT "Sellers_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -286,7 +300,34 @@ ALTER TABLE "Transactions" ADD CONSTRAINT "Transactions_wallet_id_fkey" FOREIGN 
 ALTER TABLE "Courses" ADD CONSTRAINT "Courses_seller_id_fkey" FOREIGN KEY ("seller_id") REFERENCES "Sellers"("seller_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_type_course_id_fkey" FOREIGN KEY ("type_course_id") REFERENCES "Types_of_courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_course_level_id_fkey" FOREIGN KEY ("course_level_id") REFERENCES "Courses_level"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_platform_id_fkey" FOREIGN KEY ("platform_id") REFERENCES "Platforms"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_language_id_fkey" FOREIGN KEY ("language_id") REFERENCES "Languages"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_sector_id_fkey" FOREIGN KEY ("sector_id") REFERENCES "Sectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_content_pillar_id_fkey" FOREIGN KEY ("content_pillar_id") REFERENCES "Content_pillars"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_functionality_id_fkey" FOREIGN KEY ("functionality_id") REFERENCES "Functionality"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Courses" ADD CONSTRAINT "Courses_tool_id_fkey" FOREIGN KEY ("tool_id") REFERENCES "Tools"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Courses_ratings" ADD CONSTRAINT "Courses_ratings_course_id_fkey" FOREIGN KEY ("course_id") REFERENCES "Courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Purchased_courses" ADD CONSTRAINT "Purchased_courses_transaction_id_fkey" FOREIGN KEY ("transaction_id") REFERENCES "Transactions"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Lesson" ADD CONSTRAINT "Lesson_module_id_fkey" FOREIGN KEY ("module_id") REFERENCES "Module"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Module" ADD CONSTRAINT "Module_course_id_fkey" FOREIGN KEY ("course_id") REFERENCES "Courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

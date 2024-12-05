@@ -15,12 +15,12 @@ generator client {
 }
 
 model Users {
-  user_id          String           @id @default(uuid())
+  user_id          String          @id @default(uuid())
   name             String
   lastname         String
   birthday         String?
   role_id          Int?
-  email            String           @unique
+  email            String          @unique
   profile_image    String?
   password         String
   isUserActive     Boolean         @default(true)
@@ -112,14 +112,12 @@ model DeleteAt_user {
 }
 
 model Transactions {
-  id               Int                @id @default(autoincrement())
-  wallet_id        String
-  type_transaction Int
-  date             DateTime           @default(now())
-  amount           Float
-  wallet           Wallets            @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
-  purchases        Purchased_courses?
-  // validar si la operacion es factible, luego validar que la operacion se concreto y luego un trigger que cambie el balance del Wallets asociado
+  id                  Int                @id @default(autoincrement())
+  wallet_id           String
+  type_transaction    Int
+  date                DateTime           @default(now())
+  amount              Float
+  wallet              Wallets            @relation(fields: [wallet_id], references: [id]) // Relación con Sellers
 }
 
 model Type_transactions {
@@ -148,6 +146,8 @@ model Courses {
   stars             Courses_ratings[]
   punctuation       Decimal           @default(0)
   updateAt          DateTime          @default(now())
+  //agregar logica para los videos
+  video_url         String
 
   type_course   Types_of_courses @relation(fields: [type_course_id], references: [id])
   course_level  Courses_level    @relation(fields: [course_level_id], references: [id])
@@ -157,6 +157,8 @@ model Courses {
   contentPillar Content_pillars  @relation(fields: [content_pillar_id], references: [id])
   functionality Functionality    @relation(fields: [functionality_id], references: [id])
   tool          Tools            @relation(fields: [tool_id], references: [id])
+
+  modules       Module[]
 }
 
 // cada vez que se modifique la tabla de rating tiene que actualizar la puntuacion en la tabla
@@ -220,9 +222,29 @@ model Tools {
 
 // revisar como un usuario que no es vendedor compra un curso
 model Purchased_courses {
-  id             Int          @id @default(autoincrement())
-  transaction_id Int          @unique
-  user_id        String
-  course_id      String
-  transaction    Transactions @relation(fields: [transaction_id], references: [id])
+  id           Int            @id @default(autoincrement())
+  order_id     String         @unique
+  seller_id    String
+  user_id      String
+  course_id    String
+  date         DateTime       @default(now())
+}
+
+model Lesson {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  video_url   String
+
+  module_id  Int
+  module     Module   @relation(fields: [module_id], references: [id])
+}
+
+model Module {
+  id          Int      @id @default(autoincrement())
+  course_id   Int
+  title       String
+  description String
+  course      Courses  @relation(fields: [course_id], references: [id])
+  lessons     Lesson[]
 }

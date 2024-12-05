@@ -6,11 +6,16 @@ import {
   Patch,
   Param,
   HttpException,
+  Query,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { FilterDto } from './dto/filter-course.dto';
+import { QueryDto } from './dto/query-course.dto';
 
+@ApiTags('Courses')
 @Controller('courses')
 export class CoursesController {
   constructor(private readonly coursesService: CoursesService) {}
@@ -28,12 +33,38 @@ export class CoursesController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(@Query('page') page?: number, @Query('limit') limit?: number) {
+    const newPage = page ? +page : 1;
+    const newLimit = limit ? +limit : 4;
     try {
-      return await this.coursesService.findAll();
+      return await this.coursesService.findAll(newPage, newLimit);
     } catch (error) {
       throw new HttpException(
         `Error finding courses: ${error.message}`,
+        error.status,
+      );
+    }
+  }
+
+  @Get('/search')
+  async searchCourses(@Query() query: QueryDto) {
+    try {
+      return await this.coursesService.filterWithQuery(query);
+    } catch (error) {
+      throw new HttpException(
+        `Error searching courses: ${error.message}`,
+        error.status,
+      );
+    }
+  }
+
+  @Post('/filters')
+  async findWithFilters(@Body() filtersConditions: FilterDto[]) {
+    try {
+      return await this.coursesService.filtersCourses(filtersConditions);
+    } catch (error) {
+      throw new HttpException(
+        `Error filtering courses: ${error.message}`,
         error.status,
       );
     }

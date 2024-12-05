@@ -1,4 +1,9 @@
-import { BadRequestException, ConflictException, HttpException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  HttpException,
+  Injectable,
+} from '@nestjs/common';
 import { CreateWalletDto } from './dto/create-wallet.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Wallet } from 'src/interfaces/types';
@@ -6,16 +11,13 @@ import { UpdateWalletDto } from './dto/update-wallet.dto';
 
 @Injectable()
 export class WalletService {
-
-  constructor(
-    private prisma: PrismaService
-  ) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(wallet: CreateWalletDto): Promise<Wallet | null> {
 
     try {
       return await this.prisma.wallets.create({
-        data: wallet
+        data: wallet,
       });
     } catch (error) {
       if (error.code === 'P2002') {

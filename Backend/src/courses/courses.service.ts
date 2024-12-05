@@ -7,14 +7,24 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ResponseObject } from 'src/interfaces/types';
+import { PaypalService } from 'src/paypal/paypal.service';
+import { FilterDto } from './dto/filter-course.dto';
+import { Courses } from '@prisma/client';
+import { QueryDto } from './dto/query-course.dto';
 
 @Injectable()
 export class CoursesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private paypal: PaypalService,
+  ) {}
 
-  async findAll() {
+  async findAll(page: number, limit: number) {
     try {
+      const skip = (page - 1) * limit;
       return await this.prisma.courses.findMany({
+        skip,
+        take: limit,
         include: {
           seller: true,
           stars: true,
@@ -48,6 +58,11 @@ export class CoursesService {
           contentPillar: true,
           functionality: true,
           tool: true,
+          modules: {
+            include: {
+              lessons: true,
+            },
+          },
         },
       });
       if (!course) {
@@ -95,6 +110,65 @@ export class CoursesService {
       return { message: 'Course Updated Successfully', ok: true };
     } catch (error) {
       throw error;
+    }
+  }
+
+  async filtersCourses(filters: FilterDto[]): Promise<Courses[] | null> {
+    try {
+      const whereClause = {};
+
+      filters.forEach((filter) => {
+        const { key, value } = filter;
+        whereClause[key] = value;
+      });
+
+      const courses = await this.prisma.courses.findMany({
+        where: whereClause,
+        include: {
+          type_course: true,
+          course_level: true,
+          platform: true,
+          language: true,
+          sector: true,
+          contentPillar: true,
+          functionality: true,
+          tool: true,
+        },
+      });
+
+      if (courses.length === 0) {
+        throw new BadRequestException(
+          'There are no courses with the filter parameters provided',
+        );
+      }
+
+      return courses;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async filterWithQuery(query: QueryDto) {
+    if (query.title) {
+      const title = query.title.replace(/_/g, ' ');
+      const courseFound = await this.prisma.courses.findFirst({
+        where: { title: { equals: title, mode: 'insensitive' } },
+      });
+      if (!courseFound) {
+        throw new NotFoundException('Course not found');
+      }
+      return courseFound;
+    }
+
+    if (query.tags) {
+      const tagsArray = query.tags.split(',').map((tag) => tag.trim());
+      const courseFound = await this.prisma.courses.findMany({
+        where: { tags: { hasSome: tagsArray } },
+      });
+      if (courseFound.length === 0) {
+        throw new NotFoundException('Course not found');
+      }
+      return courseFound;
     }
   }
 }

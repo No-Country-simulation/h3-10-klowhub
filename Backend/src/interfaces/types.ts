@@ -30,5 +30,14 @@ export interface TransactionCreated {
   wallet_id: string;
   type_transaction: number;
   date: Date;
-  amount: number
+  amount: number;
+}
+
+export interface CreatePaypalOrder {
+  courseId: string;
+  amount: string;
+  currency: string;
+  title: string;
+  description: string;
+  seller_email: string;
 }
