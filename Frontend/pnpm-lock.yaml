@@ -52,10 +52,6 @@ importers:
         specifier: ^5
         version: 5.7.2
 
-  dependencies: {}
-
-  devDependencies: {}
-
 packages:
 
   '@alloc/quick-lru@5.2.0':
