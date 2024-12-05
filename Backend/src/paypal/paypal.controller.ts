@@ -6,7 +6,7 @@ import {
   Param,
   Post,
 } from '@nestjs/common';
-import { CreatePaypalOrder } from 'src/interfaces/types';
+import { CreatePaypalOrderWithItems } from 'src/interfaces/types';
 import { PaypalService } from './paypal.service';
 
 @Controller('paypal')
@@ -14,9 +14,12 @@ export class PaypalController {
   constructor(private readonly paypalService: PaypalService) {}
 
   @Post('order')
-  async createPaypalOrder(@Body() createPaypalOrder: CreatePaypalOrder) {
+  async createPaypalOrder(
+    @Body() createPaypalOrder: CreatePaypalOrderWithItems,
+  ) {
     try {
       const order = await this.paypalService.createOrder(createPaypalOrder);
+      console.log(order);
 
       const approvalLink = order.links.find((link) => link.rel === 'approve');
       if (!approvalLink) {

@@ -1,5 +1,5 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { CreatePaypalOrder } from 'src/interfaces/types';
+import { CreatePaypalOrderWithItems } from 'src/interfaces/types';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -10,9 +10,7 @@ export class PaypalService {
   private readonly clientId = process.env.PAYPAL_CLIENT_ID;
   private readonly clientSecret = process.env.PAYPAL_CLIENT_SECRET;
 
-  async createOrder(createPaypalOrder: CreatePaypalOrder) {
-    const { amount, currency, title, description, seller_email } =
-      createPaypalOrder;
+  async createOrder(createPaypalOrder: CreatePaypalOrderWithItems) {
     const token = await this.getAccessToken();
     const response = await fetch(`${this.baseUrl}/v2/checkout/orders`, {
       method: 'POST',
@@ -22,16 +20,7 @@ export class PaypalService {
       },
       body: JSON.stringify({
         intent: 'CAPTURE',
-        purchase_units: [
-          {
-            amount: { currency_code: currency, value: amount },
-            description: description,
-            title: title,
-            paye: {
-              email_address: seller_email,
-            },
-          },
-        ],
+        purchase_units: createPaypalOrder.purchase_units,
       }),
     });
     const data = await response.json();
