@@ -6,17 +6,19 @@ import GithubIcon from "@/components/FormLogin/iconos/GithubIcon";
 import GoogleIcon from "@/components/FormLogin/iconos/GoogleIcon";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "sonner";
+import useAuth from "@/Hooks/useAuth";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useAuth();
   const handleLogin = async () => {
     if (email == "" || password == "") {
       await setError("Inserte Email y Contraseña");
-      console.log(error);
+      toast(error);
     } else {
-      console.log("Logueado");
-      //Acá va la lógica del logueo
+      await login(email, password);
     }
   };
   return (

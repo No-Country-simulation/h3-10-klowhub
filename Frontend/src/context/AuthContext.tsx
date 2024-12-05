@@ -1,46 +1,110 @@
 "use client";
-import { ReactNode, createContext, useEffect, useState } from "react";
-import { AuthUser } from "@/services/types";
-//import useCookie from "@/hooks/useCookie";
+import { API_URL } from "@/API";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
-interface TAuthContext {
-  user: AuthUser | null;
-  setUser: (user: AuthUser | null) => void;
-}
+import {
+  tokenData,
+  userLogin,
+  AuthTokens,
+  AuthContextProps,
+} from "../services/Interfaces";
+//import { API_URL } from "../api/api";
+import { toast } from "sonner";
+import { jwtDecode } from "jwt-decode";
 
-export const AuthContext = createContext<TAuthContext>({
-  user: null,
-  setUser: () => {},
+const AUTH_TOKEN_KEY = "TOKEN_KEY";
+const AUTH_INFO_USER = "USER_INFO";
+export const AuthContext = createContext<AuthContextProps>({
+  login: () => {},
+  logout: () => {},
+  authTokens: null,
+  isLoggedIn: false,
+  userName: "",
 });
 
-interface Props {
-  children: ReactNode;
-}
+export const AuthContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const authTokensInLocalStorage =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem(AUTH_INFO_USER)
+      : null;
 
-export const AuthProvider = ({ children }: Props) => {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  // const { getCookie } = useCookie();
+  const [authTokens, setAuthTokens] = useState<AuthTokens | null>(
+    authTokensInLocalStorage ? JSON.parse(authTokensInLocalStorage) : null
+  );
 
-  useEffect(() => {
-    if (!user) {
-      let existingUser = null;
-      //  const getFromCookie = async () => (existingUser = getCookie("user"));
-      //
+  const [userName, setUserName] = useState<string>(
+    authTokensInLocalStorage ? JSON.parse(authTokensInLocalStorage).email : ""
+  );
 
-      if (existingUser) {
-        try {
-          setUser(JSON.parse(existingUser));
-        } catch (e) {
-          console.log(e);
-        }
+  const login = async (email: string, password: string) => {
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (res.status == 401 || res.status == 400) {
+        toast.warning("El email o contraseña son incorrectos");
       }
+
+      if (!res.ok) {
+        throw new Error("Failed to login");
+      }
+
+      const data = await res.json();
+
+      if (data.token) {
+        toast.success("¡Inicio de sesión exitoso!");
+        window.location.href = "/home";
+        const token = data.token;
+        const infoToken: tokenData = jwtDecode(token);
+        const dataToken: AuthTokens = {
+          token: token,
+          email: infoToken.fullName,
+          iat: infoToken.iat,
+          exp: infoToken.exp,
+          authorities: infoToken.authorities,
+        };
+        setAuthTokens(dataToken);
+        window.localStorage.setItem(AUTH_INFO_USER, JSON.stringify(dataToken));
+        window.localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+      }
+    } catch (err) {
+      console.log(err);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  };
+
+  const logout = useCallback(() => {
+    window.localStorage.removeItem(AUTH_TOKEN_KEY);
+    window.localStorage.removeItem(AUTH_INFO_USER);
+    setAuthTokens(null);
+    setUserName("");
   }, []);
 
-  return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo<AuthContextProps>(
+    () => ({
+      login,
+      logout,
+      authTokens,
+      userName,
+      isLoggedIn: !!authTokens,
+    }),
+    [authTokens, login, logout]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
