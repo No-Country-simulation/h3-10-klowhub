@@ -25,8 +25,10 @@ export interface Wallet {
   balance: number;
 }
 
-export interface CreateTransaction {
+export interface TransactionCreated {
+  id: number;
   wallet_id: string;
   type_transaction: number;
+  date: Date;
   amount: number
 }
