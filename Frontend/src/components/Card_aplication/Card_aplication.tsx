@@ -11,9 +11,6 @@ import { Icon_Power_Apps } from "../../../public/icons/Details_Course_Icon/Power
 export default function CardAplication({
   urlImg,
   nameProject,
-  Top,
-  Industry,
-  Developer,
   numberOfScores,
   numberVotes,
   Category,
