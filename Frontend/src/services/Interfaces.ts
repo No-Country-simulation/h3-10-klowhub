@@ -193,6 +193,7 @@ export interface AuthContextProps {
   isLoggedIn: boolean;
   authTokens: AuthTokens | null;
   userName: string;
+  paypal_order: () => void
 }
 export interface tokenData {
   fullName: string;

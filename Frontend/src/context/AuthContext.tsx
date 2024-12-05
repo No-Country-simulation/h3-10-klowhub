@@ -13,17 +13,22 @@ import {
   AuthContextProps,
 } from "../services/Interfaces";
 
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { toast } from "react-toastify";
 import { API_URL } from "../../api";
+
+
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
 const AUTH_INFO_USER = "USER_INFO";
+
+
 export const AuthContext = createContext<AuthContextProps>({
   login: () => { },
   logout: () => { },
   authTokens: null,
   isLoggedIn: false,
   userName: "",
+  paypal_order: () => {}
 });
 
 export const AuthContextProvider = ({
@@ -92,6 +97,69 @@ export const AuthContextProvider = ({
     setUserName("");
   }, []);
 
+  const paypal_order = useCallback(async () => {
+    try {
+      const token = window.localStorage.getItem(AUTH_TOKEN_KEY);
+      if (!token) {
+        throw new Error("No hay token disponible");
+      }
+
+
+      const orderData = {
+        purchase_units: [
+          {
+            amount: {
+              currency_code: "USD", 
+              value: "100.00", 
+              breakdown: {
+                item_total: {
+                  currency_code: "USD",
+                  value: "100.00", 
+                },
+              },
+            },
+            items: [
+              {
+                name: "Curso de React",
+                description: "Curso completo de React con TypeScript",
+                quantity: "1",
+                unit_amount: {
+                  currency_code: "USD",
+                  value: "100.00",
+                },
+                type: "course",
+              },
+            ],
+            paye: {
+              sellerEmail: "seller@example.com",
+            },
+          },
+        ],
+      };
+
+      const res = await fetch(`${API_URL}/paypal/order`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Error al enviar la orden a PayPal");
+      }
+
+      const data = await res.json();
+      toast.success("Orden creada exitosamente");
+      return data;
+    } catch (err) {
+      console.error(err);
+      toast.error("Error al crear la orden de PayPal");
+      return null;
+    }
+  }, []);
+
   const value = useMemo<AuthContextProps>(
     () => ({
       login,
@@ -99,9 +167,14 @@ export const AuthContextProvider = ({
       authTokens,
       userName,
       isLoggedIn: !!authTokens,
+      paypal_order,
     }),
-    [authTokens, login, logout, userName] // Add 'login' here
+    [authTokens, login, logout, userName, paypal_order]
   );
+
+
+
+
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

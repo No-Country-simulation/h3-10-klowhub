@@ -2,6 +2,8 @@
 import Link from "next/link";
 import CuponInputComponent from "./CuponInputComponent";
 import { useState } from "react";
+import { Button_Buys } from "../PayPal/Button_Buys";
+
 
 export default function PurchaseSummaryComponent({valueTotal, valueService}:{valueTotal:number, valueService:number}) {
     const [total, setTotal] = useState(valueService + valueTotal)  
@@ -27,13 +29,8 @@ export default function PurchaseSummaryComponent({valueTotal, valueService}:{val
         
         <div>
          <p className="mt-5">Seleccionar un método de pago</p>
-         <div className="flex justify-around items-center my-3">
-            <p className="h-14 w-24 rounded-xl flex  items-center justify-center bg-white
-             text-[#6461FC] font-black text-2xl ">Stripe</p>
-            <p className="h-14 w-24 rounded-xl flex  items-center justify-center bg-white
-             text-[#253B80] font-black text-2xl">PayPal</p>
-            <p className="h-14 w-24 rounded-xl flex  items-center justify-center bg-white
-             text-green-600 font-black text-2xl">BCP</p>
+         <div className="flex justify-around items-center my-3 ">
+            <Button_Buys />
          </div>
         </div>
 
