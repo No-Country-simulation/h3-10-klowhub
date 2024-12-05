@@ -1,16 +1,22 @@
-import { Footer } from "@/components/Layout/Footer";
-import { Header } from "@/components/Layout/Header";
+'use client';
 
-export default function Home() {
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
+const RedirectToHome = () => {
+    const router = useRouter();
+    const isAuthenticated = useState(false)
 
-  return (
-    <>
-      <Header />
-      <main className="h-screen ">
-        <h1>Bienvenido</h1>
-      </main>
-      <Footer />
-    </>
-  );
-}
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push('/home');
+        } else {
+            router.push('/login'); 
+        }
+    }, [router, isAuthenticated]);
+
+    return null; // No se renderiza nada
+};
+
+export default RedirectToHome;
