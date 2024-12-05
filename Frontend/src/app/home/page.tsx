@@ -8,7 +8,8 @@ import Banner from "@/components/Banner/Banner";
 import CardCourseHorizontal from "@/components/Card_Course/Card_Course_Horizontal/CardCourseHorizontal";
 import CardMentoresComponent from "@/components/MentoresComp/Card_Component";
 import BannerMentores from "@/components/MentoresComp/Banner/BannerMentores";
-
+import CardAplication from "@/components/Card_aplication/Card_aplication";
+import CartJson from '@/services/CartJson.json'
 export default function Home() {
   const [visibleCountAPP, setVisibleCountAPP] = useState(4); // Estado para controlar cuántos elementos se muestran
   const [visibleCountCourse, setVisibleCountCourse] = useState(3); // Estado para controlar cuántos elementos se muestran
@@ -22,7 +23,7 @@ export default function Home() {
   };
   const base = courseCard;
   const curso = courseCard.slice(0, 1);
-
+  const aplicationCard = CartJson;
   return (
     <div>
       {curso &&
@@ -97,13 +98,21 @@ export default function Home() {
             tu proyecto y empezá a trabajar de inmediato.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {base.slice(0, visibleCountAPP).map((items) => {
-              return (
-                <div className="p-4" key={items.title}>
-                  <CardCourse course={items} />
-                </div>
-              );
-            })}
+            {aplicationCard.slice(0, visibleCountAPP).map((item) => (
+              <div className="p-4" key={item.nameProject}>
+                <CardAplication
+                 id={CartJson[0].id}
+                 Category={CartJson[0].Category}
+                 Developer={CartJson[0].Developer}
+                 Industry={CartJson[0].Industry}
+                 Top={CartJson[0].Top}
+                 nameProject={CartJson[0].nameProject}
+                 numberOfScores={CartJson[0].numberOfScores}
+                 numberVotes={CartJson[0].numberVotes}
+                 urlImg={CartJson[0].urlImg}
+                />
+              </div>
+            ))}
           </div>
           <div className="w-full flex justify-center">
             {visibleCountAPP < base.length && (
