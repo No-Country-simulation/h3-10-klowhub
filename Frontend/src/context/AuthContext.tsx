@@ -1,5 +1,5 @@
 "use client";
-import { API_URL } from "@/API";
+
 import {
   createContext,
   useCallback,
@@ -15,10 +15,11 @@ import {
   AuthTokens,
   AuthContextProps,
 } from "../services/Interfaces";
-//import { API_URL } from "../api/api";
+
 import { toast } from "sonner";
 import { jwtDecode } from "jwt-decode";
 
+const API_URL = process.env.API_URL;
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
 const AUTH_INFO_USER = "USER_INFO";
 export const AuthContext = createContext<AuthContextProps>({
