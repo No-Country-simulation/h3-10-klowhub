@@ -10,9 +10,6 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
-    "@paypal/checkout-server-sdk": "^1.0.3",
-    "@paypal/react-paypal-js": "^8.7.0",
-    "jwt-decode": "^4.0.0",
     "next": "15.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -20,9 +17,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.17.9",
-    "@types/paypal__checkout-server-sdk": "^1.0.8",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.3.13",
+    "@types/react-dom": "^18.3.1",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
