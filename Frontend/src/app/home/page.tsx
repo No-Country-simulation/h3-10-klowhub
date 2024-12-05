@@ -98,8 +98,8 @@ export default function Home() {
             tu proyecto y empezá a trabajar de inmediato.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {aplicationCard.slice(0, visibleCountAPP).map((item) => (
-              <div className="p-4" key={item.nameProject}>
+            {aplicationCard.slice(0, visibleCountAPP).map((item, index) => (
+              <div  className="p-4" key={index}>
                 <CardAplication
                  id={CartJson[0].id}
                  Category={CartJson[0].Category}
