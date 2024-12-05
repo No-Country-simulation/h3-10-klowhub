@@ -10,6 +10,7 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
+    "h3-10-klowhub": "file:",
     "jwt-decode": "^4.0.0",
     "next": "15.0.3",
     "react": "^18.3.1",

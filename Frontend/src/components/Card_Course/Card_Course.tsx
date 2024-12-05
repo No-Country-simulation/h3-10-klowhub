@@ -6,6 +6,7 @@ import DetailsIcon from "../../../public/icons/DetailIcon";
 import StarRating from "../StarsRating/StarsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
 import { PropsCourse } from "@/services/Interfaces";
+import { Icon_Shopping_Cart } from "../../../public/icons/Header_Icon/Shopping_cart";
 
 export default function CardCourse({ course }: { course: PropsCourse }) {
   const {
@@ -75,9 +76,11 @@ export default function CardCourse({ course }: { course: PropsCourse }) {
         </div>
       )}
       <div className="flex justify-between p-4">
-        <button className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded">
-          Añadir al Carrito
+      <button className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded flex items-center gap-2">
+          <Icon_Shopping_Cart />
+          Añadir al carrito
         </button>
+       
         <Link
           href=""
           className="block text-[#D194E2] hover:text-white py-4 ml-6"
