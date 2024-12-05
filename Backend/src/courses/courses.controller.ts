@@ -58,6 +58,18 @@ export class CoursesController {
     }
   }
 
+  @Get('/filters')
+  async getFilters() {
+    try {
+      return await this.coursesService.getAllFilters();
+    } catch (error) {
+      throw new HttpException(
+        `Error getting filters: ${error.message}`,
+        error.status,
+      );
+    }
+  }
+
   @Post('/filters')
   async findWithFilters(@Body() filtersConditions: FilterDto[]) {
     try {
