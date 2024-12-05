@@ -8,24 +8,7 @@ export default function Home() {
     <>
       <Header />
       <div className='w-screen h-screen flex justify-center items-center '>
-        <PayPalScriptProvider options={{
-          clientId: "",
-        }}>
-          <PayPalButtons
-            className="w-1/4"
-            style={{
-              color: "gold",
-              layout: "horizontal",
-            }}
-            createOrder={async () => {
-              const res = await fetch("/api/checkout", {
-                method: "POST"
-              });
-              const order = await res.json();
-              return order.id;
-            }}
-          />
-        </PayPalScriptProvider>
+       
       </div>
       <Footer />
     </>
