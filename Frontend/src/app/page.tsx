@@ -1,7 +1,7 @@
 'use client'
 import { Footer } from "@/components/Layout/Footer";
 import { Header } from "@/components/Layout/Header";
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 
 export default function Home() {
   return (
