@@ -16,10 +16,9 @@ import {
   AuthContextProps,
 } from "../services/Interfaces";
 
-import { toast } from "sonner";
+import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
-
-const API_URL = process.env.API_URL;
+import { API_URL } from "../../api";
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
 const AUTH_INFO_USER = "USER_INFO";
 export const AuthContext = createContext<AuthContextProps>({

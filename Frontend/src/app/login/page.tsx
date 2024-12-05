@@ -6,7 +6,7 @@ import GithubIcon from "@/components/FormLogin/iconos/GithubIcon";
 import GoogleIcon from "@/components/FormLogin/iconos/GoogleIcon";
 import Image from "next/image";
 import { useState } from "react";
-import { toast } from "sonner";
+import { toast } from "react-toastify";
 import useAuth from "@/Hooks/useAuth";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
