@@ -26,8 +26,8 @@ jobs:
       - name: Install and Build Project
         run: |
           cd Frontend
-          pnpm install
-          pnpm build
+          npm install
+          npm run build
 
       - name: Deploy to Vercel
         env:
