@@ -1,14 +1,22 @@
-'use client'
-import { Footer } from "@/components/Layout/Footer";
-import { Header } from "@/components/Layout/Header";
-import { Button_Buys } from "@/components/PayPal/Button_Buys";
+'use client';
 
-export default function Home() {
-  return (
-    <>
-      <Header />
-        <Button_Buys />
-      <Footer />
-    </>
-  );
-}
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+const RedirectToHome = () => {
+    const router = useRouter();
+    const isAuthenticated = useState(false)
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            router.push('/home');
+        } else {
+            router.push('/login'); 
+        }
+    }, [router, isAuthenticated]);
+
+    return null; // No se renderiza nada
+};
+
+export default RedirectToHome;

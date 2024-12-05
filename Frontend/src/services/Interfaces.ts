@@ -68,8 +68,6 @@ export interface Course_page {
   };
 }
 
-
-
 export interface question_info {
   question_1: string;
   question_2: string;
@@ -84,8 +82,8 @@ export interface Course_page {
   avatar: string;
   name: string;
   bio: string;
-  info_curso: string
-  items: string[]
+  info_curso: string;
+  items: string[];
   question: question_info;
 }
 
@@ -176,4 +174,42 @@ export interface Banner_Props {
   title: string;
   redirectTo: string;
   classes: string;
+}
+
+export interface userLogin {
+  email: string;
+  password: string;
+}
+export interface AuthTokens {
+  token: string;
+  email: string;
+  iat: number;
+  exp: number;
+  authorities: string[];
+}
+export interface AuthContextProps {
+  login: (email: string, password: string) => void;
+  logout: () => void;
+  isLoggedIn: boolean;
+  authTokens: AuthTokens | null;
+  userName: string;
+}
+export interface tokenData {
+  fullName: string;
+  sub: string;
+  iat: number;
+  exp: number;
+  authorities: string[];
+}
+
+export interface UserLogged {
+  id?: string;
+  email?: string;
+  name?: string;
+  token?: string;
+}
+
+export interface IAuthContext {
+  user?: UserLogged;
+  setUser?: Dispatch<SetStateAction<UserLogged>>;
 }
