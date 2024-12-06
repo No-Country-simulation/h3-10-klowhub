@@ -7,7 +7,7 @@
 datasource db {
   provider = "postgresql" // Usamos PostgreSQL
   url      = env("DATABASE_URL") // La URL de conexión desde el archivo .env
-  //directUrl = env("DIRECT_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -17,9 +17,9 @@ generator client {
 model Users {
   user_id          String          @id @default(uuid())
   name             String
-  lastname         String
+  lastname         String?
   birthday         String?
-  role_id          Int?
+  role_id          Int             @default(1)
   email            String          @unique
   profile_image    String?
   password         String
@@ -27,6 +27,7 @@ model Users {
   notification     Boolean         @default(false)
   seller           Sellers?
   deleteAt_user_id DeleteAt_user[] // al borrado logico actualizar isActive en false dentro de Sellers
+  role             Roles           @relation(fields: [role_id], references: [id])
 }
 
 model Sellers {
@@ -92,8 +93,9 @@ model Collection_method {
 }
 
 model Roles {
-  id   Int    @id @default(autoincrement())
-  name String
+  id    Int     @id @default(autoincrement())
+  name  String
+  Users Users[]
 }
 
 model Wallets {

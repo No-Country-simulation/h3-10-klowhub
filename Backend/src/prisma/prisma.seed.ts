@@ -7,13 +7,16 @@ async function main() {
 
   const hashedPassword = await passwordService.hashPassword('12345678');
 
+  await prisma.roles.createMany({
+    data: [{ name: 'User' }, { name: 'Seller' }, { name: 'Admin' }],
+  });
+
   const user1 = await prisma.users.create({
     data: {
       name: 'John',
       lastname: 'Doe',
       email: 'john.doe@example.com',
       password: hashedPassword,
-      role_id: 1,
     },
   });
 
@@ -23,7 +26,6 @@ async function main() {
       lastname: 'Smith',
       email: 'jane.smith@example.com',
       password: hashedPassword,
-      role_id: 1,
     },
   });
 
