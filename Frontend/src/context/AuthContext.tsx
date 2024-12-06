@@ -91,14 +91,12 @@ export const AuthContextProvider = ({
   const register = useCallback(
     async (name: string, email: string, password: string) => {
       try {
-        const lastname = name;
-        const birthday = "01-01-2024";
         const res = await fetch(`${API_URL}/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, lastname, birthday, email, password }),
+          body: JSON.stringify({ name, email, password }),
         });
 
         if (res.status === 401 || res.status === 400) {
