@@ -7,7 +7,7 @@
 datasource db {
   provider = "postgresql" // Usamos PostgreSQL
   url      = env("DATABASE_URL") // La URL de conexión desde el archivo .env
-  //directUrl = env("DIRECT_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -45,6 +45,7 @@ model Sellers {
   user                 Users                 @relation(fields: [user_id], references: [user_id])
   ratings              Seller_ratings[] // Relación uno a muchos con Seller_ratings
   courses              Courses[] // Relación uno a muchos con Courses
+  applications         Applications[] // Relación uno a muchos con Applications
 }
 
 model Registers_date {
@@ -166,61 +167,71 @@ model Courses {
 
 // cada vez que se modifique la tabla de rating tiene que actualizar la puntuacion en la tabla
 model Courses_ratings {
-  id        Int      @id @default(autoincrement())
-  course_id Int
-  user_id   String // validar que un mismo usuario no pueda hacer mas de una calificacion
-  rating    Int
-  comment   String
-  date      DateTime
-  course    Courses  @relation(fields: [course_id], references: [id]) // Relación con Sellers
+  id             Int          @id @default(autoincrement())
+  course_id      Int
+  user_id        String // validar que un mismo usuario no pueda hacer mas de una calificacion
+  rating         Int
+  comment        String
+  date           DateTime
+  application_id Int
+  course         Courses      @relation(fields: [course_id], references: [id]) // Relación con Sellers
+  application    Applications @relation(fields: [application_id], references: [id])
 }
 
 model Types_of_courses {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 model Courses_level {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 model Platforms {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 model Languages {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 model Sectors {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 model Content_pillars {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 model Functionality {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 model Tools {
-  id      Int       @id @default(autoincrement())
-  name    String
-  courses Courses[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  courses      Courses[]
+  applications Applications[]
 }
 
 // revisar como un usuario que no es vendedor compra un curso
@@ -250,4 +261,45 @@ model Module {
   description String
   course      Courses  @relation(fields: [course_id], references: [id])
   lessons     Lesson[]
+}
+
+model Applications {
+  id                Int               @id @default(autoincrement())
+  title             String
+  seller_id         String
+  type_course_id    Int
+  premium           Boolean           @default(false)
+  description       String?
+  course_level_id   Int
+  platform_id       Int
+  language_id       Int
+  sector_id         Int
+  content_pillar_id Int
+  functionality_id  Int
+  tool_id           Int
+  tags              String[]
+  price             Decimal
+  seller            Sellers           @relation(fields: [seller_id], references: [seller_id]) // Relación con Sellers
+  stars             Courses_ratings[]
+  punctuation       Decimal           @default(0)
+  updateAt          DateTime          @default(now())
+  media             Media[]
+
+  type_course   Types_of_courses @relation(fields: [type_course_id], references: [id])
+  course_level  Courses_level    @relation(fields: [course_level_id], references: [id])
+  platform      Platforms        @relation(fields: [platform_id], references: [id])
+  language      Languages        @relation(fields: [language_id], references: [id])
+  sector        Sectors          @relation(fields: [sector_id], references: [id])
+  contentPillar Content_pillars  @relation(fields: [content_pillar_id], references: [id])
+  functionality Functionality    @relation(fields: [functionality_id], references: [id])
+  tool          Tools            @relation(fields: [tool_id], references: [id])
+}
+
+model Media {
+  id             Int          @id @default(autoincrement())
+  title          String
+  description    String?
+  url            String
+  application_id Int
+  application    Applications @relation(fields: [application_id], references: [id])
 }

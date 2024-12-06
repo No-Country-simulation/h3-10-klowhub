@@ -157,11 +157,11 @@ async function main() {
 
   await prisma.courses.create({
     data: {
-      title: 'Web Development for Beginners',
+      title: 'Introduction to AppSheet',
       seller_id: seller1.seller_id,
       type_course_id: 1,
       premium: false,
-      description: 'Learn the basics of web development.',
+      description: 'Learn how to build apps with AppSheet.',
       course_level_id: 1,
       platform_id: 1,
       language_id: 1,
@@ -169,7 +169,7 @@ async function main() {
       content_pillar_id: 1,
       functionality_id: 1,
       tool_id: 1,
-      tags: ['HTML', 'CSS', 'JavaScript'],
+      tags: ['AppSheet', 'No-Code'],
       price: 49.99,
       video_url: '',
       image_url: '',
@@ -178,19 +178,19 @@ async function main() {
 
   await prisma.courses.create({
     data: {
-      title: 'Advanced Python Programming',
+      title: 'PowerApps for Beginners',
       seller_id: seller2.seller_id,
       type_course_id: 1,
       premium: true,
-      description: 'Master Python with this advanced course.',
-      course_level_id: 2,
-      platform_id: 1,
+      description: 'Get started with Microsoft PowerApps.',
+      course_level_id: 1,
+      platform_id: 2,
       language_id: 1,
       sector_id: 2,
       content_pillar_id: 2,
       functionality_id: 2,
       tool_id: 2,
-      tags: ['Python', 'Programming'],
+      tags: ['PowerApps', 'Microsoft'],
       price: 99.99,
       video_url: '',
       image_url: '',
@@ -199,19 +199,19 @@ async function main() {
 
   await prisma.courses.create({
     data: {
-      title: 'Graphic Design Basics',
+      title: 'Advanced Google Sheets Techniques',
       seller_id: seller1.seller_id,
       type_course_id: 2,
       premium: false,
-      description: 'Introduction to graphic design principles.',
-      course_level_id: 1,
+      description: 'Master advanced features of Google Sheets.',
+      course_level_id: 2,
       platform_id: 1,
       language_id: 2,
       sector_id: 3,
       content_pillar_id: 3,
       functionality_id: 3,
       tool_id: 3,
-      tags: ['Design', 'Graphics'],
+      tags: ['Google Sheets', 'Spreadsheets'],
       price: 29.99,
       video_url: '',
       image_url: '',
@@ -223,22 +223,22 @@ async function main() {
       {
         course_id: 1,
         title: 'Module 1',
-        description: 'Introduction to HTML',
+        description: 'Getting Started with AppSheet',
       },
       {
         course_id: 1,
         title: 'Module 2',
-        description: 'Introduction to CSS',
+        description: 'Building Your First App',
       },
       {
         course_id: 1,
         title: 'Module 3',
-        description: 'Introduction to JavaScript',
+        description: 'Advanced AppSheet Features',
       },
       {
         course_id: 1,
         title: 'Module 4',
-        description: 'Building a Simple Website',
+        description: 'Deploying Your App',
       },
     ],
   });
@@ -248,74 +248,145 @@ async function main() {
       {
         module_id: 1,
         title: 'Lesson 1',
-        description: 'HTML Basics',
+        description: 'Introduction to AppSheet',
         video_url: '',
       },
       {
         module_id: 1,
         title: 'Lesson 2',
-        description: 'HTML Elements',
+        description: 'AppSheet Interface Overview',
         video_url: '',
       },
       {
         module_id: 1,
         title: 'Lesson 3',
-        description: 'HTML Attributes',
+        description: 'Creating Your First App',
         video_url: '',
       },
       {
         module_id: 2,
         title: 'Lesson 1',
-        description: 'CSS Basics',
+        description: 'Data Sources in AppSheet',
         video_url: '',
       },
       {
         module_id: 2,
         title: 'Lesson 2',
-        description: 'CSS Selectors',
+        description: 'Building App UI',
         video_url: '',
       },
       {
         module_id: 2,
         title: 'Lesson 3',
-        description: 'CSS Properties',
+        description: 'Adding App Logic',
         video_url: '',
       },
       {
         module_id: 3,
         title: 'Lesson 1',
-        description: 'JavaScript Basics',
+        description: 'Using AppSheet Expressions',
         video_url: '',
       },
       {
         module_id: 3,
         title: 'Lesson 2',
-        description: 'JavaScript Variables',
+        description: 'Automating Tasks with Workflows',
         video_url: '',
       },
       {
         module_id: 3,
         title: 'Lesson 3',
-        description: 'JavaScript Functions',
+        description: 'Advanced Security Settings',
         video_url: '',
       },
       {
         module_id: 4,
         title: 'Lesson 1',
-        description: 'Building a Simple Website - Part 1',
+        description: 'Testing Your App',
         video_url: '',
       },
       {
         module_id: 4,
         title: 'Lesson 2',
-        description: 'Building a Simple Website - Part 2',
+        description: 'Deploying Your App',
         video_url: '',
       },
       {
         module_id: 4,
         title: 'Lesson 3',
-        description: 'Building a Simple Website - Part 3',
+        description: 'Maintaining Your App',
         video_url: '',
+      },
+    ],
+  });
+
+  await prisma.applications.createMany({
+    data: [
+      {
+        title: 'Advanced AppSheet Project Management',
+        seller_id: seller1.seller_id,
+        type_course_id: 1,
+        premium: true,
+        description:
+          'An advanced project management application built with AppSheet.',
+        course_level_id: 3,
+        platform_id: 1,
+        language_id: 1,
+        sector_id: 3,
+        content_pillar_id: 1,
+        functionality_id: 1,
+        tool_id: 1,
+        tags: ['AppSheet', 'Project Management'],
+        price: 199.99,
+      },
+      {
+        title: 'PowerApps Advanced Sales Tracker',
+        seller_id: seller2.seller_id,
+        type_course_id: 2,
+        premium: true,
+        description:
+          'An advanced sales tracking application built with PowerApps.',
+        course_level_id: 2,
+        platform_id: 2,
+        language_id: 2,
+        sector_id: 5,
+        content_pillar_id: 2,
+        functionality_id: 2,
+        tool_id: 2,
+        tags: ['PowerApps', 'Sales Tracker'],
+        price: 299.99,
+      },
+    ],
+  });
+
+  await prisma.media.createMany({
+    data: [
+      {
+        application_id: 1,
+        title: 'AppSheet Project Management Overview',
+        description:
+          'An overview of the AppSheet project management application.',
+        url: 'https://example.com/media1',
+      },
+      {
+        application_id: 1,
+        title: 'AppSheet Project Management Tutorial',
+        description:
+          'A tutorial on how to use the AppSheet project management application.',
+        url: 'https://example.com/media2',
+      },
+      {
+        application_id: 2,
+        title: 'PowerApps Sales Tracker Overview',
+        description: 'An overview of the PowerApps sales tracking application.',
+        url: 'https://example.com/media3',
+      },
+      {
+        application_id: 2,
+        title: 'PowerApps Sales Tracker Tutorial',
+        description:
+          'A tutorial on how to use the PowerApps sales tracking application.',
+        url: 'https://example.com/media4',
       },
     ],
   });
