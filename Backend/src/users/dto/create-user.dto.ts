@@ -29,6 +29,4 @@ export class CreateUserDto {
   @MinLength(4)
   @IsNotEmpty()
   password: string;
-
-  role_id: number; // revisar si se va a manejar los roles dentro de la tabla user
 }

@@ -148,7 +148,7 @@ export class CoursesService {
     }
   }
 
-  async filterWithQuery(query: QueryDto) {
+  async filterWithQuery(query: QueryDto): Promise<Courses | Courses[] | null> {
     if (query.title) {
       const title = query.title.replace(/_/g, ' ');
       const courseFound = await this.prisma.courses.findFirst({

@@ -1,19 +1,30 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { CreateSellerDto } from './dto/create-seller.dto';
 import { UpdateSellerDto } from './dto/update-seller.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ResponseObject } from 'src/interfaces/types';
 import { Sellers } from '@prisma/client';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class SellersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject(forwardRef(() => UsersService))
+    private usersService: UsersService,
+  ) {}
 
   async create(
     createSellerDto: CreateSellerDto,
   ): Promise<ResponseObject | null> {
     try {
       await this.prisma.sellers.create({ data: createSellerDto });
+      await this.usersService.update(createSellerDto.user_id, { role_id: 2 });
       return { message: 'Seller Created Successfully', ok: true };
     } catch (error) {
       throw new BadRequestException('Error at create seller', error.message);

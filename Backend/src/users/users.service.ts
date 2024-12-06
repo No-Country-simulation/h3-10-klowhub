@@ -1,6 +1,8 @@
 import {
   BadRequestException,
   ConflictException,
+  forwardRef,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -19,6 +21,7 @@ export class UsersService {
     private prisma: PrismaService,
     private passwordService: PasswordService,
     private deleteService: DeleteUserService,
+    @Inject(forwardRef(() => SellersService))
     private sellersService: SellersService,
   ) {}
 
