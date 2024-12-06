@@ -20,7 +20,7 @@ export default function CardCourse({ course }: { course: CardCursoLong  }) {
     price,
   } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
-
+  const [StateCart,setStateCart] = useState(true)
   function handleClick() {
     setStateHeadt(!StateHeadt);
   }
