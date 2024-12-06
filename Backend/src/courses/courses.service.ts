@@ -171,4 +171,30 @@ export class CoursesService {
       return courseFound;
     }
   }
+
+  async getAllFilters() {
+    try {
+      const type_course = await this.prisma.types_of_courses.findMany();
+      const course_level = await this.prisma.courses_level.findMany();
+      const platform = await this.prisma.platforms.findMany();
+      const language = await this.prisma.languages.findMany();
+      const sector = await this.prisma.sectors.findMany();
+      const contentPillar = await this.prisma.content_pillars.findMany();
+      const functionality = await this.prisma.functionality.findMany();
+      const tool = await this.prisma.tools.findMany();
+
+      return {
+        type_course,
+        course_level,
+        platform,
+        language,
+        sector,
+        contentPillar,
+        functionality,
+        tool,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
 }

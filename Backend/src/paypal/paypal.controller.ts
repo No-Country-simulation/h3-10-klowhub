@@ -5,18 +5,22 @@ import {
   HttpException,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
-import { CreatePaypalOrder } from 'src/interfaces/types';
 import { PaypalService } from './paypal.service';
+import { CreateOrderDto } from './dto/create-order.dto';
+import { CaptureOrderDto } from './dto/capture-order.dto';
+import { IsAdminGuard } from 'src/auth/guards/is-admin.guard';
 
 @Controller('paypal')
 export class PaypalController {
   constructor(private readonly paypalService: PaypalService) {}
 
   @Post('order')
-  async createPaypalOrder(@Body() createPaypalOrder: CreatePaypalOrder) {
+  async createPaypalOrder(@Body() createPaypalOrder: CreateOrderDto) {
     try {
       const order = await this.paypalService.createOrder(createPaypalOrder);
+      console.log(order);
 
       const approvalLink = order.links.find((link) => link.rel === 'approve');
       if (!approvalLink) {
@@ -33,9 +37,9 @@ export class PaypalController {
   }
 
   @Post('capture')
-  async capturePaypalPayment(@Body() { orderId }: { orderId: string }) {
+  async capturePaypalPayment(@Body() captureOrder: CaptureOrderDto) {
     try {
-      return await this.paypalService.capturePayment(orderId);
+      return await this.paypalService.capturePayment(captureOrder);
     } catch (error) {
       throw new HttpException(
         `Error capturing PayPal payment: ${error.message}`,
@@ -49,6 +53,7 @@ export class PaypalController {
     return await this.paypalService.checkout(id);
   }
 
+  @UseGuards(IsAdminGuard)
   @Post('payout')
   async payout(@Body() { sellerEmail, amount, currency }) {
     try {
@@ -61,6 +66,7 @@ export class PaypalController {
     }
   }
 
+  @UseGuards(IsAdminGuard)
   @Get('user')
   async getUser() {
     return await this.paypalService.getUser();

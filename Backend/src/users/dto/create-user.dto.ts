@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -19,6 +20,7 @@ export class CreateUserDto {
   birthday: string;
 
   @IsEmail()
+  @Matches(/@(gmail\.com|hotmail\.com|yahoo\.com|outlook\.com)$/)
   email: string;
 
   @IsString()
