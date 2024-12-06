@@ -1,34 +1,47 @@
 [
     {
       "id":1,
-      "urlImg": "/imgApp.png",
-      "nameProject": "Project Alpha",
+      "mainImageCourse": "/imgApp.png",
+      "projectImage":"/imgApp.png",
+      "projectName": "Project Alpha",
+      "title" : "Manejo de empresas a nivel escalable con Alpha",
       "Top": 1,
       "Industry": "Technology",
       "Developer": true,
-      "numberOfScores":4.1,
-      "numberVotes": 120,
-      "Category": ["Web Development", "Education", "AI"]
+      "stars":4.1,
+      "califications": 120,
+      "tags": ["Web Development", "Education", "AI"],
+      "price": 2000,
+      "description": "Plataforma para gestionar turnos médicos y perfiles de pacientes de forma eficiente."
     },
     { "id":2,
-      "urlImg": "/imgApp.png",
-      "nameProject": "Project Beta",
+      "mainImageCourse": "/imgApp.png",
+      "projectImage":"/imgApp.png",
+      "projectName": "Project Beta",
+      "title" : "Manejo de empresas a nivel escalable con Beta",
       "Top": 10,
       "Industry": "Healthcare",
       "Developer": false,
-      "numberOfScores": 4.5,
-      "numberVotes": 110,
-      "Category": ["Health Tech", "Innovation"]
+      "stars": 4.5,
+      "califications": 110,
+      "tags": ["Health Tech", "Innovation"],
+      "price": 1500,
+      "description": "Simplifica la gestión de tus consultas médicas con nuestra app intuitiva y segura."
     },
     { "id":3,
-      "urlImg": "/imgApp.png",
-      "nameProject": "Project Gamma",
+      "mainImageCourse": "/imgApp.png",
+      "projectImage":"/imgApp.png",
+      "projectName": "Project Gamma",
+      "title" : "Manejo de empresas a nivel escalable con Gamma",
       "Top": 15,
       "Industry": "Finance",
       "Developer": true,
-      "numberOfScores": 3.5,
-      "numberVotes": 95,
-      "Category": ["FinTech", "Blockchain", "Security"]
+      "stars": 3.5,
+      "califications": 95,
+      "tags": ["FinTech", "Blockchain", "Security"],
+      "price": 900,
+      "description": "Marketplace para la compra y venta de productos frescos con soporte para perfiles y historial de pedidos."
+
     }
   ]
   
