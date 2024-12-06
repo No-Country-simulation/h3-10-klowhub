@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 
 import {
   tokenData,
@@ -13,17 +8,18 @@ import {
   AuthContextProps,
 } from "../services/Interfaces";
 
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import { API_URL } from "../../api";
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
 const AUTH_INFO_USER = "USER_INFO";
 export const AuthContext = createContext<AuthContextProps>({
-  login: () => { },
-  logout: () => { },
+  login: () => {},
+  logout: () => {},
   authTokens: null,
   isLoggedIn: false,
   userName: "",
+  register: () => {},
 });
 
 export const AuthContextProvider = ({
@@ -92,6 +88,38 @@ export const AuthContextProvider = ({
     setUserName("");
   }, []);
 
+  const register = useCallback(
+    async (name: string, email: string, password: string) => {
+      try {
+        const lastname = name;
+        const birthday = "01-01-2024";
+        const res = await fetch(`${API_URL}/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, lastname, birthday, email, password }),
+        });
+
+        if (res.status === 401 || res.status === 400) {
+          toast("Error en el Registro");
+        }
+
+        if (!res.ok) {
+          throw new Error("Failed to Register");
+        }
+
+        if (res.ok) {
+          toast.success("¡Registro exitoso!");
+          window.location.href = "/login";
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    []
+  );
+
   const value = useMemo<AuthContextProps>(
     () => ({
       login,
@@ -99,8 +127,9 @@ export const AuthContextProvider = ({
       authTokens,
       userName,
       isLoggedIn: !!authTokens,
+      register,
     }),
-    [authTokens, login, logout, userName] // Add 'login' here
+    [authTokens, login, logout, userName, register] // Add 'login' here
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
