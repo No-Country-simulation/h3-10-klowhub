@@ -9,7 +9,7 @@ import { Icon_luggage } from '../../../public/icons/Header_Icon/luggage';
 import { Space } from '../../../public/icons/Header_Icon/Space';
 import { Sun_Icon } from '../../../public/icons/Header_Icon/Sun';
 import { Info_Icon } from '../../../public/icons/Header_Icon/Info';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '../../context/CartContext';
 import { useContext } from 'react';
 
 export function Header() {

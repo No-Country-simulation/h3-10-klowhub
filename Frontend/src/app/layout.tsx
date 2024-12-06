@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { CartProvider } from "@/components/context/CartContext";
+import { CartProvider } from "@/context/CartContext";
 import { AuthContextProvider } from "@/context/AuthContext";
 export const metadata: Metadata = {
   title: "Klowhub",

@@ -1,6 +1,30 @@
 import { StaticImageData } from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
+export interface CardCursoLong {
+  id:number;
+  title: string;
+  description?: string;
+  tags: string[];
+  price?: string;
+  video_url?: string;
+  projectName?: string;
+  sector?: {name:string};
+  punctuation: string;
+  altMainImageCourse?: string;
+  stars: [];
+  children?: React.ReactNode
+  projectImage?: string;
+  url_img?: string;
+  sellerImage?: string;
+  premium?: boolean;
+  seller?: {isUserActive: boolean};
+  top?: number;
+  
+  className?: string;
+  width?: number;
+  heigth?: number;
+}
 export interface PropsMentor {
   mentorImage: string;
   fullName: string;

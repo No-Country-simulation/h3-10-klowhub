@@ -1,7 +1,8 @@
 import React from 'react'
 import { useContext } from "react"
-import { CartContext } from "../context/CartContext"
+import { CartContext } from "../../context/CartContext"
 import Button from "../interface/Button"
+import {Icon_Delete} from "../../../public/icons/Details_Course_Icon/Icon_Delete"
 const useCart = () => {
     const {removeFromCart} = useContext(CartContext)
   if(!removeFromCart){
@@ -19,8 +20,9 @@ export default function RemoveCart({id}: {id:number }) {
     }
       return (
       <Button TypeStyle="transparent" fnOnClick={RemoveFromCart}>
-        <div className="flex justify-center items-center gap-1">
-        <p className="flex items-center">Eliminar carito</p>
+        <div className="py-2 flex justify-center items-center gap-1">
+          <Icon_Delete/>
+        <p className="flex items-center">Eliminar carrito</p>
         </div>
       </Button>
     )

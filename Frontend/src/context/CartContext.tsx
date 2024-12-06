@@ -1,13 +1,13 @@
 'use client'
 import React, { createContext, useReducer } from "react"
-import { AplicationCart } from "@/services/Interfaces";
+import { CardCursoLong } from "@/services/Interfaces";
 
 
 
   
   interface CartContextType {
-    items: AplicationCart[] | never[];
-    addToCart?:  (product: AplicationCart) => void;
+    items: CardCursoLong[] | never[];
+    addToCart?:  (product: CardCursoLong) => void;
     removeFromCart?: (id: number) => void;
   }
   
@@ -15,7 +15,7 @@ export const CartContext = createContext< CartContextType >({
     items:[],
 })
 
-const cartReducer = (state:object, action:{type:string,payload:{items:AplicationCart[]}}) => {
+const cartReducer = (state:object, action:{type:string,payload:{items:CardCursoLong[]}}) => {
     const {type, payload } = action;
     switch (type) {
         case "ADD": 
@@ -35,7 +35,7 @@ const cartReducer = (state:object, action:{type:string,payload:{items:Aplication
 export  function CartProvider({children}: {children:React.ReactNode}) {
     const [state, dispach] = useReducer(cartReducer, {items:[]});
 
-    const addToCart = (product:AplicationCart) => {
+    const addToCart = (product:CardCursoLong) => {
         const updatedCart = [...state.items, product]
         dispach({
             type: 'ADD',
@@ -48,7 +48,7 @@ export  function CartProvider({children}: {children:React.ReactNode}) {
 
     const removeFromCart = (id:number) => {
         const updatedCart = state.items.filter(
-            (currentProduct:AplicationCart) => currentProduct.id !== id
+            (currentProduct:CardCursoLong) => currentProduct.id !== id
         );
 
         dispach({
