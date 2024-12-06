@@ -1,56 +1,57 @@
 'use client';
-
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { toast } from "react-toastify";
-
-export function Button_Buys() {
-  const { paypal_order } = useContext(AuthContext);
 
 
-  const createOrder = async () => {
-    try {
-      const order = await paypal_order();
-      if (order && order.id) {
-        toast.success("Orden creada exitosamente en PayPal");
-        return order.id; // Devuelve el ID de la orden para que PayPal lo use
-      } else {
-        throw new Error("No se obtuvo un ID de orden válido");
-      }
-    } catch (err) {
-      console.error(err);
-      toast.error("Error al crear la orden en PayPal");
-      return null; // Indica un fallo en la creación
-    }
-  };
+export function Button_Buys({ setCarts, setPurchaseSuccess, }: {
+  setCarts: React.Dispatch<React.SetStateAction<any[]>>;
+  setPurchaseSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const paypalClientId =
+    "ATnTXFUhKYkfzCmfo1dDcUDW5n0mEAZKoZ630VnTBuV7HfImHmrgdq25Ef3BJiH2qmOARzLs_CHAy3ic";
 
-  const onApprove = async (data: any, actions: any) => {
-    // Manejo de la aprobación de la orden
-    toast.success("Pago aprobado");
-    console.log("Datos de la transacción aprobada:", data);
-    return actions.order?.capture();
-  };
+  const handlePurchaseSuccess = () => {
+    // Vaciar el carrito
+    setCarts([]);
+    localStorage.removeItem("cartItems");
 
-  const onError = (err: any) => {
-    console.error("Error durante el proceso de pago:", err);
-    toast.error("Error durante el proceso de pago");
+    // Mostrar mensaje de éxito
+    setPurchaseSuccess(true);
+    setTimeout(() => setPurchaseSuccess(false), 5000);
   };
 
   return (
     <div className="h-1/2 w-full">
-      <PayPalScriptProvider options={{ clientId: process.env.PAYPAL_CLIENT_ID ?? "" }}>
+      <PayPalScriptProvider options={{ clientId: paypalClientId }}>
         <PayPalButtons
           style={{
-            layout: "horizontal",
-            tagline: false,
             color: "blue",
-            shape: "rect",
-            label: "paypal",
           }}
-          createOrder={createOrder}
-          onApprove={onApprove}
-          onError={onError}
+          createOrder={(data, actions) => {
+            return actions.order.create({
+              intent: "CAPTURE",
+              purchase_units: [
+                {
+                  amount: {
+                    currency_code: "USD",
+                    value: "100.00"
+                  },
+                },
+              ],
+            });
+          }}
+          onApprove={(data, actions) => {
+            if (actions.order) {
+              // Captura la orden y devuelve el Promise<void>
+              return actions.order.capture().then(() => {
+                handlePurchaseSuccess();
+              });
+            }
+            // En caso de que no haya `actions.order`, aún devolvemos un Promise<void>
+            return Promise.resolve();
+          }}
+          onError={(err) => {
+            console.error("Error en la transacción:", err);
+          }}
         />
       </PayPalScriptProvider>
     </div>

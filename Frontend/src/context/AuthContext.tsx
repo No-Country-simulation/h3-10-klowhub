@@ -103,47 +103,12 @@ export const AuthContextProvider = ({
       if (!token) {
         throw new Error("No hay token disponible");
       }
-
-
-      const orderData = {
-        purchase_units: [
-          {
-            amount: {
-              currency_code: "USD", 
-              value: "100.00", 
-              breakdown: {
-                item_total: {
-                  currency_code: "USD",
-                  value: "100.00", 
-                },
-              },
-            },
-            items: [
-              {
-                name: "Curso de React",
-                description: "Curso completo de React con TypeScript",
-                quantity: "1",
-                unit_amount: {
-                  currency_code: "USD",
-                  value: "100.00",
-                },
-                type: "course",
-              },
-            ],
-            paye: {
-              sellerEmail: "seller@example.com",
-            },
-          },
-        ],
-      };
-
       const res = await fetch(`${API_URL}/paypal/order`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(orderData),
       });
 
       if (!res.ok) {
