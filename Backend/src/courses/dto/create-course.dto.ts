@@ -67,4 +67,8 @@ export class CreateCourseDto {
   @IsString()
   @IsOptional()
   video_url: string;
+
+  @IsString()
+  @IsOptional()
+  image_url: string;
 }

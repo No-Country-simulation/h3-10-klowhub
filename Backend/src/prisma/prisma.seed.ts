@@ -170,6 +170,7 @@ async function main() {
       tags: ['HTML', 'CSS', 'JavaScript'],
       price: 49.99,
       video_url: '',
+      image_url: '',
     },
   });
 
@@ -190,6 +191,7 @@ async function main() {
       tags: ['Python', 'Programming'],
       price: 99.99,
       video_url: '',
+      image_url: '',
     },
   });
 
@@ -210,6 +212,7 @@ async function main() {
       tags: ['Design', 'Graphics'],
       price: 29.99,
       video_url: '',
+      image_url: '',
     },
   });
 

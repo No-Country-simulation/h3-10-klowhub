@@ -7,7 +7,7 @@
 datasource db {
   provider = "postgresql" // Usamos PostgreSQL
   url      = env("DATABASE_URL") // La URL de conexión desde el archivo .env
-  // //directUrl = env("DIRECT_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -148,6 +148,7 @@ model Courses {
   updateAt          DateTime          @default(now())
   //agregar logica para los videos
   video_url         String
+  image_url         String
 
   type_course   Types_of_courses @relation(fields: [type_course_id], references: [id])
   course_level  Courses_level    @relation(fields: [course_level_id], references: [id])
