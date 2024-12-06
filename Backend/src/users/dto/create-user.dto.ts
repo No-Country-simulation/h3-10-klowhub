@@ -4,6 +4,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -19,6 +20,7 @@ export class CreateUserDto {
   birthday: string;
 
   @IsEmail()
+  @Matches(/@(gmail\.com|hotmail\.com|yahoo\.com|outlook\.com)$/)
   email: string;
 
   @IsString()
@@ -29,6 +31,4 @@ export class CreateUserDto {
   @MinLength(4)
   @IsNotEmpty()
   password: string;
-
-  role_id: number; // revisar si se va a manejar los roles dentro de la tabla user
 }

@@ -33,11 +33,36 @@ export interface TransactionCreated {
   amount: number;
 }
 
-export interface CreatePaypalOrder {
-  courseId: string;
-  amount: string;
-  currency: string;
-  title: string;
+export interface PaypalItem {
+  name: string;
   description: string;
-  seller_email: string;
+  quantity: string;
+  unit_amount: {
+    currency_code: string;
+    value: string;
+  };
+  type: 'course' | 'plan';
+}
+
+export interface PaypalAmountBreakdown {
+  item_total: {
+    currency_code: string;
+    value: string;
+  };
+}
+
+export interface PaypalAmount {
+  currency_code: string;
+  value: string;
+  breakdown: PaypalAmountBreakdown;
+}
+
+export interface PaypalPurchaseUnit {
+  amount: PaypalAmount;
+  items: PaypalItem[];
+  paye: { sellerEmail: string };
+}
+
+export interface CreatePaypalOrderWithItems {
+  purchase_units: PaypalPurchaseUnit[];
 }

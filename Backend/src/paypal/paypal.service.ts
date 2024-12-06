@@ -1,6 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { CreatePaypalOrder } from 'src/interfaces/types';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateOrderDto } from './dto/create-order.dto';
+import { CaptureOrderDto } from './dto/capture-order.dto';
 
 @Injectable()
 export class PaypalService {
@@ -10,9 +11,7 @@ export class PaypalService {
   private readonly clientId = process.env.PAYPAL_CLIENT_ID;
   private readonly clientSecret = process.env.PAYPAL_CLIENT_SECRET;
 
-  async createOrder(createPaypalOrder: CreatePaypalOrder) {
-    const { amount, currency, title, description, seller_email } =
-      createPaypalOrder;
+  async createOrder(createPaypalOrder: CreateOrderDto) {
     const token = await this.getAccessToken();
     const response = await fetch(`${this.baseUrl}/v2/checkout/orders`, {
       method: 'POST',
@@ -22,16 +21,7 @@ export class PaypalService {
       },
       body: JSON.stringify({
         intent: 'CAPTURE',
-        purchase_units: [
-          {
-            amount: { currency_code: currency, value: amount },
-            description: description,
-            title: title,
-            paye: {
-              email_address: seller_email,
-            },
-          },
-        ],
+        purchase_units: createPaypalOrder.purchase_units,
       }),
     });
     const data = await response.json();
@@ -51,10 +41,10 @@ export class PaypalService {
     return data.access_token;
   }
 
-  async capturePayment(orderId: string) {
+  async capturePayment(captureOrder: CaptureOrderDto) {
     const token = await this.getAccessToken();
     const response = await fetch(
-      `${this.baseUrl}/v2/checkout/orders/${orderId}/capture`,
+      `${this.baseUrl}/v2/checkout/orders/${captureOrder.orderId}/capture`,
       {
         method: 'POST',
         headers: {
@@ -64,7 +54,8 @@ export class PaypalService {
       },
     );
     const data = await response.json();
-    return data;
+    // hacer un dto para la info que puede devolver paypal y agregarlo a la respuesta
+    return data.details[0];
   }
 
   async checkout(id: string) {
