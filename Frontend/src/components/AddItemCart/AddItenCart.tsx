@@ -24,7 +24,7 @@ export default function AddItenCart({items}: {items:AplicationCart }) {
     <Button TypeStyle="purple" fnOnClick={AddCart}>
       <div className="flex justify-center items-center gap-1">
       <Icon_Shopping_Cart />
-      <p className="flex items-center">Añadir al cario</p>
+      <p className="flex items-center">Añadir al carito</p>
       </div>
     </Button>
   )

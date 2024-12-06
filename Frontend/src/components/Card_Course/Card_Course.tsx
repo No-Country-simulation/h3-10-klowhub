@@ -26,7 +26,7 @@ export default function CardCourse({ course }: { course: PropsCourse  }) {
     heigth = 453,
   } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
-  const [StateCart,setStateCart] = useState(true) // estado de carito si el boton muestra eliminar o añadir carito
+
   function handleClick() {
     setStateHeadt(!StateHeadt);
   }
