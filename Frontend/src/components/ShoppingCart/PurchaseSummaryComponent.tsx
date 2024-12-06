@@ -1,27 +1,25 @@
 'use client';
-import Link from "next/link";
-import CuponInputComponent from "./CuponInputComponent";
-import { useState } from "react";
-import { Button_Buys } from "../PayPal/Button_Buys";
+import Link from 'next/link';
+import CuponInputComponent from './CuponInputComponent';
+import { Button_Buys } from '../PayPal/Button_Buys';
+import { useState, useContext } from 'react';
+import { CartContext } from '@/context/CartContext';
 
 export default function PurchaseSummaryComponent({
   valueTotal,
   valueService,
-  setCarts,
   setPurchaseSuccess,
 }: {
   valueTotal: number;
   valueService: number;
-  Carts: any[];
-  setCarts: React.Dispatch<React.SetStateAction<any[]>>;
   setPurchaseSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const { clearCart } = useContext(CartContext); 
   const [total, setTotal] = useState(valueService + valueTotal);
 
   return (
     <div className="bg-[#1F2937] p-5 rounded-xl h-max w-full max-w-[411px]">
-      <h6 className="font-bold text-xl  mb-3">Resumen</h6>
-
+      <h6 className="font-bold text-xl mb-3">Resumen</h6>
       <div className="flex justify-between">
         <h6>Subtotal</h6>
         <p>${valueTotal}</p>
@@ -30,28 +28,26 @@ export default function PurchaseSummaryComponent({
         <h6>Tarifa de servicio</h6>
         <p>${valueService}</p>
       </div>
-
       <CuponInputComponent
         SetTotal={setTotal}
         valueService={valueService}
         valueTotal={valueTotal}
       />
-
       <div className="flex justify-between">
         <h6>Total</h6>
         <p>${total}</p>
       </div>
-
       <div>
         <p className="mt-5">Seleccionar un método de pago</p>
-        <div className="flex justify-around items-center my-3 ">
+        <div className="flex justify-around items-center my-3">
           <Button_Buys
-            setCarts={setCarts}
-            setPurchaseSuccess={setPurchaseSuccess}
+            onPurchaseSuccess={() => {
+              setPurchaseSuccess(true); // Mostrar éxito
+              clearCart(); // Vaciar el carrito después de la compra
+            }}
           />
         </div>
       </div>
-
       <Link href={''} className="text-[#7CB4FF] text-center">
         Al comprar/contratar los productos aceptas los términos y condiciones
       </Link>
