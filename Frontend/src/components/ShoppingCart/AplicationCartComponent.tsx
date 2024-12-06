@@ -34,7 +34,7 @@ export default function AplicationCartComponent(
          />
         <div className='flex flex-col gap-3'>
           <h6 className='font-bold text-base'>Aplicación para seguimiento de proyectos</h6>
-
+           
           <div className='flex gap-3 text-sm'>
             <StarCartIcon/>
             <p>Top {top} apps más vendidas</p>
@@ -71,7 +71,7 @@ export default function AplicationCartComponent(
 
         {children}
       </div>
-      <hr />
+      <hr/>
     </div>
   )
 }

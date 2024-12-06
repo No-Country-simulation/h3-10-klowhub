@@ -25,6 +25,7 @@ export default function AddItenCart({items}: {items:CardCursoLong }) {
       <div className=" flex justify-center items-center gap-1">
       <Icon_Shopping_Cart />
       <p className=" flex items-center">Añadir al carrito</p>
+      <p className="flex items-center">Añadir al cario</p>
       </div>
     </Button>
   )
