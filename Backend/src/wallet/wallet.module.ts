@@ -7,5 +7,6 @@ import { PrismaModule } from 'src/prisma/prisma.module';
   controllers: [WalletController],
   providers: [WalletService],
   imports: [PrismaModule],
+  exports: [WalletService],
 })
 export class WalletModule {}

@@ -13,11 +13,13 @@ export class CreateUserDto {
   @IsAlpha()
   name: string;
 
+  @IsOptional()
   @IsAlpha()
-  lastname: string;
+  lastname?: string;
 
   @IsString()
-  birthday: string;
+  @IsOptional()
+  birthday?: string;
 
   @IsEmail()
   @Matches(/@(gmail\.com|hotmail\.com|yahoo\.com|outlook\.com)$/)

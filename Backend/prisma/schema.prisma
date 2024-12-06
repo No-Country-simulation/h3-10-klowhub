@@ -7,7 +7,7 @@
 datasource db {
   provider = "postgresql" // Usamos PostgreSQL
   url      = env("DATABASE_URL") // La URL de conexión desde el archivo .env
-  directUrl = env("DIRECT_URL")
+  //directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -17,7 +17,7 @@ generator client {
 model Users {
   user_id          String          @id @default(uuid())
   name             String
-  lastname         String
+  lastname         String?
   birthday         String?
   role_id          Int             @default(1)
   email            String          @unique

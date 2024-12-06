@@ -4,7 +4,7 @@ CREATE TABLE "Users" (
     "name" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "birthday" TEXT,
-    "role_id" INTEGER,
+    "role_id" INTEGER NOT NULL DEFAULT 1,
     "email" TEXT NOT NULL,
     "profile_image" TEXT,
     "password" TEXT NOT NULL,
@@ -150,6 +150,7 @@ CREATE TABLE "Courses" (
     "punctuation" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "video_url" TEXT NOT NULL,
+    "image_url" TEXT NOT NULL,
 
     CONSTRAINT "Courses_pkey" PRIMARY KEY ("id")
 );
@@ -277,6 +278,9 @@ CREATE UNIQUE INDEX "Wallets_seller_id_key" ON "Wallets"("seller_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Purchased_courses_order_id_key" ON "Purchased_courses"("order_id");
+
+-- AddForeignKey
+ALTER TABLE "Users" ADD CONSTRAINT "Users_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "Roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Sellers" ADD CONSTRAINT "Sellers_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "Users"("user_id") ON DELETE RESTRICT ON UPDATE CASCADE;

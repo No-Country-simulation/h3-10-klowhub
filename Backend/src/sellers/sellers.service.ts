@@ -10,6 +10,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { ResponseObject } from 'src/interfaces/types';
 import { Sellers } from '@prisma/client';
 import { UsersService } from 'src/users/users.service';
+import { WalletService } from 'src/wallet/wallet.service';
 
 @Injectable()
 export class SellersService {
@@ -17,14 +18,19 @@ export class SellersService {
     private prisma: PrismaService,
     @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
+    private walletService: WalletService,
   ) {}
 
   async create(
     createSellerDto: CreateSellerDto,
   ): Promise<ResponseObject | null> {
     try {
-      await this.prisma.sellers.create({ data: createSellerDto });
+      const sellerCreated = await this.prisma.sellers.create({
+        data: createSellerDto,
+      });
+      const { seller_id } = sellerCreated;
       await this.usersService.update(createSellerDto.user_id, { role_id: 2 });
+      await this.walletService.create({ seller_id });
       return { message: 'Seller Created Successfully', ok: true };
     } catch (error) {
       throw new BadRequestException('Error at create seller', error.message);
