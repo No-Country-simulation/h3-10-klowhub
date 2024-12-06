@@ -14,7 +14,8 @@
     "next": "15.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-toastify": "^10.0.6"
+    "react-toastify": "^10.0.6",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/jwt-decode": "^3.1.0",

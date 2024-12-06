@@ -59,7 +59,7 @@ export default function CardAplication({
 
         {/* Categorías */}
         <div className="flex flex-wrap gap-2 mt-4">
-          {Category.map((category, index) => (
+          {Category?.map((category, index) => (
             <span
               key={index}
               className="inline-block bg-purple-200 text-purple-700 text-xs font-bold py-2 px-4 rounded"

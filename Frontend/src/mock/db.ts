@@ -329,7 +329,7 @@ export const Program_info = [
 ];
 
 export const courseCard = [
-  {
+  {id:1,
     mainImageCourse: "/img/Details_Course/Course_1.png",
     altMainImageCourse: "Curso",
     projectImage: "/img/Cards_Img/logo.png",
