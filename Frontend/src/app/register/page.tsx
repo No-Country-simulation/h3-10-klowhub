@@ -7,7 +7,7 @@ import GoogleIcon from "@/components/FormLogin/iconos/GoogleIcon";
 import Image from "next/image";
 import { useState } from "react";
 import useAuth from "@/Hooks/useAuth";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
