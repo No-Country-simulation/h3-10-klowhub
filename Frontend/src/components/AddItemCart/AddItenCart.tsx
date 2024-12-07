@@ -5,7 +5,7 @@ import { CardCursoLong } from "@/services/Interfaces"
 import { Icon_Shopping_Cart } from "../../../public/icons/Header_Icon/Shopping_cart"
 
 const useCart = () => {
-    const {addToCart} = useContext(CartContext)
+  const {addToCart} = useContext(CartContext)
   if(!addToCart){
     throw new Error('AddCart')
   }

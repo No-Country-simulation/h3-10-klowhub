@@ -20,7 +20,6 @@ export interface CardCursoLong {
   premium?: boolean;
   seller?: {isUserActive: boolean};
   top?: number;
-  
   className?: string;
   width?: number;
   heigth?: number;
