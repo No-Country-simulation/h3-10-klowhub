@@ -34,7 +34,7 @@ export default function Home() {
             .then(response => response.json())
             .then(date => setCurso(date))
         console.log(Card_Curso)
-    }, [])
+    }, [Card_Curso])
 
 
     return (

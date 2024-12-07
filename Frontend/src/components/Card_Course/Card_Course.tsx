@@ -41,7 +41,7 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
             <DetailsIcon />
           </div>
 
-          <p className="w-full text-sm lg:text-md">Aprende a simplificar y automatizar tareas rutinarias utilizando las herramientas intuitivas de AppSheetHub.</p>
+          <p className="w-full text-sm lg:text-md">{description}</p>
 
           <section className="">
             {projectName

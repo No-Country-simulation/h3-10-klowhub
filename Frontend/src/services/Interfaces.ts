@@ -1,4 +1,3 @@
-import { StaticImageData } from "next/image";
 import React, { Dispatch, SetStateAction } from "react";
 
 export interface CardCursoLong {
