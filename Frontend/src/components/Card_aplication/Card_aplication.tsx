@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import CaficationCartComponent from "../ShoppingCart/CaficationCartComponent";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
 import { Icon_Shopping_Cart } from "../../../public/icons/Header_Icon/Shopping_cart";
 import DetailsIcon from "../../../public/icons/DetailIcon";
@@ -73,7 +72,6 @@ export default function CardAplication({
       {/* Calificaciones */}
       <div className="px-6 mb-4 flex items-center">
         <p className="text-white mr-1">{numberOfScores}</p>
-        <CaficationCartComponent valueStar={numberOfScores} />
         <p className="ml-2 text-gray-400">({numberVotes})</p>
       </div>
 

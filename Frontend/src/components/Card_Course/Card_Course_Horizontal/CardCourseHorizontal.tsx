@@ -12,7 +12,6 @@ export default function CardCourseHorizontal({
 }) {
   const {
     mainImageCourse,
-    altMainImageCourse,
     title,
     description,
     tags,
@@ -24,11 +23,10 @@ export default function CardCourseHorizontal({
   const progress = 50;
   return (
     <div className="h-auto w-full bg-[#1F2937] relative rounded-xl flex flex-col lg:flex-row">
-      {/* Imagen al lado izquierdo */}
       <div className="w-full lg:w-1/4 h-64 lg:h-auto relative">
         <Image
           src={mainImageCourse}
-          alt={altMainImageCourse}
+          alt="Imagen"
           layout="fill"
           objectFit="cover"
           className="rounded-t-xl lg:rounded-l-xl lg:rounded-t-none"
@@ -85,11 +83,11 @@ export default function CardCourseHorizontal({
           </div>
         </div>
         <button
-  onClick={handleClick}
-  className="mt-4 px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-900 w-48"
->
-  Continuar viendo
-</button>
+          onClick={handleClick}
+          className="mt-4 px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-900 w-48"
+        >
+          Continuar viendo
+        </button>
 
       </div>
     </div>

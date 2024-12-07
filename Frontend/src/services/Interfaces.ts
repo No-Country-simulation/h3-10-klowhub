@@ -209,7 +209,7 @@ export interface PropsCourse {
 }
 
 export interface Banner_Props {
-  backgroundImage: StaticImageData | string;
+  backgroundImage: string;
   title: string;
   redirectTo: string;
   classes: string;
