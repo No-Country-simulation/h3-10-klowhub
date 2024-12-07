@@ -9,15 +9,13 @@ import { Icon_luggage } from "../../../public/icons/Header_Icon/luggage";
 import { Space } from "../../../public/icons/Header_Icon/Space";
 import { Sun_Icon } from "../../../public/icons/Header_Icon/Sun";
 import { Info_Icon } from "../../../public/icons/Header_Icon/Info";
-import { CartContext } from "../../context/CartContext";
-import { useContext } from "react";
 import useAuth from "@/Hooks/useAuth";
 
 export function Header() {
   const [isActive, setIsActive] = useState(false);
   const [openlogout, setopenlogout] = useState(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { items } = useContext(CartContext);
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
@@ -31,9 +29,6 @@ export function Header() {
     setLoggedIn(isLoggedIn);
   }, [isLoggedIn]);
 
-  const handleLogout = () => {
-    logout();
-  };
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
@@ -61,7 +56,7 @@ export function Header() {
       </div>
       <div className="absolute top-0 left-0 w-full h-[4.5rem] -z-[10] bg-[#1F2026] opacity-60"></div>
 
-      <div className="flex items-center 2xl:justify-evenly justify-between px-4 md:px-10">
+      <div className="flex items-center xl:justify-evenly justify-between px-4 md:px-10">
         <div className="flex items-center">
           <Image
             alt="Logo"
@@ -112,7 +107,7 @@ export function Header() {
               >
                 <Icon_Shopping_Cart />
                 <p className="text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]">
-                  {items.length}
+                  12
                 </p>
               </Link>
               <Link
@@ -151,16 +146,18 @@ export function Header() {
                   alt="Profile Picture"
                   width={100}
                   height={100}
-                  className="w-full h-full object-cover cursor-pointer"
+                  className="w-full h-full object-cover"
                   onClick={toggleLogout}
                 />
                 {openlogout && (
-                  <button
-                    onClick={logout}
-                    className="px-1 py-1 absolute bg-purple-700 text-white rounded hover:bg-purple-900"
-                  >
-                    Cerrar Sesión
-                  </button>
+                  <div className=" p-1 bg-purple-200 m-1">
+                    <button
+                      onClick={logout}
+                      className="px-1 py-1  absolute bg-purple-700 text-white rounded hover:bg-purple-900"
+                    >
+                      Cerrar Sesión
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
@@ -169,7 +166,7 @@ export function Header() {
         {!loggedIn && (
           <>
             <Link href="/login">
-              <button className="invisible px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-900 w-36 md:visible">
+              <button className="invisible px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-900 w-36 xl:visible">
                 Iniciar Sesión
               </button>
             </Link>
@@ -227,7 +224,6 @@ export function Header() {
               {item.name}
             </Link>
           ))}
-
           <div className="flex items-center w-2/3 gap-2 bg-gray-600/100 py-2 px-2 rounded-md">
             <Link href="/home" className="hover:text-purple-400">
               Home
@@ -238,7 +234,7 @@ export function Header() {
           </div>
           {loggedIn ? (
             <button
-              className="p-4 mt-6 bg-purple-500 text-white px-2 rounded-md"
+              className="p-4 mt-8 bg-purple-500 text-white px-2 rounded-md"
               onClick={logout}
             >
               Cerrar Sesión
