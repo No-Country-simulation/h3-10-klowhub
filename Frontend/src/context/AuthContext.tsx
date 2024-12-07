@@ -79,7 +79,7 @@ export const AuthContextProvider = ({
     } catch (err) {
       console.log(err);
     }
-  }, []); // Empty dependency array ensures this function is memoized
+  }, []);
 
   const logout = useCallback(() => {
     window.localStorage.removeItem(AUTH_TOKEN_KEY);

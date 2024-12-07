@@ -1,0 +1,48 @@
+[
+    {
+
+      "id":1,
+      "mainImageCourse": "/imgApp.png",
+      "projectImage":"/imgApp.png",
+      "projectName": "Project Alpha",
+      "title" : "Manejo de empresas a nivel escalable con Alpha",
+      "Top": 1,
+      "Industry": "Technology",
+      "Developer": true,
+      "stars":4.1,
+      "califications": 120,
+      "tags": ["Web Development", "Education", "AI"],
+      "price": 2000,
+      "description": "Plataforma para gestionar turnos médicos y perfiles de pacientes de forma eficiente."
+    },
+    { "id":2,
+      "mainImageCourse": "/imgApp.png",
+      "projectImage":"/imgApp.png",
+      "projectName": "Project Beta",
+      "title" : "Manejo de empresas a nivel escalable con Beta",
+      "Top": 10,
+      "Industry": "Healthcare",
+      "Developer": false,
+      "stars": 4.5,
+      "califications": 110,
+      "tags": ["Health Tech", "Innovation"],
+      "price": 1500,
+      "description": "Simplifica la gestión de tus consultas médicas con nuestra app intuitiva y segura."
+    },
+    { "id":3,
+      "mainImageCourse": "/imgApp.png",
+      "projectImage":"/imgApp.png",
+      "projectName": "Project Gamma",
+      "title" : "Manejo de empresas a nivel escalable con Gamma",
+      "Top": 15,
+      "Industry": "Finance",
+      "Developer": true,
+      "stars": 3.5,
+      "califications": 95,
+      "tags": ["FinTech", "Blockchain", "Security"],
+      "price": 900,
+      "description": "Marketplace para la compra y venta de productos frescos con soporte para perfiles y historial de pedidos."
+
+    }
+  ]
+  

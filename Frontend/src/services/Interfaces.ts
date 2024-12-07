@@ -1,6 +1,28 @@
-import { StaticImageData } from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
+export interface CardCursoLong {
+  id:number;
+  title: string;
+  description?: string;
+  tags: string[];
+  price?: string;
+  video_url?: string;
+  projectName?: string;
+  sector?: {name:string};
+  punctuation: string;
+  altMainImageCourse?: string;
+  stars: [];
+  children?: React.ReactNode
+  projectImage?: string;
+  url_img?: string;
+  sellerImage?: string;
+  premium?: boolean;
+  seller?: {isUserActive: boolean};
+  top?: number;
+  className?: string;
+  width?: number;
+  heigth?: number;
+}
 export interface PropsMentor {
   mentorImage: string;
   fullName: string;
@@ -110,6 +132,7 @@ export interface AplicationCart {
   children?: React.ReactNode;
   className?: string;
   id: number;
+  
 }
 
 export interface PropsDetailsAppCart {
@@ -122,6 +145,20 @@ export interface PropsDetailsAppCart {
   PaymentMethod: string;
 }
 
+export interface Product {
+id:number
+urlImg: string
+nameProject: string
+Top: number
+Industry: string
+Developer: boolean
+numberOfScores: number
+numberVotes: number
+Category: string[]
+price: number
+description: string,
+quantity? : number
+}
 export interface Steps {
   step1: { status: boolean; step: boolean };
   step2: { status: boolean; step: boolean };
@@ -152,8 +189,9 @@ export interface step2 {
 }
 
 export interface PropsCourse {
+  id:number;
   mainImageCourse: string;
-  altMainImageCourse: string;
+  altMainImageCourse?: string;
   title: string;
   description: string;
   projectName: string;
@@ -170,7 +208,7 @@ export interface PropsCourse {
 }
 
 export interface Banner_Props {
-  backgroundImage: StaticImageData | string;
+  backgroundImage: string;
   title: string;
   redirectTo: string;
   classes: string;
