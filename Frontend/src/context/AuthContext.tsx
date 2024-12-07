@@ -13,7 +13,7 @@ import {
   AuthContextProps,
 } from "../services/Interfaces";
 
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { toast } from "react-toastify";
 import { API_URL } from "../../api";
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
@@ -83,7 +83,7 @@ export const AuthContextProvider = ({
     } catch (err) {
       console.log(err);
     }
-  }, []); // Empty dependency array ensures this function is memoized
+  }, []);
 
   const logout = useCallback(() => {
     window.localStorage.removeItem(AUTH_TOKEN_KEY);
@@ -102,6 +102,13 @@ export const AuthContextProvider = ({
     }),
     [authTokens, login, logout, userName] // Add 'login' here
   );
+
+  // Agregar Curso
+
+  // Agregar paypal
+
+
+
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

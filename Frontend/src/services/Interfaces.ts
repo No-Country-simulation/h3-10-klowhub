@@ -1,4 +1,3 @@
-import { StaticImageData } from "next/image";
 import React, { Dispatch, SetStateAction } from "react";
 
 export interface CardCursoLong {
@@ -20,7 +19,6 @@ export interface CardCursoLong {
   premium?: boolean;
   seller?: {isUserActive: boolean};
   top?: number;
-  
   className?: string;
   width?: number;
   heigth?: number;
@@ -210,7 +208,7 @@ export interface PropsCourse {
 }
 
 export interface Banner_Props {
-  backgroundImage: StaticImageData | string;
+  backgroundImage: string;
   title: string;
   redirectTo: string;
   classes: string;
