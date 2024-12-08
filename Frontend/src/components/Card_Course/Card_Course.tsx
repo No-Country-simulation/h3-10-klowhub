@@ -6,7 +6,9 @@ import DetailsIcon from "../../../public/icons/DetailIcon";
 import StarRating from "../StarsRating/StarsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
 import { CardCursoLong } from "@/services/Interfaces";
-import { Icon_Shopping } from "../../../public/icons/Card_Course/Icon_Shopping";
+import AddItenCart from "../AddItemCart/AddItenCart";
+import RemoveCart from "../AddItemCart/RemoveCart";
+
 
 export default function CardCourse({ course }: { course: CardCursoLong }) {
   const {
@@ -19,6 +21,13 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
     price,
   } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
+
+ 
+  const [StateButonCart, setStateButonCart] = useState(true)
+
+  const handleButonCart = () => {
+    setStateButonCart(!StateButonCart)
+  }
   function handleClick() {
     setStateHeadt(!StateHeadt);
   }
@@ -83,10 +92,12 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
       </section>
 
       <div className="flex items-center  space-between py-2 mt-2 font-inter">
-        <button onClick={() => { }} className="flex flex-row gap-x-3 font-inter justify-center items-center bg-primary_b_500 text-white w-1/2 rounded-2xl h-[80%] px-3">
-          <Icon_Shopping width={20} height={21} />
-          <p className="font-semibold font-inter">Añadir al Carrito</p>
-        </button>
+      
+         <div onClick={handleButonCart}>
+          {StateButonCart 
+            ?  <AddItenCart items={course}/>
+            :  <RemoveCart id={course.id}/>}
+         </div>
         <Link
           href=""
           className="block text-[#D194E2] hover:text-white py-4 ml-6 font-bold font-inter"
