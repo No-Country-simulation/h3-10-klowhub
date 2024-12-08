@@ -10,12 +10,14 @@ import { Space } from "../../../public/icons/Header_Icon/Space";
 import { Sun_Icon } from "../../../public/icons/Header_Icon/Sun";
 import { Info_Icon } from "../../../public/icons/Header_Icon/Info";
 import useAuth from "@/Hooks/useAuth";
-
+import { useContext } from "react";
+import { CartContext } from "@/context/CartContext";
 export function Header() {
   const [isActive, setIsActive] = useState(false);
   const [openlogout, setopenlogout] = useState(false);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { items } = useContext(CartContext);
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
@@ -99,79 +101,54 @@ export function Header() {
         </nav>
 
         <div className="hidden xl:flex items-center space-x-4">
-          {loggedIn && (
-            <div className="flex items-center space-x-3">
-              <Link
-                href="/home/shopping_card"
-                className="relative hover:text-purple-400"
+          <div className="flex items-center space-x-3">
+            <Link
+              href="/home/shopping_cart"
+              className="relative hover:text-purple-400"
+            >
+              <Icon_Shopping_Cart />
+              <p
+                className={`${
+                  items.length == 0 ? "opacity-0" : "opacity-100"
+                } text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]`}
               >
-                <Icon_Shopping_Cart />
-                <p className="text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]">
-                  12
-                </p>
-              </Link>
-              <Link
-                href="/home/shopping_card"
-                className="hover:text-purple-400"
-              >
-                <Icon_Notification />
-              </Link>
-              <Link
-                href="/home/shopping_card"
-                className="hover:text-purple-400"
-              >
-                <Icon_Email />
-              </Link>
-            </div>
-          )}
-          {loggedIn && (
-            <div className="flex items-center space-x-3">
-              <button className="px-4 py-2 rounded-full text-sm font-semibold">
-                Explorador
-              </button>
-              <div
-                className="flex items-center  rounded-xl bg-purple-600 cursor-pointer gap-x-2 px-1"
-                onClick={toggleSwitch}
-              >
-                <Icon_luggage classname="bg-white rounded-xl" />
-                <Space
-                  width={20}
-                  height={20}
-                  stroke={isActive ? "white" : "white"}
-                />
-              </div>
-              <div className="w-8 h-8 rounded-full bg-purple-500 overflow-hidden">
-                <Image
-                  src="/img/Header_Img/avatar.png"
-                  alt="Profile Picture"
-                  width={100}
-                  height={100}
-                  className="w-full h-full object-cover"
-                  onClick={toggleLogout}
-                />
-                {openlogout && (
-                  <div className=" p-1 bg-purple-200 m-1">
-                    <button
-                      onClick={logout}
-                      className="px-1 py-1  absolute bg-purple-700 text-white rounded hover:bg-purple-900"
-                    >
-                      Cerrar Sesión
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-        {!loggedIn && (
-          <>
-            <Link href="/login">
-              <button className="invisible px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-900 w-36 xl:visible">
-                Iniciar Sesión
-              </button>
+                {items.length}
+              </p>
             </Link>
-          </>
-        )}
+            <Link href="/home/shopping_cart" className="hover:text-purple-400">
+              <Icon_Notification />
+            </Link>
+            <Link href="/home/shopping_cart" className="hover:text-purple-400">
+              <Icon_Email />
+            </Link>
+          </div>
+          <div className="flex items-center space-x-3">
+            <button className="px-4 py-2 rounded-full text-sm font-semibold">
+              Explorador
+            </button>
+            <div
+              className="flex items-center  rounded-xl bg-purple-600 cursor-pointer gap-x-2 px-1"
+              onClick={toggleSwitch}
+            >
+              <Icon_luggage classname="bg-white rounded-xl" />
+              <Space
+                width={20}
+                height={20}
+                stroke={isActive ? "white" : "white"}
+              />
+            </div>
+            <div className="w-8 h-8 rounded-full bg-purple-500 overflow-hidden">
+              <Image
+                src="/img/Header_Img/avatar.png"
+                alt="Profile Picture"
+                width={100}
+                height={100}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
         <button className="xl:hidden " onClick={toggleMenu}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -197,24 +174,23 @@ export function Header() {
           >
             ✕
           </button>
-          {loggedIn && (
-            <div className="flex flex-row">
-              <button className="px-4 py-2 rounded-full text-sm font-semibold">
-                Explorador
-              </button>
-              <div
-                className="flex items-center  rounded-2xl bg-purple-600 cursor-pointer gap-x-3 px-1 "
-                onClick={toggleSwitch}
-              >
-                <Icon_luggage classname="bg-white rounded-xl" />
-                <Space
-                  width={20}
-                  height={20}
-                  stroke={isActive ? "white" : "white"}
-                />
-              </div>
+
+          <div className="flex flex-row">
+            <button className="px-4 py-2 rounded-full text-sm font-semibold">
+              Explorador
+            </button>
+            <div
+              className="flex items-center  rounded-2xl bg-purple-600 cursor-pointer gap-x-3 px-1 "
+              onClick={toggleSwitch}
+            >
+              <Icon_luggage classname="bg-white rounded-xl" />
+              <Space
+                width={20}
+                height={20}
+                stroke={isActive ? "white" : "white"}
+              />
             </div>
-          )}
+          </div>
           {rutas.map((item, index) => (
             <Link
               key={index}
@@ -232,65 +208,49 @@ export function Header() {
               Plataforma
             </Link>
           </div>
-          {loggedIn ? (
-            <button
-              className="p-4 mt-8 bg-purple-500 text-white px-2 rounded-md"
-              onClick={logout}
-            >
-              Cerrar Sesión
-            </button>
-          ) : (
-            <Link href="/login" className="">
-              <button className=" p-4 mt-6 bg-purple-500 text-white px-2 rounded-md">
-                Iniciar Sesión
-              </button>
-            </Link>
-          )}
-          {loggedIn && (
-            <div className="bg-gray-300/15 rounded-md p-2 px-3">
-              <div className="flex flex-row items-center gap-x-3 w-8 h-8 rounded-md ">
-                <Image
-                  src="/img/Header_Img/avatar.png"
-                  alt="Profile Picture"
-                  width={100}
-                  height={100}
-                  className="w-full h-full rounded-full object-cover"
-                />
-                <h3 className="text-white">Perfil</h3>
-              </div>
-              <hr className="border-white mt-2 mb-2" />
-              <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
-                <Sun_Icon width={20} height={20} />
-                <p>Cambia a modo oscuro/claro</p>
-              </div>
-              <hr className="border-white mt-2 mb-2" />
-              <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
-                <Info_Icon width={20} height={20} />
-                <p>Soporte</p>
-              </div>
-              <hr className="border-white mt-2 mb-2" />
-              <div className="flex items-center space-x-6 justify-center">
-                <Link
-                  href="/home/shopping_card"
-                  className="hover:text-purple-400 scale-150"
-                >
-                  <Icon_Shopping_Cart />
-                </Link>
-                <Link
-                  href="/home/shopping_card"
-                  className="hover:text-purple-400 scale-150"
-                >
-                  <Icon_Notification />
-                </Link>
-                <Link
-                  href="/home/shopping_card"
-                  className="hover:text-purple-400 scale-150"
-                >
-                  <Icon_Email />
-                </Link>
-              </div>
+          <div className="bg-gray-300/15 rounded-md p-2 px-3">
+            <div className="flex flex-row items-center gap-x-3 w-8 h-8 rounded-md ">
+              <Image
+                src="/img/Header_Img/avatar.png"
+                alt="Profile Picture"
+                width={100}
+                height={100}
+                className="w-full h-full rounded-full object-cover"
+              />
+              <h3 className="text-white">Perfil</h3>
             </div>
-          )}
+            <hr className="border-white mt-2 mb-2" />
+            <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
+              <Sun_Icon width={20} height={20} />
+              <p>Cambia a modo oscuro/claro</p>
+            </div>
+            <hr className="border-white mt-2 mb-2" />
+            <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
+              <Info_Icon width={20} height={20} />
+              <p>Soporte</p>
+            </div>
+            <hr className="border-white mt-2 mb-2" />
+            <div className="flex items-center space-x-6 justify-center">
+              <Link
+                href="/home/shopping_cart"
+                className="hover:text-purple-400 scale-150"
+              >
+                <Icon_Shopping_Cart />
+              </Link>
+              <Link
+                href="/home/shopping_cart"
+                className="hover:text-purple-400 scale-150"
+              >
+                <Icon_Notification />
+              </Link>
+              <Link
+                href="/home/shopping_cart"
+                className="hover:text-purple-400 scale-150"
+              >
+                <Icon_Email />
+              </Link>
+            </div>
+          </div>
         </nav>
       )}
     </header>
