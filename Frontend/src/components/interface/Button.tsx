@@ -10,7 +10,7 @@ export default function Button(
     } 
   return (
     <button 
-    className={`min-w-56 p-3 border-[1px] mt-3 rounded-lg ${ClassName}`}
+    className={`min-w-56 p-0 border-[1px] mt-3 rounded-lg ${ClassName}`}
     onClick={fnOnClick}>
         {children}
     </button>

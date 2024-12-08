@@ -5,82 +5,91 @@ import Image from "next/image";
 import DetailsIcon from "../../../public/icons/DetailIcon";
 import StarRating from "../StarsRating/StarsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
-import { PropsCourse } from "@/services/Interfaces";
+import { CardCursoLong } from "@/services/Interfaces";
+import { Icon_Shopping } from "../../../public/icons/Card_Course/Icon_Shopping";
 
-export default function CardCourse({ course }: { course: PropsCourse }) {
+export default function CardCourse({ course }: { course: CardCursoLong }) {
   const {
-    mainImageCourse,
-    altMainImageCourse,
     projectImage,
     projectName,
     title,
     description,
     tags,
-    stars,
-    califications,
+    punctuation,
     price,
-    width = 200,
-    heigth = 453,
   } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
   function handleClick() {
     setStateHeadt(!StateHeadt);
   }
   return (
-    <div className="h-[800px] w-full bg-[#1F2937] relative rounded-xl">
+    <div className="h-auto w-full  flex flex-col   bg-[#1F2937] relative rounded-xl p-4">
       <Image
-        src={mainImageCourse}
-        alt={altMainImageCourse}
-        width={width}
-        height={heigth}
-        objectFit="cover"
-        className=" h-2/5 w-full rounded-t-xl object-cover object-center"
-      />
-      <button onClick={handleClick} className={"absolute right-2 top-2"}>
+        src={'/imgApp.png'}
+        alt="IMagen de app"
+        width={245}
+        height={245}
+        className="w-full object-cover object-center rounded-md" />
+      <button onClick={handleClick} className="absolute right-2 top-2">
         <HeartIcon StateHeart={StateHeadt} />
       </button>
-      <div className="px-4 flex justify-between py-4">
-        <h2 className=" text-3xl">{title}</h2>
-        <DetailsIcon />
-      </div>
-      <p className="px-4 w-4/5 text-md">{description}</p>
-      <section className="m-4">
-        <div className=" flex gap-3 bg-[#FFFFFF1A] rounded-lg w-max px-6 py-3 items-center">
-          <Image
-            src={projectImage}
-            alt={`Imagen del proyecto ${projectName}`}
-            width={30}
-            height={20}
-            className="m-4 "
-          />
-          <p className="font-semibold text-xs">{projectName}</p>
-        </div>
-        {tags.map((tags) => (
-          <span
-            className=" inline-block relative text-purple-900 bg-[#F7E5FFBF] hover:bg-purple-200 text-{#632daf} font-bold my-2 py-2 px-4 mr-4 rounded"
-            key={tags}
-          >
-            {tags}
-          </span>
-        ))}
+
+      <section className="flex flex-col w-full  items-center ">
+        <article className="flex flex-col w-[95%]  ">
+          <div className="flex justify-between pt-3 pb-[12px]">
+            <h2 className="text-base font-semibold font-inter">{title}</h2>
+            <DetailsIcon />
+          </div>
+
+          <p className="w-full text-sm lg:text-md">{description}</p>
+
+          <section className="">
+            {projectName
+              && <div className="flex  bg-[#FFFFFF1A] rounded-lg w-full px-4 py-2 items-center flex-wrap">
+                <Image
+                  src={projectImage ? projectImage : ""}
+                  alt={`Imagen del proyecto ${projectName}`}
+                  width={30}
+                  height={20}
+                  className="mr-4 flex-shrink-0"
+                />
+                <p className="font-semibold text-xs text-white ">{projectName}</p>
+              </div>}
+            {tags.map((tag) => (
+              <span
+                className="inline-block relative  bg-[#F7E5FFBF] hover:bg-purple-200 text-primary_d font-bold my-2 text-[14px] py-1  px-4 mr-4 rounded-md"
+                key={tag}
+              >
+                {tag}
+              </span>
+            ))}
+          </section>
+
+          <div className="">
+            <StarRating
+              totalNumbers={punctuation ? parseInt(punctuation) : 45}
+              rating={4.5}
+              className="mb-3"
+            />
+          </div>
+
+          {price && (
+            <div>
+              <p className="text-xl lg:text-2xl font-bold">${parseFloat(price).toFixed(2)}</p>
+            </div>
+          )}
+        </article>
+
       </section>
-      <StarRating
-        totalNumbers={califications}
-        rating={stars}
-        className="px-6 mb-8"
-      ></StarRating>
-      {price && (
-        <div>
-          <p className="text-3xl px-4">$ {price}</p>
-        </div>
-      )}
-      <div className="flex space-between p-4">
-        <button className="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded">
-          Añadir al Carrito
+
+      <div className="flex items-center  space-between py-2 mt-2 font-inter">
+        <button onClick={() => { }} className="flex flex-row gap-x-3 font-inter justify-center items-center bg-primary_b_500 text-white w-1/2 rounded-2xl h-[80%] px-3">
+          <Icon_Shopping width={20} height={21} />
+          <p className="font-semibold font-inter">Añadir al Carrito</p>
         </button>
         <Link
-          href={""}
-          className="block text-[#D194E2] hover:text-white py-4 ml-6"
+          href=""
+          className="block text-[#D194E2] hover:text-white py-4 ml-6 font-bold font-inter"
         >
           Ver detalles
         </Link>
