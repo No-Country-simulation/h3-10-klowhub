@@ -9,16 +9,18 @@ import { Icon_luggage } from '../../../public/icons/Header_Icon/luggage';
 import { Space } from '../../../public/icons/Header_Icon/Space';
 import { Sun_Icon } from '../../../public/icons/Header_Icon/Sun';
 import { Info_Icon } from '../../../public/icons/Header_Icon/Info';
-
+import { useContext } from 'react';
+import { CartContext } from '@/context/CartContext';
 export function Header() {
     const [isActive, setIsActive] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const {items} = useContext(CartContext)
     const toggleSwitch = () => {
         setIsActive((prev) => !prev);
     };
 
 
-
+    
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
@@ -80,10 +82,10 @@ export function Header() {
 
                 <div className="hidden xl:flex items-center space-x-4">
                     <div className="flex items-center space-x-3">
-                        <Link href="/home/shopping_card" className="relative hover:text-purple-400"><Icon_Shopping_Cart />
-                        <p className='text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]'>12</p></Link>
-                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Notification /></Link>
-                        <Link href="/home/shopping_card" className="hover:text-purple-400"><Icon_Email /></Link>
+                        <Link href="/home/shopping_cart" className="relative hover:text-purple-400"><Icon_Shopping_Cart />
+                        <p className={`${items.length == 0 ? 'opacity-0' : 'opacity-100'} text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]`}>{items.length }</p></Link>
+                        <Link href="/home/shopping_cart" className="hover:text-purple-400"><Icon_Notification /></Link>
+                        <Link href="/home/shopping_cart" className="hover:text-purple-400"><Icon_Email /></Link>
                     </div>
                     <div className="flex items-center space-x-3">
                         <button className="px-4 py-2 rounded-full text-sm font-semibold">Explorador</button>
@@ -143,9 +145,9 @@ export function Header() {
                         </div>
                         <hr className='border-white mt-2 mb-2' />
                         <div className="flex items-center space-x-6 justify-center">
-                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Shopping_Cart /></Link>
-                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Notification /></Link>
-                            <Link href="/home/shopping_card" className="hover:text-purple-400 scale-150"><Icon_Email /></Link>
+                            <Link href="/home/shopping_cart" className="hover:text-purple-400 scale-150"><Icon_Shopping_Cart /></Link>
+                            <Link href="/home/shopping_cart" className="hover:text-purple-400 scale-150"><Icon_Notification /></Link>
+                            <Link href="/home/shopping_cart" className="hover:text-purple-400 scale-150"><Icon_Email /></Link>
                         </div>
                     </div>
                 </nav>
