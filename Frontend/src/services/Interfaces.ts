@@ -231,6 +231,7 @@ export interface AuthContextProps {
   isLoggedIn: boolean;
   authTokens: AuthTokens | null;
   userName: string;
+  register: (name: string, email: string, password: string) => void;
 }
 export interface tokenData {
   fullName: string;
