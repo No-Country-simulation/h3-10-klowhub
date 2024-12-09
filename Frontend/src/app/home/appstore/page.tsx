@@ -8,17 +8,19 @@ import React, { useState } from 'react'
 
 export default function Page() {
     const [search, setSearch] = useState('')
-    const {apps} = useSearch(search)
+    const {apps,status} = useSearch(search)
     return (
         <main>
             <div className=" mb-0">
                 <Breadcrumbs />
             </div>
             <div className='px-5'>
-               <h6 className='font-semibold'>Encuentra la app que necesitas</h6>
-              <InputSearch setSearch={setSearch} placeholder="Buscar cursos y lecciones"/>
-              <p className='font-semibold mb-3'>App recomendadas</p>
-              <div className='grid gap-2'
+               <h6 className='font-semibold my-3'>Encuentra la app que necesitas</h6>
+              <InputSearch setSearch={setSearch} placeholder="Buscar cursos y lecciones" />
+              <p className='font-semibold my-3'>App recomendadas</p>
+              {status === 400
+              ?<p>Ampliación no encontrada</p>
+              :<div className='grid gap-2'
               style={{
                 gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))"
             }}>
@@ -28,7 +30,8 @@ export default function Page() {
                     course={app}
                     />
                 ))}
-              </div>
+              </div>}
+              
               
               
             </div>

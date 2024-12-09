@@ -29,6 +29,9 @@ importers:
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
+      use-debounce:
+        specifier: 4.0.0
+        version: 4.0.0(react@18.3.1)
     devDependencies:
       '@types/jwt-decode':
         specifier: ^3.1.0
@@ -1634,6 +1637,11 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  use-debounce@4.0.0:
+    resolution: {integrity: sha512-ZdOEjLNwdCn99dx1D+umZe1Dolki7m7QYmkprugKfpOjXGHQsI6AUkFdolHfp+rm3QX8cQSiA5r0eDrXClv5wA==}
+    peerDependencies:
+      react: '>=16.8.0'
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -3469,6 +3477,10 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  use-debounce@4.0.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   util-deprecate@1.0.2: {}
 

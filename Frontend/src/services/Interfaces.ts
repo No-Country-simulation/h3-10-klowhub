@@ -22,6 +22,9 @@ export interface CardCursoLong {
   className?: string;
   width?: number;
   heigth?: number;
+  platform?: {
+    name: string
+  }
 }
 export interface PropsMentor {
   mentorImage: string;
