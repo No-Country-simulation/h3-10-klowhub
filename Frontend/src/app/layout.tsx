@@ -16,11 +16,13 @@ export default function RootLayout({
   return (
     <AuthContextProvider>
       <html lang="en">
-          <body className="bg-gradient-to-r from-[#34395c] via-[#181941] to-[#1b1b1f] h-screen ">
-          <Header />
-           {children}
-           <Footer />
-          </body>
+        <body className="bg-gradient-to-r from-[#34395c] via-[#181941] to-[#1b1b1f] h-screen ">
+          
+            <Header />
+        
+          {children}
+          <Footer />
+        </body>
       </html>
     </AuthContextProvider>
   );
