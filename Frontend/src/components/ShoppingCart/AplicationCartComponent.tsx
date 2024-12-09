@@ -31,7 +31,7 @@ export default function AplicationCartComponent({
       <hr />
       <div className="my-3 flex  flex-wrap  gap-6 ">
         <Image
-          src={url.length > 0 ? url : "./imgApp.png"}
+          src={imagen}
           alt={`imagen de ${title}`}
           width={245}
           height={245}
