@@ -80,7 +80,7 @@ export function Header() {
 
         <nav className="hidden xl:flex md:space-x-6 ">
           <div className="flex items-center gap-2 bg-gray-500/100 py-1 px-2 rounded-md">
-            <Link href="/home   " className="hover:text-purple-400">
+            <Link href="/" className="hover:text-purple-400">
               Home
             </Link>
             <Link href="#" className="bg-purple-500 text-white px-2 rounded-md">
@@ -99,56 +99,86 @@ export function Header() {
             ))}
           </div>
         </nav>
-
-        <div className="hidden xl:flex items-center space-x-4">
-          <div className="flex items-center space-x-3">
-            <Link
-              href="/home/shopping_cart"
-              className="relative hover:text-purple-400"
-            >
-              <Icon_Shopping_Cart />
-              <p
-                className={`${
-                  items.length == 0 ? "opacity-0" : "opacity-100"
-                } text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]`}
+        {loggedIn && (
+          <div className="hidden xl:flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
+              <Link
+                href="/home/shopping_cart"
+                className="relative hover:text-purple-400"
               >
-                {items.length}
-              </p>
-            </Link>
-            <Link href="/home/shopping_cart" className="hover:text-purple-400">
-              <Icon_Notification />
-            </Link>
-            <Link href="/home/shopping_cart" className="hover:text-purple-400">
-              <Icon_Email />
+                <Icon_Shopping_Cart />
+                <p
+                  className={`${
+                    items.length == 0 ? "opacity-0" : "opacity-100"
+                  } text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]`}
+                >
+                  {items.length}
+                </p>
+              </Link>
+              <Link
+                href="/home/shopping_cart"
+                className="hover:text-purple-400"
+              >
+                <Icon_Notification />
+              </Link>
+              <Link
+                href="/home/shopping_cart"
+                className="hover:text-purple-400"
+              >
+                <Icon_Email />
+              </Link>
+            </div>
+            <div className="flex items-center space-x-3">
+              <button className="px-4 py-2 rounded-full text-sm font-semibold">
+                Explorador
+              </button>
+              <div
+                className="flex items-center  rounded-xl bg-purple-600 cursor-pointer gap-x-2 px-1"
+                onClick={toggleSwitch}
+              >
+                <Icon_luggage classname="bg-white rounded-xl" />
+                <Space
+                  width={20}
+                  height={20}
+                  stroke={isActive ? "white" : "white"}
+                />
+              </div>
+              <div className="w-8 h-8 rounded-full bg-purple-500 overflow-hidden">
+                <Image
+                  src="/img/Header_Img/avatar.png"
+                  alt="Profile Picture"
+                  width={100}
+                  height={100}
+                  className="cursor-pointer w-full h-full object-cover"
+                  onClick={toggleLogout}
+                />
+                {openlogout && (
+                  <div>
+                    <button
+                      className="absolute transition-colors lg:max-w-[120px] mx-auto border-transparent rounded-md
+        p-2 mt-2 bg-[#702486] hover:bg-purple-700  border-2 border-solid text-sm"
+                      onClick={logout}
+                    >
+                      Cerrar Sesión
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+        {!loggedIn && (
+          <div className="w-1/5">
+            <Link href="/login">
+              <button
+                className="invisible xl:visible transition-colors lg:max-w-[150px] mx-auto border-transparent rounded-md
+           px-6 py-2 bg-[#702486] hover:bg-transparent hover:border-white border-2 border-solid"
+              >
+                Iniciar Sesión
+              </button>
             </Link>
           </div>
-          <div className="flex items-center space-x-3">
-            <button className="px-4 py-2 rounded-full text-sm font-semibold">
-              Explorador
-            </button>
-            <div
-              className="flex items-center  rounded-xl bg-purple-600 cursor-pointer gap-x-2 px-1"
-              onClick={toggleSwitch}
-            >
-              <Icon_luggage classname="bg-white rounded-xl" />
-              <Space
-                width={20}
-                height={20}
-                stroke={isActive ? "white" : "white"}
-              />
-            </div>
-            <div className="w-8 h-8 rounded-full bg-purple-500 overflow-hidden">
-              <Image
-                src="/img/Header_Img/avatar.png"
-                alt="Profile Picture"
-                width={100}
-                height={100}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-
+        )}
         <button className="xl:hidden " onClick={toggleMenu}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -174,23 +204,25 @@ export function Header() {
           >
             ✕
           </button>
-
-          <div className="flex flex-row">
-            <button className="px-4 py-2 rounded-full text-sm font-semibold">
-              Explorador
-            </button>
-            <div
-              className="flex items-center  rounded-2xl bg-purple-600 cursor-pointer gap-x-3 px-1 "
-              onClick={toggleSwitch}
-            >
-              <Icon_luggage classname="bg-white rounded-xl" />
-              <Space
-                width={20}
-                height={20}
-                stroke={isActive ? "white" : "white"}
-              />
+          {loggedIn && (
+            <div className="flex flex-row">
+              <button className="px-4 py-2 rounded-full text-sm font-semibold">
+                Explorador
+              </button>
+              <div
+                className="flex items-center  rounded-2xl bg-purple-600 cursor-pointer gap-x-3 px-1 "
+                onClick={toggleSwitch}
+              >
+                <Icon_luggage classname="bg-white rounded-xl" />
+                <Space
+                  width={20}
+                  height={20}
+                  stroke={isActive ? "white" : "white"}
+                />
+              </div>
             </div>
-          </div>
+          )}
+
           {rutas.map((item, index) => (
             <Link
               key={index}
@@ -208,49 +240,69 @@ export function Header() {
               Plataforma
             </Link>
           </div>
-          <div className="bg-gray-300/15 rounded-md p-2 px-3">
-            <div className="flex flex-row items-center gap-x-3 w-8 h-8 rounded-md ">
-              <Image
-                src="/img/Header_Img/avatar.png"
-                alt="Profile Picture"
-                width={100}
-                height={100}
-                className="w-full h-full rounded-full object-cover"
-              />
-              <h3 className="text-white">Perfil</h3>
-            </div>
-            <hr className="border-white mt-2 mb-2" />
-            <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
-              <Sun_Icon width={20} height={20} />
-              <p>Cambia a modo oscuro/claro</p>
-            </div>
-            <hr className="border-white mt-2 mb-2" />
-            <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
-              <Info_Icon width={20} height={20} />
-              <p>Soporte</p>
-            </div>
-            <hr className="border-white mt-2 mb-2" />
-            <div className="flex items-center space-x-6 justify-center">
-              <Link
-                href="/home/shopping_cart"
-                className="hover:text-purple-400 scale-150"
+          {!loggedIn ? (
+            <Link href="/login">
+              <button
+                className=" transition-colors lg:max-w-[150px] mx-auto border-transparent rounded-md
+        mt-4 px-6 py-2 bg-[#702486] hover:bg-transparent hover:border-white border-2 border-solid"
               >
-                <Icon_Shopping_Cart />
-              </Link>
-              <Link
-                href="/home/shopping_cart"
-                className="hover:text-purple-400 scale-150"
-              >
-                <Icon_Notification />
-              </Link>
-              <Link
-                href="/home/shopping_cart"
-                className="hover:text-purple-400 scale-150"
-              >
-                <Icon_Email />
-              </Link>
+                Iniciar Sesión
+              </button>
+            </Link>
+          ) : (
+            <button
+              className=" transition-colors lg:max-w-[150px] mx-auto border-transparent rounded-md
+        mt-4 px-6 py-2 bg-[#702486] hover:bg-transparent hover:border-white border-2 border-solid"
+              onClick={logout}
+            >
+              Cerrar Sesión
+            </button>
+          )}
+          {loggedIn && (
+            <div className="bg-gray-300/15 rounded-md p-2 px-3">
+              <div className="flex flex-row items-center gap-x-3 w-8 h-8 rounded-md ">
+                <Image
+                  src="/img/Header_Img/avatar.png"
+                  alt="Profile Picture"
+                  width={100}
+                  height={100}
+                  className="w-full h-full rounded-full object-cover"
+                />
+                <h3 className="text-white">Perfil</h3>
+              </div>
+              <hr className="border-white mt-2 mb-2" />
+              <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
+                <Sun_Icon width={20} height={20} />
+                <p>Cambia a modo oscuro/claro</p>
+              </div>
+              <hr className="border-white mt-2 mb-2" />
+              <div className="flex flex-row items-center gap-x-3 w-auto h-8 rounded-md ">
+                <Info_Icon width={20} height={20} />
+                <p>Soporte</p>
+              </div>
+              <hr className="border-white mt-2 mb-2" />
+              <div className="flex items-center space-x-6 justify-center">
+                <Link
+                  href="/home/shopping_cart"
+                  className="hover:text-purple-400 scale-150"
+                >
+                  <Icon_Shopping_Cart />
+                </Link>
+                <Link
+                  href="/home/shopping_cart"
+                  className="hover:text-purple-400 scale-150"
+                >
+                  <Icon_Notification />
+                </Link>
+                <Link
+                  href="/home/shopping_cart"
+                  className="hover:text-purple-400 scale-150"
+                >
+                  <Icon_Email />
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </nav>
       )}
     </header>
