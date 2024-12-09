@@ -78,7 +78,7 @@ export default function Home() {
           <div
             className="grid gap-5"
             style={{
-              gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))",
             }}
           >
             {Card_Curso.map((item, index) => (
