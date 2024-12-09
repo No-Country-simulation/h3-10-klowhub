@@ -11,13 +11,17 @@ export default function PageCart() {
   const [Open, setOpen] = useState(false)
  const [value, steValue] = useState<{valueTotal:number, valueService:number}>({valueTotal:0, valueService:0})
     useEffect(() => {
-      items.forEach(item => {
-        steValue({
-          ...value,
-          valueTotal: item.price ? parseInt(item.price) : 0 + value.valueTotal
-        })
+      let Value = 0
+      items.map(item => [
+        Value = item.price  !== undefined ? parseInt(item.price) + Value : 0 + Value
+      ])
+    const  valueService = Value * 0.1
+      steValue({
+        ...value,
+        valueTotal:Value,
+        valueService:valueService
       })
-    },[])
+    },[items])
   return (
     <div className='w-full p-5 pt-12 flex flex-col items-center justify-center'>
         <Breadcrumbs/>
@@ -48,7 +52,7 @@ export default function PageCart() {
         ))}
         </div>
          : <p className='text-center w-full'>No tiene productos en su carrito</p> }
-        <PurchaseSummaryComponent valueService={50} valueTotal={ value.valueTotal}/>
+        <PurchaseSummaryComponent valueService={value.valueService} valueTotal={ value.valueTotal}/>
      </div> 
      
     
