@@ -7,11 +7,6 @@ import DetailsIcon from "../../../public/icons/DetailIcon";
 import StarRating from "../StarsRating/StarsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
 import { CardCursoLong } from "@/services/Interfaces";
-import AddItenCart from "../AddItemCart/AddItenCart";
-import RemoveCart from "../AddItemCart/RemoveCart";
-
-
-export default function CardCourse({ course }: { course: CardCursoLong }) {
 import { Icon_Shopping } from "../../../public/icons/Card_Course/Icon_Shopping";
 import { useCart } from "@/Hooks/useCart";
 
@@ -24,24 +19,6 @@ const CardCourse: React.FC<CardCourseProps> = ({ course }) => {
 
   const {
     projectImage,
-    projectName,
-    title,
-    description,
-    tags,
-    punctuation,
-    price,
-  } = course;
-  const [StateHeadt, setStateHeadt] = useState(false);
-
- 
-  const [StateButonCart, setStateButonCart] = useState(true)
-
-  const handleButonCart = () => {
-    setStateButonCart(!StateButonCart)
-  }
-  function handleClick() {
-    setStateHeadt(!StateHeadt);
-  }
     projectName = "Nombre del Proyecto",
     title = "Título del Curso",
     description = "Descripción del Curso",
@@ -142,13 +119,6 @@ const CardCourse: React.FC<CardCourseProps> = ({ course }) => {
         </article>
       </section>
 
-      <div className="flex items-center  space-between py-2 mt-2 font-inter">
-      
-         <div onClick={handleButonCart}>
-          {StateButonCart 
-            ?  <AddItenCart items={course}/>
-            :  <RemoveCart id={course.id}/>}
-         </div>
       {/* Botones de acción */}
       <div className="flex items-center space-between py-2 mt-2 font-inter">
         <button

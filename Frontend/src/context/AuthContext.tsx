@@ -14,12 +14,12 @@ import { API_URL } from "../../api";
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
 const AUTH_INFO_USER = "USER_INFO";
 export const AuthContext = createContext<AuthContextProps>({
-  login: () => {},
-  logout: () => {},
+  login: () => { },
+  logout: () => { },
   authTokens: null,
   isLoggedIn: false,
   userName: "",
-  register: () => {},
+  register: () => { },
 });
 
 export const AuthContextProvider = ({
@@ -62,7 +62,7 @@ export const AuthContextProvider = ({
 
       if (data.token) {
         toast.success("¡Inicio de sesión exitoso!");
-        window.location.href = "/home";
+        window.location.href = "/";
         const token = data.token;
         const infoToken: tokenData = jwtDecode(token);
         const dataToken: AuthTokens = {
