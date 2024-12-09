@@ -38,7 +38,7 @@ export function Header() {
   const rutas = [
     { id: 1, name: "Dashboard", path: "/home/dashboard" },
     { id: 2, name: "Cursos y Lecciones", path: "/home/cursos" },
-    { id: 3, name: "Appstore", path: "/home/Appstores" },
+    { id: 3, name: "Appstore", path: "/home/appstore" },
     { id: 4, name: "Proyectos", path: "/home/Proyectos" },
     { id: 5, name: "Consultoria", path: "/home/Consultoria" },
     { id: 6, name: "Sobre Appsheet", path: "/home/Sobre Appsheet" },

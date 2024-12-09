@@ -11,7 +11,7 @@ export default function AplicationCartComponent({
   top,
   sector,
   seller,
-  stars,
+  platform,
   punctuation,
   tags,
   children,
@@ -31,16 +31,14 @@ export default function AplicationCartComponent({
       <hr />
       <div className="my-3 flex  flex-wrap  gap-6 ">
         <Image
-          src={imagen}
+          src={url.length > 0 ? url : "./imgApp.png"}
           alt={`imagen de ${title}`}
           width={245}
           height={245}
           className="w-[240px] rounded-xl max-lg:w-full"
         />
         <div className="flex flex-col gap-3">
-          <h6 className="font-bold text-base">
-            Aplicación para seguimiento de proyectos
-          </h6>
+          <h6 className="font-bold text-base">{title}</h6>
 
           <div className="flex gap-3 text-sm">
             <StarCartIcon />
@@ -49,7 +47,7 @@ export default function AplicationCartComponent({
 
           <div className="flex gap-3 text-sm">
             <MensageCartIcon />
-            <p>Plataforma: {title}</p>
+            <p>Plataforma: {platform?.name}</p>
           </div>
 
           <div className="flex gap-3 text-sm">
@@ -60,7 +58,7 @@ export default function AplicationCartComponent({
           <div className="flex gap-3 text-sm">
             <MovieCartIcon />
             <p>
-              Desarrollador %
+              Desarrollador{" "}
               {seller?.isUserActive ? "Verificado" : "No verificado"}
             </p>
           </div>
@@ -68,7 +66,7 @@ export default function AplicationCartComponent({
           <div className="flex gap-3 text-sm">
             <p>{punctuation}</p>
             <CaficationCartComponent valueStar={parseInt(punctuation)} />
-            <p>{`(${stars})`}</p>
+            <p>{`(${0})`}</p>
           </div>
 
           <div className="flex gap-3 text-sm">
