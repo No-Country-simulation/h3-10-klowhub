@@ -62,7 +62,7 @@ export const AuthContextProvider = ({
 
       if (data.token) {
         toast.success("¡Inicio de sesión exitoso!");
-        window.location.href = "/home";
+        window.location.href = "/";
         const token = data.token;
         const infoToken: tokenData = jwtDecode(token);
         const dataToken: AuthTokens = {
