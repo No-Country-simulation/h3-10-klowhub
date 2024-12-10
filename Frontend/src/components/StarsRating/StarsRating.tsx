@@ -11,7 +11,8 @@ const StarRating: React.FC<StarRatingProps> = ({
   className,
 }) => {
   return (
-    <div className={className}>
+    <div className={`${className} flex flex-row items-center gap-x-2`}>
+      <p className="pt-2">4.1</p>
       <span className="flex space-x-1">
         {Array.from({ length: totalStars }, (_, index) => {
           const starIndex = index + 1;

@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 
 import {
   tokenData,
@@ -13,7 +8,7 @@ import {
   AuthContextProps,
 } from "../services/Interfaces";
 
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import { API_URL } from "../../api";
 
@@ -28,7 +23,7 @@ export const AuthContext = createContext<AuthContextProps>({
   authTokens: null,
   isLoggedIn: false,
   userName: "",
-  paypal_order: () => {}
+  register: () => { },
 });
 
 export const AuthContextProvider = ({
@@ -71,7 +66,7 @@ export const AuthContextProvider = ({
 
       if (data.token) {
         toast.success("¡Inicio de sesión exitoso!");
-        window.location.href = "/home";
+        window.location.href = "/";
         const token = data.token;
         const infoToken: tokenData = jwtDecode(token);
         const dataToken: AuthTokens = {
@@ -88,7 +83,7 @@ export const AuthContextProvider = ({
     } catch (err) {
       console.log(err);
     }
-  }, []); // Empty dependency array ensures this function is memoized
+  }, []);
 
   const logout = useCallback(() => {
     window.localStorage.removeItem(AUTH_TOKEN_KEY);
@@ -97,33 +92,35 @@ export const AuthContextProvider = ({
     setUserName("");
   }, []);
 
-  const paypal_order = useCallback(async () => {
-    try {
-      const token = window.localStorage.getItem(AUTH_TOKEN_KEY);
-      if (!token) {
-        throw new Error("No hay token disponible");
-      }
-      const res = await fetch(`${API_URL}/paypal/order`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  const register = useCallback(
+    async (name: string, email: string, password: string) => {
+      try {
+        const res = await fetch(`${API_URL}/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, password }),
+        });
 
-      if (!res.ok) {
-        throw new Error("Error al enviar la orden a PayPal");
-      }
+        if (res.status === 401 || res.status === 400) {
+          toast("Error en el Registro");
+        }
 
-      const data = await res.json();
-      toast.success("Orden creada exitosamente");
-      return data;
-    } catch (err) {
-      console.error(err);
-      toast.error("Error al crear la orden de PayPal");
-      return null;
-    }
-  }, []);
+        if (!res.ok) {
+          throw new Error("Failed to Register");
+        }
+
+        if (res.ok) {
+          toast.success("¡Registro exitoso!");
+          window.location.href = "/login";
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    []
+  );
 
   const value = useMemo<AuthContextProps>(
     () => ({
@@ -132,9 +129,9 @@ export const AuthContextProvider = ({
       authTokens,
       userName,
       isLoggedIn: !!authTokens,
-      paypal_order,
+      register,
     }),
-    [authTokens, login, logout, userName, paypal_order]
+    [authTokens, login, logout, userName, register] // Add 'login' here
   );
 
 

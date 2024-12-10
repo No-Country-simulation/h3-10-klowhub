@@ -18,6 +18,8 @@ const Banner: React.FC<Banner_Props> = ({
             alt="Background image with abstract purple shapes"
             objectFit="cover"
             className="overflow-hidden"
+            width={500}
+            height={500}
           />
           <div className="absolute inset-0 flex items-center justify-center">
             <h1 className="text-white text-md md:text-lg lg:text-2xl font-bold">

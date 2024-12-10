@@ -1,5 +1,6 @@
+'use client'
 import { useContext } from "react"
-import { CartContext } from "../../context/CartContext"
+import { CartContext } from "@/context/CartContext"
 import Button from "../interface/Button"
 import { CardCursoLong } from "@/services/Interfaces"
 import { Icon_Shopping_Cart } from "../../../public/icons/Header_Icon/Shopping_cart"

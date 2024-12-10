@@ -16,6 +16,7 @@ export default {
         primary_b: "#B95ED4",
         primary_b_500: "#702486",
         primary_c_200: "#D194E2",
+        primary_d: "#812AAC",
       },
     },
   },

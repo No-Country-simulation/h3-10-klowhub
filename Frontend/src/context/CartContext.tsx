@@ -9,6 +9,7 @@ import { CardCursoLong } from "@/services/Interfaces";
     items: CardCursoLong[] | never[];
     addToCart?:  (product: CardCursoLong) => void;
     removeFromCart?: (id: number) => void;
+   
   }
   
 export const CartContext = createContext< CartContextType >({
@@ -59,10 +60,12 @@ export  function CartProvider({children}: {children:React.ReactNode}) {
         });
     }
 
+    
     const value = {
         items: state.items,
         addToCart,
         removeFromCart,
+        
     }
   return (
     <CartContext.Provider value={value}>{children}</CartContext.Provider>
