@@ -26,7 +26,7 @@ export default function AplicationCartComponent({
   }
   return (
     <div
-      className={`p-6 bg-[#FFFFFF1A] rounded-xl shadow-2xl w-full  ${className}`}
+      className={`p-6 bg-[#b369691a] rounded-xl shadow-2xl w-full  ${className}`}
     >
       <hr />
       <div className="my-3 flex  flex-wrap  gap-6 ">

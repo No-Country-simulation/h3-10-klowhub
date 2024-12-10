@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Sumarry({valueTotal, valueService}:{valueTotal:number, valueService:number}) {
     
-    const [total, setTotal] = useState(valueService + valueTotal)
+    const [total] = useState(valueService + valueTotal)
     
     
     return (

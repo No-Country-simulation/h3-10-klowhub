@@ -1,6 +1,6 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
-export function Button_Buys({ onPurchaseSuccess }: { onPurchaseSuccess: () => void }) {
+export function Button_Buys({ onPurchaseSuccess, totalAmount }: { onPurchaseSuccess: () => void , totalAmount: number}) {
   const paypalClientId =
     "ATnTXFUhKYkfzCmfo1dDcUDW5n0mEAZKoZ630VnTBuV7HfImHmrgdq25Ef3BJiH2qmOARzLs_CHAy3ic";
 
@@ -18,7 +18,7 @@ export function Button_Buys({ onPurchaseSuccess }: { onPurchaseSuccess: () => vo
                 {
                   amount: {
                     currency_code: "USD",
-                    value: "100.00",
+                    value: `${totalAmount}`,
                   },
                 },
               ],

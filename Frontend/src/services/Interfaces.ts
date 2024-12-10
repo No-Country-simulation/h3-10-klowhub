@@ -22,6 +22,7 @@ export interface CardCursoLong {
   className?: string;
   width?: number;
   heigth?: number;
+  quantity?: number;
   platform?: {
     name: string
   }

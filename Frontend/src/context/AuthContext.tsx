@@ -1,52 +1,35 @@
 "use client";
 
 import { createContext, useCallback, useMemo, useState } from "react";
-
-import {
-  tokenData,
-  AuthTokens,
-  AuthContextProps,
-} from "../services/Interfaces";
-
-import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 import { API_URL } from "../../api";
-
+import { tokenData, AuthTokens, AuthContextProps } from "../services/Interfaces";
 
 const AUTH_TOKEN_KEY = "TOKEN_KEY";
 const AUTH_INFO_USER = "USER_INFO";
 
-
 export const AuthContext = createContext<AuthContextProps>({
-  login: () => { },
-  logout: () => { },
+  login: () => {},
+  logout: () => {},
   authTokens: null,
   isLoggedIn: false,
   userName: "",
-  register: () => { },
+  register: () => {},
+  paypal_order: () => {}
 });
 
-export const AuthContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const authTokensInLocalStorage =
-    typeof window !== "undefined"
-      ? window.localStorage.getItem(AUTH_INFO_USER)
-      : null;
+export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const authTokensInLocalStorage = typeof window !== "undefined"
+    ? JSON.parse(window.localStorage.getItem(AUTH_INFO_USER) || 'null')
+    : null;
 
-  const [authTokens, setAuthTokens] = useState<AuthTokens | null>(
-    authTokensInLocalStorage ? JSON.parse(authTokensInLocalStorage) : null
-  );
-
-  const [userName, setUserName] = useState<string>(
-    authTokensInLocalStorage ? JSON.parse(authTokensInLocalStorage).email : ""
-  );
+  const [authTokens, setAuthTokens] = useState<AuthTokens | null>(authTokensInLocalStorage);
+  const [userName, setUserName] = useState<string>(authTokensInLocalStorage ? authTokensInLocalStorage.email : "");
 
   const login = useCallback(async (email: string, password: string) => {
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,34 +37,33 @@ export const AuthContextProvider = ({
         body: JSON.stringify({ email, password }),
       });
 
-      if (res.status === 401 || res.status === 400) {
-        toast.warning("El email o contraseña son incorrectos");
-      }
-
-      if (!res.ok) {
+      if (!response.ok) {
         throw new Error("Failed to login");
       }
 
-      const data = await res.json();
+      const data = await response.json();
 
       if (data.token) {
         toast.success("¡Inicio de sesión exitoso!");
-        window.location.href = "/";
         const token = data.token;
-        const infoToken: tokenData = jwtDecode(token);
+        const decodedToken: tokenData = jwtDecode(token);
         const dataToken: AuthTokens = {
-          token: token,
-          email: infoToken.fullName,
-          iat: infoToken.iat,
-          exp: infoToken.exp,
-          authorities: infoToken.authorities,
+          token,
+          email: decodedToken.fullName,
+          iat: decodedToken.iat,
+          exp: decodedToken.exp,
+          authorities: decodedToken.authorities,
         };
+
         setAuthTokens(dataToken);
         window.localStorage.setItem(AUTH_INFO_USER, JSON.stringify(dataToken));
         window.localStorage.setItem(AUTH_TOKEN_KEY, data.token);
+        window.location.href = "/";
+      } else {
+        toast.warning("El email o contraseña son incorrectos");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error("Error de autenticación:", error);
     }
   }, []);
 
@@ -92,51 +74,37 @@ export const AuthContextProvider = ({
     setUserName("");
   }, []);
 
-  const register = useCallback(
-    async (name: string, email: string, password: string) => {
-      try {
-        const res = await fetch(`${API_URL}/users`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, password }),
-        });
+  const register = useCallback(async (name: string, email: string, password: string) => {
+    try {
+      const response = await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
 
-        if (res.status === 401 || res.status === 400) {
-          toast("Error en el Registro");
-        }
-
-        if (!res.ok) {
-          throw new Error("Failed to Register");
-        }
-
-        if (res.ok) {
-          toast.success("¡Registro exitoso!");
-          window.location.href = "/login";
-        }
-      } catch (err) {
-        console.log(err);
+      if (!response.ok) {
+        throw new Error("Failed to Register");
       }
-    },
-    []
-  );
 
-  const value = useMemo<AuthContextProps>(
-    () => ({
-      login,
-      logout,
-      authTokens,
-      userName,
-      isLoggedIn: !!authTokens,
-      register,
-    }),
-    [authTokens, login, logout, userName, register] // Add 'login' here
-  );
+      toast.success("¡Registro exitoso!");
+      window.location.href = "/login";
+    } catch (error) {
+      console.error("Error de registro:", error);
+      toast.error("Error en el Registro");
+    }
+  }, []);
 
-
-
-
+  const value = useMemo<AuthContextProps>(() => ({
+    login,
+    logout,
+    authTokens,
+    userName,
+    isLoggedIn: !!authTokens,
+    register,
+    paypal_order: () => {}
+  }), [authTokens, login, logout, userName, register]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

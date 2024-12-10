@@ -11,6 +11,9 @@ importers:
       '@paypal/react-paypal-js':
         specifier: ^8.7.0
         version: 8.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      debounce:
+        specifier: ^2.2.0
+        version: 2.2.0
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
