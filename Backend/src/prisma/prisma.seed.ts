@@ -47,11 +47,11 @@ async function main() {
     },
   });
 
-  await prisma.types_of_courses.createMany({
+  await prisma.types_of_items.createMany({
     data: [{ name: 'course' }, { name: 'lesson' }],
   });
 
-  await prisma.courses_level.createMany({
+  await prisma.item_level.createMany({
     data: [
       { name: 'beginner' },
       { name: 'intermediate' },
@@ -155,14 +155,14 @@ async function main() {
     ],
   });
 
-  await prisma.courses.create({
+  const item1 = await prisma.items.create({
     data: {
       title: 'Introduction to AppSheet',
       seller_id: seller1.seller_id,
-      type_course_id: 1,
+      type_item_id: 1,
       premium: false,
       description: 'Learn how to build apps with AppSheet.',
-      course_level_id: 1,
+      item_level_id: 1,
       platform_id: 1,
       language_id: 1,
       sector_id: 1,
@@ -176,14 +176,14 @@ async function main() {
     },
   });
 
-  await prisma.courses.create({
+  await prisma.items.create({
     data: {
       title: 'PowerApps for Beginners',
       seller_id: seller2.seller_id,
-      type_course_id: 1,
+      type_item_id: 1,
       premium: true,
       description: 'Get started with Microsoft PowerApps.',
-      course_level_id: 1,
+      item_level_id: 1,
       platform_id: 2,
       language_id: 1,
       sector_id: 2,
@@ -197,14 +197,14 @@ async function main() {
     },
   });
 
-  await prisma.courses.create({
+  await prisma.items.create({
     data: {
       title: 'Advanced Google Sheets Techniques',
       seller_id: seller1.seller_id,
-      type_course_id: 2,
+      type_item_id: 2,
       premium: false,
       description: 'Master advanced features of Google Sheets.',
-      course_level_id: 2,
+      item_level_id: 2,
       platform_id: 1,
       language_id: 2,
       sector_id: 3,
@@ -221,22 +221,22 @@ async function main() {
   await prisma.module.createMany({
     data: [
       {
-        course_id: 1,
+        item_id: item1.id,
         title: 'Module 1',
         description: 'Getting Started with AppSheet',
       },
       {
-        course_id: 1,
+        item_id: item1.id,
         title: 'Module 2',
         description: 'Building Your First App',
       },
       {
-        course_id: 1,
+        item_id: item1.id,
         title: 'Module 3',
         description: 'Advanced AppSheet Features',
       },
       {
-        course_id: 1,
+        item_id: item1.id,
         title: 'Module 4',
         description: 'Deploying Your App',
       },
@@ -320,69 +320,72 @@ async function main() {
     ],
   });
 
-  await prisma.applications.createMany({
-    data: [
-      {
-        title: 'Advanced AppSheet Project Management',
-        seller_id: seller1.seller_id,
-        type_course_id: 1,
-        premium: true,
-        description:
-          'An advanced project management application built with AppSheet.',
-        course_level_id: 3,
-        platform_id: 1,
-        language_id: 1,
-        sector_id: 3,
-        content_pillar_id: 1,
-        functionality_id: 1,
-        tool_id: 1,
-        tags: ['AppSheet', 'Project Management'],
-        price: 199.99,
-      },
-      {
-        title: 'PowerApps Advanced Sales Tracker',
-        seller_id: seller2.seller_id,
-        type_course_id: 2,
-        premium: true,
-        description:
-          'An advanced sales tracking application built with PowerApps.',
-        course_level_id: 2,
-        platform_id: 2,
-        language_id: 2,
-        sector_id: 5,
-        content_pillar_id: 2,
-        functionality_id: 2,
-        tool_id: 2,
-        tags: ['PowerApps', 'Sales Tracker'],
-        price: 299.99,
-      },
-    ],
+  const app1 = await prisma.items.create({
+    data: {
+      title: 'Advanced AppSheet Project Management',
+      seller_id: seller1.seller_id,
+      is_course: false,
+      type_item_id: 1,
+      premium: true,
+      description:
+        'An advanced project management application built with AppSheet.',
+      item_level_id: 3,
+      platform_id: 1,
+      language_id: 1,
+      sector_id: 3,
+      content_pillar_id: 1,
+      functionality_id: 1,
+      tool_id: 1,
+      tags: ['AppSheet', 'Project Management'],
+      price: 199.99,
+    },
+  });
+
+  const app2 = await prisma.items.create({
+    data: {
+      title: 'PowerApps Advanced Sales Tracker',
+      seller_id: seller2.seller_id,
+      is_course: false,
+      type_item_id: 2,
+      premium: true,
+      description:
+        'An advanced sales tracking application built with PowerApps.',
+      item_level_id: 2,
+      platform_id: 2,
+      language_id: 2,
+      sector_id: 5,
+      content_pillar_id: 2,
+      functionality_id: 2,
+      tool_id: 2,
+      tags: ['PowerApps', 'Sales Tracker'],
+      price: 299.99,
+    },
   });
 
   await prisma.media.createMany({
     data: [
       {
-        application_id: 1,
+        item_id: app1.id,
         title: 'AppSheet Project Management Overview',
         description:
           'An overview of the AppSheet project management application.',
         url: 'https://example.com/media1',
       },
       {
-        application_id: 1,
+        item_id: app1.id,
         title: 'AppSheet Project Management Tutorial',
         description:
           'A tutorial on how to use the AppSheet project management application.',
         url: 'https://example.com/media2',
       },
       {
-        application_id: 2,
+        item_id: app2.id,
         title: 'PowerApps Sales Tracker Overview',
         description: 'An overview of the PowerApps sales tracking application.',
         url: 'https://example.com/media3',
       },
       {
-        application_id: 2,
+        item_id: app2.id,
         title: 'PowerApps Sales Tracker Tutorial',
         description:
           'A tutorial on how to use the PowerApps sales tracking application.',

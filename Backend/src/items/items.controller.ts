@@ -8,22 +8,35 @@ import {
   HttpException,
   Query,
 } from '@nestjs/common';
-import { CoursesService } from './courses.service';
+import { ItemsService } from './items.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { FilterDto } from './dto/filter-course.dto';
-import { QueryDto } from './dto/query-course.dto';
+import { FilterDto } from './dto/filter-item.dto';
+import { QueryDto } from './dto/query-item.dto';
+import { CreateApplicationDto } from 'src/items/dto/create-application.dto';
 
-@ApiTags('Courses')
-@Controller('courses')
-export class CoursesController {
-  constructor(private readonly coursesService: CoursesService) {}
+@ApiTags('Items')
+@Controller('items')
+export class ItemsController {
+  constructor(private readonly itemsService: ItemsService) {}
 
-  @Post()
-  async create(@Body() createCourseDto: CreateCourseDto) {
+  @Post('/courses')
+  async createCourse(@Body() createCourseDto: CreateCourseDto) {
     try {
-      return await this.coursesService.create(createCourseDto);
+      return await this.itemsService.create(createCourseDto);
+    } catch (error) {
+      throw new HttpException(
+        `Error creating course: ${error.message}`,
+        error.status,
+      );
+    }
+  }
+
+  @Post('/applications')
+  async createApplication(@Body() createApplicationDto: CreateApplicationDto) {
+    try {
+      return await this.itemsService.create(createApplicationDto);
     } catch (error) {
       throw new HttpException(
         `Error creating course: ${error.message}`,
@@ -37,22 +50,22 @@ export class CoursesController {
     const newPage = page ? +page : 1;
     const newLimit = limit ? +limit : 4;
     try {
-      return await this.coursesService.findAll(newPage, newLimit);
+      return await this.itemsService.findAll(newPage, newLimit);
     } catch (error) {
       throw new HttpException(
-        `Error finding courses: ${error.message}`,
+        `Error finding items: ${error.message}`,
         error.status,
       );
     }
   }
 
   @Get('/search')
-  async searchCourses(@Query() query: QueryDto) {
+  async searchitems(@Query() query: QueryDto) {
     try {
-      return await this.coursesService.filterWithQuery(query);
+      return await this.itemsService.filterWithQuery(query);
     } catch (error) {
       throw new HttpException(
-        `Error searching courses: ${error.message}`,
+        `Error searching items: ${error.message}`,
         error.status,
       );
     }
@@ -61,7 +74,7 @@ export class CoursesController {
   @Get('/filters')
   async getFilters() {
     try {
-      return await this.coursesService.getAllFilters();
+      return await this.itemsService.getAllFilters();
     } catch (error) {
       throw new HttpException(
         `Error getting filters: ${error.message}`,
@@ -73,10 +86,10 @@ export class CoursesController {
   @Post('/filters')
   async findWithFilters(@Body() filtersConditions: FilterDto[]) {
     try {
-      return await this.coursesService.filtersCourses(filtersConditions);
+      return await this.itemsService.filtersItems(filtersConditions);
     } catch (error) {
       throw new HttpException(
-        `Error filtering courses: ${error.message}`,
+        `Error filtering items: ${error.message}`,
         error.status,
       );
     }
@@ -85,7 +98,7 @@ export class CoursesController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     try {
-      return await this.coursesService.findOne(+id);
+      return await this.itemsService.findOne(id);
     } catch (error) {
       throw new HttpException(
         `Error finding course with id ${id}: ${error.message}`,
@@ -100,7 +113,7 @@ export class CoursesController {
     @Body() updateCourseDto: UpdateCourseDto,
   ) {
     try {
-      return await this.coursesService.update(+id, updateCourseDto);
+      return await this.itemsService.update(id, updateCourseDto);
     } catch (error) {
       throw new HttpException(
         `Error updating course with id ${id}: ${error.message}`,

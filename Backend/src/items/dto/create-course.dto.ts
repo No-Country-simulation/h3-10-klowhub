@@ -9,17 +9,21 @@ import {
   IsNumber,
 } from 'class-validator';
 
-export class CreateApplicationDto {
+export class CreateCourseDto {
   @IsString()
   @IsNotEmpty()
   title: string;
+
+  @IsOptional()
+  @IsBoolean()
+  is_course: boolean = true;
 
   @IsString()
   @IsNotEmpty()
   seller_id: string;
 
   @IsInt()
-  type_course_id: number;
+  type_item_id: number;
 
   @IsBoolean()
   @IsOptional()
@@ -30,7 +34,7 @@ export class CreateApplicationDto {
   description?: string;
 
   @IsInt()
-  course_level_id: number;
+  item_level_id: number;
 
   @IsInt()
   platform_id: number;
@@ -63,4 +67,12 @@ export class CreateApplicationDto {
   @IsDecimal()
   @IsOptional()
   punctuation?: number;
+
+  @IsString()
+  @IsOptional()
+  video_url: string;
+
+  @IsString()
+  @IsOptional()
+  image_url: string;
 }

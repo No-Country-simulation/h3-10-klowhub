@@ -2,7 +2,7 @@
 CREATE TABLE "Users" (
     "user_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "lastname" TEXT NOT NULL,
+    "lastname" TEXT,
     "birthday" TEXT,
     "role_id" INTEGER NOT NULL DEFAULT 1,
     "email" TEXT NOT NULL,
@@ -131,56 +131,31 @@ CREATE TABLE "Type_transactions" (
 );
 
 -- CreateTable
-CREATE TABLE "Courses" (
+CREATE TABLE "Items_ratings" (
     "id" SERIAL NOT NULL,
-    "title" TEXT NOT NULL,
-    "seller_id" TEXT NOT NULL,
-    "type_course_id" INTEGER NOT NULL,
-    "premium" BOOLEAN NOT NULL DEFAULT false,
-    "description" TEXT,
-    "course_level_id" INTEGER NOT NULL,
-    "platform_id" INTEGER NOT NULL,
-    "language_id" INTEGER NOT NULL,
-    "sector_id" INTEGER NOT NULL,
-    "content_pillar_id" INTEGER NOT NULL,
-    "functionality_id" INTEGER NOT NULL,
-    "tool_id" INTEGER NOT NULL,
-    "tags" TEXT[],
-    "price" DECIMAL(65,30) NOT NULL,
-    "punctuation" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "video_url" TEXT NOT NULL,
-    "image_url" TEXT NOT NULL,
-
-    CONSTRAINT "Courses_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Courses_ratings" (
-    "id" SERIAL NOT NULL,
-    "course_id" INTEGER NOT NULL,
     "user_id" TEXT NOT NULL,
     "rating" INTEGER NOT NULL,
     "comment" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
+    "item_id" INTEGER NOT NULL,
 
-    CONSTRAINT "Courses_ratings_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Items_ratings_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Types_of_courses" (
+CREATE TABLE "Types_of_items" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
 
-    CONSTRAINT "Types_of_courses_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Types_of_items_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Courses_level" (
+CREATE TABLE "Item_level" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
 
-    CONSTRAINT "Courses_level_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Item_level_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -232,15 +207,15 @@ CREATE TABLE "Tools" (
 );
 
 -- CreateTable
-CREATE TABLE "Purchased_courses" (
+CREATE TABLE "Purchased_items" (
     "id" SERIAL NOT NULL,
     "order_id" TEXT NOT NULL,
     "seller_id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
-    "course_id" TEXT NOT NULL,
+    "item_id" TEXT NOT NULL,
     "date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "Purchased_courses_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Purchased_items_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -257,11 +232,47 @@ CREATE TABLE "Lesson" (
 -- CreateTable
 CREATE TABLE "Module" (
     "id" SERIAL NOT NULL,
-    "course_id" INTEGER NOT NULL,
+    "item_id" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
 
     CONSTRAINT "Module_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Items" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "seller_id" TEXT NOT NULL,
+    "type_item_id" INTEGER NOT NULL,
+    "premium" BOOLEAN NOT NULL DEFAULT false,
+    "description" TEXT,
+    "item_level_id" INTEGER NOT NULL,
+    "platform_id" INTEGER NOT NULL,
+    "language_id" INTEGER NOT NULL,
+    "sector_id" INTEGER NOT NULL,
+    "content_pillar_id" INTEGER NOT NULL,
+    "functionality_id" INTEGER NOT NULL,
+    "tool_id" INTEGER NOT NULL,
+    "tags" TEXT[],
+    "price" DECIMAL(65,30) NOT NULL,
+    "punctuation" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "video_url" TEXT,
+    "image_url" TEXT,
+
+    CONSTRAINT "Items_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Media" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT,
+    "url" TEXT NOT NULL,
+    "item_id" INTEGER NOT NULL,
+
+    CONSTRAINT "Media_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -277,7 +288,7 @@ CREATE UNIQUE INDEX "Registers_date_id_key" ON "Registers_date"("id");
 CREATE UNIQUE INDEX "Wallets_seller_id_key" ON "Wallets"("seller_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Purchased_courses_order_id_key" ON "Purchased_courses"("order_id");
+CREATE UNIQUE INDEX "Purchased_items_order_id_key" ON "Purchased_items"("order_id");
 
 -- AddForeignKey
 ALTER TABLE "Users" ADD CONSTRAINT "Users_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "Roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -301,37 +312,40 @@ ALTER TABLE "DeleteAt_user" ADD CONSTRAINT "DeleteAt_user_user_id_fkey" FOREIGN 
 ALTER TABLE "Transactions" ADD CONSTRAINT "Transactions_wallet_id_fkey" FOREIGN KEY ("wallet_id") REFERENCES "Wallets"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_seller_id_fkey" FOREIGN KEY ("seller_id") REFERENCES "Sellers"("seller_id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_type_course_id_fkey" FOREIGN KEY ("type_course_id") REFERENCES "Types_of_courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_course_level_id_fkey" FOREIGN KEY ("course_level_id") REFERENCES "Courses_level"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_platform_id_fkey" FOREIGN KEY ("platform_id") REFERENCES "Platforms"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_language_id_fkey" FOREIGN KEY ("language_id") REFERENCES "Languages"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_sector_id_fkey" FOREIGN KEY ("sector_id") REFERENCES "Sectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_content_pillar_id_fkey" FOREIGN KEY ("content_pillar_id") REFERENCES "Content_pillars"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_functionality_id_fkey" FOREIGN KEY ("functionality_id") REFERENCES "Functionality"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses" ADD CONSTRAINT "Courses_tool_id_fkey" FOREIGN KEY ("tool_id") REFERENCES "Tools"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Courses_ratings" ADD CONSTRAINT "Courses_ratings_course_id_fkey" FOREIGN KEY ("course_id") REFERENCES "Courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Items_ratings" ADD CONSTRAINT "Items_ratings_item_id_fkey" FOREIGN KEY ("item_id") REFERENCES "Items"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Lesson" ADD CONSTRAINT "Lesson_module_id_fkey" FOREIGN KEY ("module_id") REFERENCES "Module"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Module" ADD CONSTRAINT "Module_course_id_fkey" FOREIGN KEY ("course_id") REFERENCES "Courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Module" ADD CONSTRAINT "Module_item_id_fkey" FOREIGN KEY ("item_id") REFERENCES "Items"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_seller_id_fkey" FOREIGN KEY ("seller_id") REFERENCES "Sellers"("seller_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_type_item_id_fkey" FOREIGN KEY ("type_item_id") REFERENCES "Types_of_items"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_item_level_id_fkey" FOREIGN KEY ("item_level_id") REFERENCES "Item_level"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_platform_id_fkey" FOREIGN KEY ("platform_id") REFERENCES "Platforms"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_language_id_fkey" FOREIGN KEY ("language_id") REFERENCES "Languages"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_sector_id_fkey" FOREIGN KEY ("sector_id") REFERENCES "Sectors"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_content_pillar_id_fkey" FOREIGN KEY ("content_pillar_id") REFERENCES "Content_pillars"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_functionality_id_fkey" FOREIGN KEY ("functionality_id") REFERENCES "Functionality"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Items" ADD CONSTRAINT "Items_tool_id_fkey" FOREIGN KEY ("tool_id") REFERENCES "Tools"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Media" ADD CONSTRAINT "Media_item_id_fkey" FOREIGN KEY ("item_id") REFERENCES "Items"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
