@@ -115,7 +115,7 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
           )}
         </div>
         <Link
-          href={`/course/${id}`}
+          href={`/course/`}
           className="block text-[#D194E2] hover:text-white py-4 ml-6 font-bold font-inter"
         >
           Ver detalles
