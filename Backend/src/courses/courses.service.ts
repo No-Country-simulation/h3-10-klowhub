@@ -152,7 +152,22 @@ export class CoursesService {
     if (query.title) {
       const title = query.title.replace(/_/g, ' ');
       const courseFound = await this.prisma.courses.findFirst({
-        where: { title: { equals: title, mode: 'insensitive' } },
+        where: {
+          OR: [
+            { title: { contains: title, mode: 'insensitive' } },
+            { description: { contains: title, mode: 'insensitive' } },
+          ],
+        },
+        include: {
+          type_course: true,
+          course_level: true,
+          platform: true,
+          language: true,
+          sector: true,
+          contentPillar: true,
+          functionality: true,
+          tool: true,
+        },
       });
       if (!courseFound) {
         throw new NotFoundException('Course not found');
@@ -164,6 +179,16 @@ export class CoursesService {
       const tagsArray = query.tags.split(',').map((tag) => tag.trim());
       const courseFound = await this.prisma.courses.findMany({
         where: { tags: { hasSome: tagsArray } },
+        include: {
+          type_course: true,
+          course_level: true,
+          platform: true,
+          language: true,
+          sector: true,
+          contentPillar: true,
+          functionality: true,
+          tool: true,
+        },
       });
       if (courseFound.length === 0) {
         throw new NotFoundException('Course not found');
