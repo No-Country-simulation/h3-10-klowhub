@@ -7,57 +7,46 @@ import DetailsIcon from "../../../public/icons/DetailIcon";
 import StarRating from "../StarsRating/StarsRating";
 import HeartIcon from "../MentoresComp/Icons/HeartIcon";
 import { CardCursoLong } from "@/services/Interfaces";
-import { Icon_Shopping } from "../../../public/icons/Card_Course/Icon_Shopping";
-import { useCart } from "@/Hooks/useCart";
+import AddItenCart from "../AddItemCart/AddItenCart";
+import RemoveCart from "../AddItemCart/RemoveCart";
 
-interface CardCourseProps {
-  course: CardCursoLong;
-}
-
-const CardCourse: React.FC<CardCourseProps> = ({ course }) => {
-  const { addToCart } = useCart();
-
+export default function CardCourse({ course }: { course: CardCursoLong }) {
   const {
     projectImage,
-    projectName = "Nombre del Proyecto",
-    title = "Título del Curso",
-    description = "Descripción del Curso",
-    tags = [],
-    punctuation = "0",
-    price = "0.00",
-    id,
-  }: CardCursoLong = course;
+    projectName,
+    title,
+    description,
+    tags,
+    punctuation,
+    price,
+    image_url,
+  } = course;
+  const [StateHeadt, setStateHeadt] = useState(false);
+  let imagen: string;
+  if (image_url != null && image_url != "") {
+    imagen = image_url;
+  } else {
+    imagen = "/imgApp.png";
+  }
+  const [StateButonCart, setStateButonCart] = useState(true);
 
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
-
-  const handleToggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  const handleButonCart = () => {
+    setStateButonCart(!StateButonCart);
   };
-
-  const handleAddToCart = () => {
-    addToCart(course);
-  };
-
+  function handleClick() {
+    setStateHeadt(!StateHeadt);
+  }
   return (
-    <div className="h-auto w-full flex flex-col bg-[#1F2937] relative rounded-xl p-4">
-    
-      {projectImage ? (
-        <Image
-          src={projectImage}
-          alt={`Imagen del proyecto ${projectName}`}
-          width={245}
-          height={245}
-          className="w-full object-cover object-center rounded-md"
-        />
-      ) : (
-        <div className="w-full h-[245px] bg-gray-700 rounded-md flex items-center justify-center">
-          <p className="text-gray-300 text-sm">Sin imagen disponible</p>
-        </div>
-      )}
-      
-      {/* Botón para marcar como favorito */}
-      <button onClick={handleToggleFavorite} className="absolute right-2 top-2">
-        <HeartIcon StateHeart={isFavorite} />
+    <div className="h-auto w-full  flex flex-col   bg-[#1F2937] relative rounded-xl p-4">
+      <Image
+        src={imagen}
+        alt="IMagen de app"
+        width={245}
+        height={245}
+        className="w-full object-cover object-center rounded-md"
+      />
+      <button onClick={handleClick} className="absolute right-2 top-2">
+        <HeartIcon StateHeart={StateHeadt} />
       </button>
 
       {/* Contenido del curso */}
@@ -72,31 +61,29 @@ const CardCourse: React.FC<CardCourseProps> = ({ course }) => {
           {/* Descripción */}
           <p className="w-full text-sm lg:text-md">{description}</p>
 
-          {/* Etiquetas y nombre del proyecto */}
-          <section>
+          <section className="">
             {projectName && (
-              <div className="flex bg-[#FFFFFF1A] rounded-lg w-full px-4 py-2 items-center flex-wrap">
-                {projectImage ? (
-                  <Image
-                    src={projectImage}
-                    alt={`Imagen del proyecto ${projectName}`}
-                    width={30}
-                    height={20}
-                    className="mr-4 flex-shrink-0"
-                  />
-                ) : null}
-                <p className="font-semibold text-xs text-white">{projectName}</p>
+              <div className="flex  bg-[#FFFFFF1A] rounded-lg w-full px-4 py-2 items-center flex-wrap">
+                <Image
+                  src={projectImage ? projectImage : ""}
+                  alt={`Imagen del proyecto ${projectName}`}
+                  width={30}
+                  height={20}
+                  className="mr-4 flex-shrink-0"
+                />
+                <p className="font-semibold text-xs text-white ">
+                  {projectName}
+                </p>
               </div>
             )}
-            {tags.length > 0 &&
-              tags.map((tag) => (
-                <span
-                  className="inline-block relative bg-[#F7E5FFBF] hover:bg-purple-200 text-primary_d font-bold my-2 text-[14px] py-1 px-4 mr-4 rounded-md"
-                  key={tag}
-                >
-                  {tag}
-                </span>
-              ))}
+            {tags.map((tag) => (
+              <span
+                className="inline-block relative  bg-[#F7E5FFBF] hover:bg-purple-200 text-primary_d font-bold my-2 text-[14px] py-1  px-4 mr-4 rounded-md"
+                key={tag}
+              >
+                {tag}
+              </span>
+            ))}
           </section>
 
           {/* Puntuación */}
@@ -119,15 +106,14 @@ const CardCourse: React.FC<CardCourseProps> = ({ course }) => {
         </article>
       </section>
 
-      {/* Botones de acción */}
-      <div className="flex items-center space-between py-2 mt-2 font-inter">
-        <button
-          onClick={handleAddToCart}
-          className="flex flex-row gap-x-3 font-inter justify-center items-center bg-primary_b_500 text-white w-1/2 rounded-2xl h-[80%] px-3"
-        >
-          <Icon_Shopping width={20} height={21} />
-          <p className="font-semibold font-inter">Añadir al Carrito</p>
-        </button>
+      <div className="flex items-center  space-between py-2 mt-2 font-inter">
+        <div onClick={handleButonCart}>
+          {StateButonCart ? (
+            <AddItenCart items={course} />
+          ) : (
+            <RemoveCart id={course.id} />
+          )}
+        </div>
         <Link
           href={`/course/${id}`}
           className="block text-[#D194E2] hover:text-white py-4 ml-6 font-bold font-inter"
@@ -137,6 +123,4 @@ const CardCourse: React.FC<CardCourseProps> = ({ course }) => {
       </div>
     </div>
   );
-};
-
-export default CardCourse;
+}
