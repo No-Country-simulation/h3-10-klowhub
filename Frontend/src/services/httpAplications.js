@@ -30,3 +30,30 @@ console.log(search)
         console.error('error ', e)
     }
 }
+
+
+export async function ServiceCurso(search){
+    console.log(search)
+        try {
+            const res = await fetch(`https://knowhub-api-production.up.railway.app/courses/search?title=${search}&tags=a`,{
+                method: 'GET',
+                headers: {
+                    "Authorization": "Bearer "+token || '' ,
+                    "Content-Type": "application/json",
+                }
+            })
+    
+            if(!res.ok){
+    
+                status = res.status
+            }else {
+                status = 200
+            }
+    
+            const data = await res.json()
+            return {data,status};
+        }
+        catch(e){
+            console.error('error ', e)
+        }
+    }

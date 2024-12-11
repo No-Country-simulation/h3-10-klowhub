@@ -22,7 +22,7 @@ export default function Page() {
               ?<p>Ampliación no encontrada</p>
               :<div className='grid gap-2'
               style={{
-                gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))"
+                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))"
             }}>
                 {apps.map( app => (
                     <CardCourse

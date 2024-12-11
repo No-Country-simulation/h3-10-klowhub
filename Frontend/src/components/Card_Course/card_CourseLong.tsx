@@ -10,22 +10,19 @@ import { CardCursoLong } from "@/services/Interfaces";
 import AddItenCart from "../AddItemCart/AddItenCart";
 import RemoveCart from "../AddItemCart/RemoveCart";
 
-export default function CardCourse({ course }: { course: CardCursoLong }) {
+export default function CardCoursLong({ course }: { course: CardCursoLong }) {
   const {
-    projectImage,
-    projectName,
+    platform,
     title,
     description,
     tags,
     punctuation,
-    price,
     image_url,
-    platform
   } = course;
   const [StateHeadt, setStateHeadt] = useState(false);
   let imagen: string;
-  if (image_url != null && image_url != "") {
-    imagen = image_url;
+  if (image_url && image_url != "") {
+    imagen = image_url.length > 0 ? image_url : '/imgApp.png';
   } else {
     imagen = "/imgApp.png";
   }
@@ -38,13 +35,13 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
     setStateHeadt(!StateHeadt);
   }
   return (
-    <div className="h-auto   flex flex-col   bg-[#1F2937] relative rounded-xl p-4">
+    <div className="h-auto w-full  flex  max-md:flex-wrap   bg-[#1F2937] relative rounded-xl p-4">
       <Image
         src={imagen}
         alt="IMagen de app"
         width={245}
         height={245}
-        className="w-full  object-cover object-center rounded-md"
+        className="w-full max-md:max-w-full max-md:h-[245px] max-w-[300px]  object-cover object-center rounded-md"
       />
       <button onClick={handleClick} className="absolute right-2 top-2">
         <HeartIcon StateHeart={StateHeadt} />
@@ -62,18 +59,18 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
           {/* Descripción */}
           <p className="w-full text-sm lg:text-md">{description}</p>
 
-          <section className="mt-2">
-            {platform?.name && (
-              <div className="flex  bg-[#FFFFFF1A] rounded-lg max-w-max px-4 py-2 items-center flex-wrap">
+          <section className="">
+            {platform && (
+              <div className="flex my-2 max-w-max bg-[#FFFFFF1A] rounded-lg  px-4 py-2 items-center flex-wrap">
                 <Image
-                  src={projectImage ? projectImage : "/img/Cards_Img/logo.png"}
-                  alt={`Imagen del proyecto ${projectName}`}
+                  src={"/img/Cards_Img/logo.png"}
+                  alt={`Imagen del proyecto ${platform.name}`}
                   width={30}
                   height={20}
                   className="mr-4 flex-shrink-0"
                 />
                 <p className="font-semibold text-xs text-white ">
-                  {platform?.name}
+                  {platform.name}
                 </p>
               </div>
             )}
@@ -97,17 +94,8 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
           </div>
 
           {/* Precio */}
-          {price && (
-            <div>
-              <p className="text-xl lg:text-2xl font-bold">
-                ${parseFloat(price).toFixed(2)}
-              </p>
-            </div>
-          )}
         </article>
-      </section>
-
-      <div className="flex flex-wrap items-center  space-between py-2 mt-2 font-inter">
+        <div className="ml-4 mr-auto flex flex-wrap items-center  space-between py-2 mt-2 font-inter">
         <div onClick={handleButonCart}>
           {StateButonCart ? (
             <AddItenCart items={course} />
@@ -122,6 +110,9 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
           Ver detalles
         </Link>
       </div>
+      </section>
+
+     
     </div>
   );
 }

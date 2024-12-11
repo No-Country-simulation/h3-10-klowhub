@@ -10,7 +10,7 @@ export default function InputSearch({ placeholder, setSearch}:{placeholder:strin
       console.log(value)
     },
     // delay in ms
-    800
+    500
   );
   return (
     <div className='relative'>

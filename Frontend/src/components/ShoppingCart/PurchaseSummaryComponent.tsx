@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import CuponInputComponent from "./CuponInputComponent";
 import { Button_Buys } from "../PayPal/Button_Buys";
 import { CleanContext } from "@/context/ClearContext";
@@ -32,6 +32,10 @@ export default function PurchaseSummaryComponent({
     onPurchaseSuccessAction(); // Llamamos al callback de éxito para manejarlo en el componente padre
   };
 
+  useEffect(() => {
+    setTotal(valueService + valueTotal)
+    console.log('repite')
+  },[valueTotal,valueService])
   return (
     <div className="ml-auto mr-0 bg-[#1F2937] p-5 rounded-xl h-max w-full max-w-[411px]">
       <h6 className="font-bold text-xl mb-3">Resumen</h6>
