@@ -10,12 +10,14 @@ import { Space } from "../../../public/icons/Header_Icon/Space";
 import { Sun_Icon } from "../../../public/icons/Header_Icon/Sun";
 import { Info_Icon } from "../../../public/icons/Header_Icon/Info";
 import useAuth from "@/Hooks/useAuth";
-
+import { useContext } from "react";
+import { CartContext } from "@/context/CartContext";
 export function Header() {
   const [isActive, setIsActive] = useState(false);
   const [openlogout, setopenlogout] = useState(false);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { items } = useContext(CartContext);
   const toggleSwitch = () => {
     setIsActive((prev) => !prev);
   };
@@ -36,7 +38,7 @@ export function Header() {
   const rutas = [
     { id: 1, name: "Dashboard", path: "/home/dashboard" },
     { id: 2, name: "Cursos y Lecciones", path: "/home/cursos" },
-    { id: 3, name: "Appstore", path: "/home/Appstores" },
+    { id: 3, name: "Appstore", path: "/home/appstore" },
     { id: 4, name: "Proyectos", path: "/home/Proyectos" },
     { id: 5, name: "Consultoria", path: "/home/Consultoria" },
     { id: 6, name: "Sobre Appsheet", path: "/home/Sobre Appsheet" },
@@ -78,7 +80,7 @@ export function Header() {
 
         <nav className="hidden xl:flex md:space-x-6 ">
           <div className="flex items-center gap-2 bg-gray-500/100 py-1 px-2 rounded-md">
-            <Link href="/home   " className="hover:text-purple-400">
+            <Link href="/" className="hover:text-purple-400">
               Home
             </Link>
             <Link href="#" className="bg-purple-500 text-white px-2 rounded-md">
@@ -97,34 +99,35 @@ export function Header() {
             ))}
           </div>
         </nav>
-
-        <div className="hidden xl:flex items-center space-x-4">
-          {loggedIn && (
+        {loggedIn && (
+          <div className="hidden xl:flex items-center space-x-4">
             <div className="flex items-center space-x-3">
               <Link
-                href="/home/shopping_card"
+                href="/home/shopping_cart"
                 className="relative hover:text-purple-400"
               >
                 <Icon_Shopping_Cart />
-                <p className="text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]">
-                  12
+                <p
+                  className={`${
+                    items.length == 0 ? "opacity-0" : "opacity-100"
+                  } text-xs absolute -top-1 -right-3 px-2 py-1 rounded-full bg-white text-[#1F2937]`}
+                >
+                  {items.length}
                 </p>
               </Link>
               <Link
-                href="/home/shopping_card"
+                href="/home/shopping_cart"
                 className="hover:text-purple-400"
               >
                 <Icon_Notification />
               </Link>
               <Link
-                href="/home/shopping_card"
+                href="/home/shopping_cart"
                 className="hover:text-purple-400"
               >
                 <Icon_Email />
               </Link>
             </div>
-          )}
-          {loggedIn && (
             <div className="flex items-center space-x-3">
               <button className="px-4 py-2 rounded-full text-sm font-semibold">
                 Explorador
@@ -146,14 +149,15 @@ export function Header() {
                   alt="Profile Picture"
                   width={100}
                   height={100}
-                  className="w-full h-full object-cover"
+                  className="cursor-pointer w-full h-full object-cover"
                   onClick={toggleLogout}
                 />
                 {openlogout && (
-                  <div className=" p-1 bg-purple-200 m-1">
+                  <div>
                     <button
+                      className="absolute transition-colors lg:max-w-[120px] mx-auto border-transparent rounded-md
+        p-2 mt-2 bg-[#702486] hover:bg-purple-700  border-2 border-solid text-sm"
                       onClick={logout}
-                      className="px-1 py-1  absolute bg-purple-700 text-white rounded hover:bg-purple-900"
                     >
                       Cerrar Sesión
                     </button>
@@ -161,16 +165,19 @@ export function Header() {
                 )}
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
         {!loggedIn && (
-          <>
+          <div className="w-1/5">
             <Link href="/login">
-              <button className="invisible px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-900 w-36 xl:visible">
+              <button
+                className="invisible xl:visible transition-colors lg:max-w-[150px] mx-auto border-transparent rounded-md
+           px-6 py-2 bg-[#702486] hover:bg-transparent hover:border-white border-2 border-solid"
+              >
                 Iniciar Sesión
               </button>
             </Link>
-          </>
+          </div>
         )}
         <button className="xl:hidden " onClick={toggleMenu}>
           <svg
@@ -215,6 +222,7 @@ export function Header() {
               </div>
             </div>
           )}
+
           {rutas.map((item, index) => (
             <Link
               key={index}
@@ -232,19 +240,23 @@ export function Header() {
               Plataforma
             </Link>
           </div>
-          {loggedIn ? (
+          {!loggedIn ? (
+            <Link href="/login">
+              <button
+                className=" transition-colors lg:max-w-[150px] mx-auto border-transparent rounded-md
+        mt-4 px-6 py-2 bg-[#702486] hover:bg-transparent hover:border-white border-2 border-solid"
+              >
+                Iniciar Sesión
+              </button>
+            </Link>
+          ) : (
             <button
-              className="p-4 mt-8 bg-purple-500 text-white px-2 rounded-md"
+              className=" transition-colors lg:max-w-[150px] mx-auto border-transparent rounded-md
+        mt-4 px-6 py-2 bg-[#702486] hover:bg-transparent hover:border-white border-2 border-solid"
               onClick={logout}
             >
               Cerrar Sesión
             </button>
-          ) : (
-            <Link href="/login" className="">
-              <button className=" p-4 mt-6 bg-purple-500 text-white px-2 rounded-md">
-                Iniciar Sesión
-              </button>
-            </Link>
           )}
           {loggedIn && (
             <div className="bg-gray-300/15 rounded-md p-2 px-3">
@@ -271,19 +283,19 @@ export function Header() {
               <hr className="border-white mt-2 mb-2" />
               <div className="flex items-center space-x-6 justify-center">
                 <Link
-                  href="/home/shopping_card"
+                  href="/home/shopping_cart"
                   className="hover:text-purple-400 scale-150"
                 >
                   <Icon_Shopping_Cart />
                 </Link>
                 <Link
-                  href="/home/shopping_card"
+                  href="/home/shopping_cart"
                   className="hover:text-purple-400 scale-150"
                 >
                   <Icon_Notification />
                 </Link>
                 <Link
-                  href="/home/shopping_card"
+                  href="/home/shopping_cart"
                   className="hover:text-purple-400 scale-150"
                 >
                   <Icon_Email />

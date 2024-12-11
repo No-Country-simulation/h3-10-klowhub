@@ -1,27 +1,31 @@
 import React, { Dispatch, SetStateAction } from "react";
 
 export interface CardCursoLong {
-  id:number;
+  id: number;
   title: string;
   description?: string;
   tags: string[];
   price?: string;
   video_url?: string;
   projectName?: string;
-  sector?: {name:string};
+  sector?: { name: string };
   punctuation: string;
   altMainImageCourse?: string;
   stars: [];
-  children?: React.ReactNode
+  children?: React.ReactNode;
   projectImage?: string;
-  url_img?: string;
+  image_url?: string;
   sellerImage?: string;
   premium?: boolean;
-  seller?: {isUserActive: boolean};
+  seller?: { isUserActive: boolean };
   top?: number;
   className?: string;
   width?: number;
   heigth?: number;
+  quantity?: number;
+  platform?: {
+    name: string
+  }
 }
 export interface PropsMentor {
   mentorImage: string;
@@ -132,7 +136,6 @@ export interface AplicationCart {
   children?: React.ReactNode;
   className?: string;
   id: number;
-  
 }
 
 export interface PropsDetailsAppCart {
@@ -146,18 +149,18 @@ export interface PropsDetailsAppCart {
 }
 
 export interface Product {
-id:number
-urlImg: string
-nameProject: string
-Top: number
-Industry: string
-Developer: boolean
-numberOfScores: number
-numberVotes: number
-Category: string[]
-price: number
-description: string,
-quantity? : number
+  id: number;
+  urlImg: string;
+  nameProject: string;
+  Top: number;
+  Industry: string;
+  Developer: boolean;
+  numberOfScores: number;
+  numberVotes: number;
+  Category: string[];
+  price: number;
+  description: string;
+  quantity?: number;
 }
 export interface Steps {
   step1: { status: boolean; step: boolean };
@@ -189,7 +192,7 @@ export interface step2 {
 }
 
 export interface PropsCourse {
-  id:number;
+  id: number;
   mainImageCourse: string;
   altMainImageCourse?: string;
   title: string;
@@ -232,6 +235,7 @@ export interface AuthContextProps {
   authTokens: AuthTokens | null;
   userName: string;
   register: (name: string, email: string, password: string) => void;
+  paypal_order: () => void
 }
 export interface tokenData {
   fullName: string;
