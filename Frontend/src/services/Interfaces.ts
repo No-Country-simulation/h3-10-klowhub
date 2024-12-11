@@ -22,6 +22,7 @@ export interface CardCursoLong {
   className?: string;
   width?: number;
   heigth?: number;
+  quantity?: number;
   platform?: {
     name: string
   }
@@ -234,6 +235,7 @@ export interface AuthContextProps {
   authTokens: AuthTokens | null;
   userName: string;
   register: (name: string, email: string, password: string) => void;
+  paypal_order: () => void
 }
 export interface tokenData {
   fullName: string;

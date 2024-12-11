@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -48,13 +49,16 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
         <HeartIcon StateHeart={StateHeadt} />
       </button>
 
-      <section className="flex flex-col w-full  items-center ">
-        <article className="flex flex-col w-[95%]  ">
+      {/* Contenido del curso */}
+      <section className="flex flex-col w-full items-center">
+        <article className="flex flex-col w-[95%]">
+          {/* Título y detalles */}
           <div className="flex justify-between pt-3 pb-[12px]">
             <h2 className="text-base font-semibold font-inter">{title}</h2>
             <DetailsIcon />
           </div>
 
+          {/* Descripción */}
           <p className="w-full text-sm lg:text-md">{description}</p>
 
           <section className="">
@@ -82,14 +86,16 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
             ))}
           </section>
 
-          <div className="">
+          {/* Puntuación */}
+          <div>
             <StarRating
-              totalNumbers={punctuation ? parseInt(punctuation) : 45}
+              totalNumbers={parseInt(punctuation)}
               rating={4.5}
               className="mb-3"
             />
           </div>
 
+          {/* Precio */}
           {price && (
             <div>
               <p className="text-xl lg:text-2xl font-bold">
@@ -109,7 +115,7 @@ export default function CardCourse({ course }: { course: CardCursoLong }) {
           )}
         </div>
         <Link
-          href=""
+          href={`/course/`}
           className="block text-[#D194E2] hover:text-white py-4 ml-6 font-bold font-inter"
         >
           Ver detalles

@@ -3,8 +3,6 @@ import React, { createContext, useReducer } from "react"
 import { CardCursoLong } from "@/services/Interfaces";
 
 
-
-  
   interface CartContextType {
     items: CardCursoLong[] | never[];
     addToCart?:  (product: CardCursoLong) => void;
@@ -33,6 +31,7 @@ const cartReducer = (state:object, action:{type:string,payload:{items:CardCursoL
             throw new Error("No cumple con ninguna acción")
     }
 }
+
 export  function CartProvider({children}: {children:React.ReactNode}) {
     const [state, dispach] = useReducer(cartReducer, {items:[]});
 
