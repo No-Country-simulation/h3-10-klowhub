@@ -36,6 +36,7 @@ export default function PageCart() {
       valueTotal: totalValue,
       valueService: valueService,
     });
+    
   }, [items]);
 
   const handlePurchaseSuccess = () => {
